@@ -1,0 +1,2 @@
+Prevents Tortoise from getting mad at empty folders.
+- David
