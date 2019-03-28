@@ -1,0 +1,18 @@
+Tilemap
+{
+  numComponents : 3
+  Transform
+  {
+    translation : { -387.5, 287.5 }
+    rotation : 0
+    scale : { 25, 25 }
+  }
+  SpriteTilemap
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+  }
+  ColliderTilemap
+  {
+  }
+}

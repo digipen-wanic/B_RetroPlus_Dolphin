@@ -1,0 +1,35 @@
+Player
+{
+  numComponents : 6
+  Transform
+  {
+    translation : { -150, -1200 }
+    rotation : 0
+    scale : { 100, 100 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+  }
+  Animation
+  {
+  }
+  Physics
+  {
+    acceleration : { 0, 0 }
+    velocity : { 0, 0 }
+    angularVelocity : 0
+    mass : 1
+  }
+  Behaviors::PlayerMovement
+  {
+    PlayerWalkSpeed : 200
+    PlayerJumpSpeed : 300
+    gravity : { 0, -600 }
+  }
+  ColliderRectangle
+  {
+    extents : { 50, 50 }
+  }
+}

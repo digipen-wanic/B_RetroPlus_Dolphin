@@ -1,0 +1,19 @@
+Hammer
+{
+  numComponents : 3
+  Transform
+  {
+    translation : { -100, -100 }
+    rotation : 0
+    scale : { 25, 25 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+  }
+  ColliderRectangle
+  {
+    extents : { 25, 25 }
+  }
+}

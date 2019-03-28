@@ -1,0 +1,19 @@
+Ladder
+{
+  numComponents : 3
+  Transform
+  {
+    translation : { 910, -1000 }
+    rotation : 0
+    scale : { 100, 100 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+  }
+  ColliderRectangle
+  {
+    extents : { 10, 200 }
+  }
+}
