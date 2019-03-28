@@ -66,7 +66,7 @@ void Levels::Level1::Load()
 	soundManager->AddBank("Master Bank.strings.bank");
 	soundManager->AddBank("Master Bank.bank");
 
-	SetFileLocation("Assets/Level1.lvl");
+	SetFileLocation("Assets/10Meters.lvl");
 }
 
 void Levels::Level1::Initialize()
@@ -79,8 +79,6 @@ void Levels::Level1::Initialize()
 void Levels::Level1::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
-
-	Graphics::GetInstance().GetCurrentCamera().SetTranslation(GetSpace()->GetObjectManager().GetObjectByName("Monkey")->GetComponent<Transform>()->GetTranslation());
 }
 
 void Levels::Level1::Shutdown()

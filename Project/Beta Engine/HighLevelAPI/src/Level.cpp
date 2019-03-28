@@ -34,7 +34,7 @@ void Level::Deserialize(Parser & parser)
 
 	unsigned numGameObjects = 0;
 	parser.ReadVar(numGameObjects);
-
+	
 	parser.ReadSkip("{");
 
 	for (unsigned i = 0; i < numGameObjects; i++)

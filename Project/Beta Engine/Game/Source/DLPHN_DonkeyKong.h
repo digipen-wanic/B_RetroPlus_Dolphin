@@ -18,7 +18,7 @@ namespace DLPHN
 	// The AI states for Donkey Kong
 	enum DK_AIState
 	{
-		START_BARREL, IDLE, GRAB_BARREL, THROW_BARREL
+		IDLE, GRAB_BARREL, THROW_BARREL
 	};
 
 	// Controls Donkey Kong's behavior

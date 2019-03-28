@@ -149,12 +149,6 @@ void SpaceManager::Shutdown(void)
 
 	spaceList.clear();
 	spaceList.shrink_to_fit();
-
-	GameObjectFactory* GOFactory = &GameObjectFactory::GetInstance();
-	delete GOFactory;
-
-	ResourceManager* ReManager = &ResourceManager::GetInstance();
-	delete ReManager;
 }
 
 void SpaceManager::AddSpace(Space & space)

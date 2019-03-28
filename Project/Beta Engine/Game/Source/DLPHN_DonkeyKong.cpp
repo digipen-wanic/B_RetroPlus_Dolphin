@@ -13,11 +13,14 @@
 #include <Space.h>
 #include <Animation.h>
 
+// Defines 
+#define AVOID_ANIMATIONS true
+
 // Public Member Functions
 namespace DLPHN
 {
 	DonkeyKong::DonkeyKong()
-		: Component("DonkeyKong"), current(DK_AIState::START_BARREL), idleTime(2.0f), idleTimer(0.0f), barrelArchetype(nullptr), animation(nullptr)
+		: Component("DonkeyKong"), current(DK_AIState::THROW_BARREL), idleTime(2.0f), idleTimer(0.0f), barrelArchetype(nullptr), animation(nullptr)
 	{
 	}
 
@@ -30,28 +33,24 @@ namespace DLPHN
 	{
 		// Finding the barrel archetype by name
 		barrelArchetype = GetOwner()->GetSpace()->GetObjectManager().GetArchetypeByName("Barrel");
-		// Get the DK's animations
-		animation = GetOwner()->GetComponent<Animation>();
 	}
 
 	void DonkeyKong::Initialize()
 	{
-		current = DK_AIState::START_BARREL;
+		current = DK_AIState::THROW_BARREL;
+		// Get the DK's animations
+		animation = GetOwner()->GetComponent<Animation>();
 	}
 
 	void DonkeyKong::Update(float dt)
 	{
+		// See the transitions between DK's AI states
+		DK_AIState prev = current;
 		// Update DK's AI
 		switch (current)
 		{
-		case DK_AIState::START_BARREL:
-			// TODO: Add animation for throw the barrel
-			ThrowBarrel();
-			// ... and immediately switch to the idle state
-			current = DK_AIState::IDLE;
-			break;
 		case DK_AIState::IDLE:
-			// Stay in the idle state through two iterations of the his idle animation
+			// TODO: Play the idle animation
 			idleTimer += dt;
 			if (idleTimer >= idleTime)
 			{
@@ -62,7 +61,7 @@ namespace DLPHN
 			break;
 		case DK_AIState::GRAB_BARREL:
 			// Play the animation of grabbing a barrel
-			if (animation->IsDone())
+			if (animation->IsDone() || AVOID_ANIMATIONS)
 			{
 				// Switch states when this animation is done playing the grabbing animation
 				current = DK_AIState::THROW_BARREL;
@@ -71,11 +70,18 @@ namespace DLPHN
 		case DK_AIState::THROW_BARREL:
 			// TODO: Play the animation for throwing the barrel
 			// When the animation is done playing then we change states back to idle
-			if (animation->IsDone())
+			if (animation->IsDone() || AVOID_ANIMATIONS)
 			{
+				ThrowBarrel();
 				current = DK_AIState::IDLE;
 			}
 			break;
+		}
+
+		// See the change betweens states
+		if (prev != current)
+		{
+			std::cout << "[DLPHN::DonkeyKong] State change from " << prev << " to current " << current << std::endl;
 		}
 	}
 

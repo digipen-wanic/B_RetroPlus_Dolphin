@@ -1,19 +1,19 @@
 LevelEditor
 {
-  numGameObjects : 5
+  numGameObjects : 2
   {
     TileMap
     {
       numComponents : 3
       Transform
       {
-        translation : { -300, 450 }
+        translation : { -450, 500 }
         rotation : 0
         scale : { 50, 50 }
       }
       SpriteTilemap
       {
-        frameIndex : 6
+        frameIndex : 4
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : TileMap
         tilemapLoc : Default
@@ -25,7 +25,6 @@ LevelEditor
         tilemapLoc : Default
       }
     }
-    
     DonkeyKong
     {
       numComponents : 5

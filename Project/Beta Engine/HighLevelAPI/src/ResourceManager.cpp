@@ -18,8 +18,6 @@
 #include <Texture.h>
 #include <Parser.h>
 
-static ResourceManager* Instance;
-
 ResourceManager::ResourceManager()
 {
 }
@@ -346,11 +344,8 @@ void ResourceManager::Shutdown()
 
 ResourceManager & ResourceManager::GetInstance()
 {
-	if (Instance == nullptr) {
-		Instance = new ResourceManager();
-	}
-
-	return *Instance;
+	static ResourceManager manager;
+	return manager;
 }
 
 std::vector<std::string> ResourceManager::explodeString(const std::string& str, const char& ch) {
