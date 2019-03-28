@@ -220,13 +220,8 @@ bool MovingCircleLineIntersection(const LineSegment & staticLine, const LineSegm
 
 bool PointIsBetweenLines(const Vector2D & point, const Vector2D & firstLine, const Vector2D & secondLine, const Vector2D & normal)
 {
-	UNREFERENCED_PARAMETER(point);
-	UNREFERENCED_PARAMETER(firstLine);
-	UNREFERENCED_PARAMETER(secondLine);
-	UNREFERENCED_PARAMETER(normal);
-
 	//////////////////////////////////////////////////////////////////////////////////
-	//										//
+	//																				//
 	// To determine whether the point is between the two lines, we'll be		//
 	// comparing distances of parallel lines going through each point		//
 	// to the origin.								//
@@ -249,16 +244,18 @@ bool PointIsBetweenLines(const Vector2D & point, const Vector2D & firstLine, con
 	// 1. Calculate distances between the line through each point and the origin, 
 	// store each result in its own variable.
 	// (Distance from origin to line through any point = normal dot point)
-
+	float dist1 = normal.DotProduct(firstLine);
+	float dist2 = normal.DotProduct(secondLine);
 	// 2. If the distance to the line through "point" is less than both the others,
 	// it is not between them. Return false.
-
+	if (normal.DotProduct(point) < dist1 && normal.DotProduct(point) < dist2)
+		return false;
 	// 3. If the distance to the line through "point" is greater than both the others,
 	// it is not between them. Return false.
-
+	if (normal.DotProduct(point) > dist1 && normal.DotProduct(point) > dist2)
+		return false;
 	// 4. All other cases eliminated, so it must be between them. Return true!
-	
-	return false;
+	return true;
 }
 
 
