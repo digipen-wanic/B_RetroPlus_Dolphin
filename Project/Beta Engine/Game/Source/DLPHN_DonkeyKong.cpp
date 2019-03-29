@@ -65,7 +65,7 @@ namespace DLPHN
 				if (idleCount < maxIdleCount)
 				{
 					++idleCount;
-					animation->Play(0.4f, 4, 5, false);
+					animation->Play(0.4f, 5,6 , false);
 				}
 				else
 				{
@@ -94,11 +94,11 @@ namespace DLPHN
 				sprite->SetFrame(2);
 				if (RandomRange(0, 4) == 4)
 				{
-					animation->Play(0.4f, 6, 6, false);
+					animation->Play(0.4f, 3, 3, false);
 				}
 				else
 				{
-					animation->Play(0.4f, 3, 3, false);
+					animation->Play(0.4f, 4, 4, false);
 				}
 			}
 			prev = current;
