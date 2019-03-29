@@ -84,6 +84,10 @@ namespace Levels
 		// create resources for hammer
 		textureHammer = Texture::CreateTextureFromFile("Hammer.png");
 		spriteSourceHammer = new SpriteSource(1, 1, textureHammer);
+
+		// create resources for ladder
+		textureLadder = Texture::CreateTextureFromFile("Ladder.png");
+		spriteSourceLadder = new SpriteSource(1, 1, textureLadder);
 	}
 
 	// Initialize the memory associated with Level 2.
@@ -124,8 +128,12 @@ namespace Levels
 
 		GOM.AddObject(*Tilemap);
 
+		// Create Player
+		GOM.AddObject(*GOF.CreateObject("Player", meshPlayer, spriteSourcePlayer));
+
 		// Create test ladder
-		GOM.AddObject(*GOF.CreateObject("Ladder"));
+		GameObject* ladder1 = GOF.CreateObject("Ladder", genericQuadMesh, spriteSourceLadder);
+		GOM.AddObject(*ladder1);
 
 		// Create test hammer(s)
 		GameObject* hammer1 = GOF.CreateObject("Hammer", genericQuadMesh, spriteSourceHammer);
@@ -133,9 +141,6 @@ namespace Levels
 
 		// Create test firedude
 		GOM.AddObject(*GOF.CreateObject("FireDude"));
-
-		// Create Player
-		GOM.AddObject(*GOF.CreateObject("Player", meshPlayer, spriteSourcePlayer));
 	}
 
 	// Update Level 1.
@@ -157,6 +162,9 @@ namespace Levels
 		
 		delete spriteSourceHammer;
 		delete textureHammer;
+
+		delete spriteSourceLadder;
+		delete textureLadder;
 
 		delete genericQuadMesh;
 

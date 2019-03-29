@@ -5,7 +5,7 @@ Ladder
   {
     translation : { 910, -1000 }
     rotation : 0
-    scale : { 100, 100 }
+    scale : { 100, 400 }
   }
   Sprite
   {

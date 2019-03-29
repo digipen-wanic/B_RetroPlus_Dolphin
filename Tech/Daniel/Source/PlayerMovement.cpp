@@ -66,7 +66,7 @@ namespace Behaviors
 		// set map collision handler
 		GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(&PlayerMapCollisionHandler);
 
-		// set Player collision handler
+		// set player collision handler
 		GetOwner()->GetComponent<Collider>()->SetCollisionHandler(&PlayerCollisionHandler);
 	}
 
@@ -96,6 +96,12 @@ namespace Behaviors
 			else
 			{
 				MoveVertical();
+			}
+
+			// Add gravity to player (if not on ladder)
+			if (!onLadder)
+			{
+				physics->AddForce(gravity);
 			}
 		}
 	}
@@ -299,12 +305,6 @@ namespace Behaviors
 		{
 			onLadder = false;
 			touchingLadder = false;
-		}
-
-		// Gravity affects player if not on a ladder
-		if (!onLadder)
-		{
-			physics->AddForce(gravity);
 		}
 	}
 

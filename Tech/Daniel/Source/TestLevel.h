@@ -78,6 +78,10 @@ namespace Levels
 		Texture* textureHammer;
 		SpriteSource* spriteSourceHammer;
 
+		// Ladder
+		Texture* textureLadder;
+		SpriteSource* spriteSourceLadder;
+
 		// Tilemap
 		Tilemap* dataMap;
 		Texture* textureMap;

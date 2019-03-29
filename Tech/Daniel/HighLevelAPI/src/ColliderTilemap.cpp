@@ -57,7 +57,7 @@ void ColliderTilemap::Draw()
 //	 Return the results of the collision check.
 bool ColliderTilemap::IsCollidingWith(const Collider& other) const
 {
-	// make sure collider is a ract
+	// make sure collider is a rectangle
 	if (other.GetType() != ColliderTypeRectangle)
 		return false;
 
