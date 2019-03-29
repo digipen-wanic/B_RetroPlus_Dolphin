@@ -99,6 +99,11 @@ void Animation::Play(float duration, float start, float end, bool loop)
 	sprite->SetFrame(frameIndex);
 }
 
+void Animation::Stop()
+{
+	isRunning = false;
+}
+
 void Animation::FixedUpdate(float dt)
 {
 	//std::cout << "Animation::FixedUpdate" << std::endl;
@@ -136,7 +141,7 @@ void Animation::FixedUpdate(float dt)
 				isDone = true;
 				isRunning = true;
 			} else {
-				frameIndex = frameStart;
+				frameIndex = frameEnd;
 				isDone = true;
 				isRunning = false;
 			}

@@ -44,6 +44,10 @@ namespace DLPHN
 		Animation* animation;
 		// DK's sprite
 		Sprite* sprite;
+		// Throw barrel timer
+		float throwTimer_;
+		// How long the throwing lasts
+		float throwDuration_;
 
 		// Spawns a barrel and throws it down the beams
 		void ThrowBarrel() const;

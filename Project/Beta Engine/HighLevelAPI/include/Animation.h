@@ -61,6 +61,9 @@ public:
 	//	looping: Whether the animation loops
 	void Play(float frameDuration, float start, float end, bool looping);
 
+	// Stops the animation from playing
+	void Stop();
+
 	// Update the animation.
 	// Params:
 	//	 dt = Change in time (in seconds) since the last game loop.

@@ -24,7 +24,7 @@ namespace DLPHN
 	DonkeyKong::DonkeyKong()
 		: Component("DonkeyKong"), current(DK_AIState::GRAB_BARREL), prev(DK_AIState::IDLE),
 		idleCount(0), maxIdleCount(2), maxBarrelThrows(2), barrelThrows(0), 
-		barrelArchetype(nullptr), animation(nullptr)
+		barrelArchetype(nullptr), animation(nullptr), throwTimer_(0.0f), throwDuration_(0.4f)
 	{
 	}
 
@@ -84,6 +84,8 @@ namespace DLPHN
 			{
 				// Switch states when this animation is done playing the grabbing animation
 				current = DK_AIState::THROW_BARREL;
+				// Stop the animation
+				animation->Stop();
 			}
 			break;
 		case DK_AIState::THROW_BARREL:
@@ -91,19 +93,19 @@ namespace DLPHN
 			// When the animation is done playing then we change states back to idle
 			if (current != prev)
 			{
-				sprite->SetFrame(2);
 				if (RandomRange(0, 4) == 4)
 				{
-					animation->Play(0.4f, 3, 3, false);
+					sprite->SetFrame(3);
 				}
 				else
 				{
-					animation->Play(0.4f, 4, 4, false);
+					sprite->SetFrame(4);
 				}
 			}
 			prev = current;
-			if (animation->IsDone())
+			if (throwTimer_ > throwDuration_)
 			{
+				throwTimer_ = 0;
 				ThrowBarrel();
 				++barrelThrows;
 				// Decide whether to throw another barrel
@@ -116,6 +118,10 @@ namespace DLPHN
 					barrelThrows = 0;
 					current = DK_AIState::IDLE;
 				}
+			}
+			else
+			{
+				throwTimer_ += dt;
 			}
 			break;
 		}
