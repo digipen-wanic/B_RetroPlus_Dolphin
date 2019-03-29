@@ -45,7 +45,9 @@ bool ColliderLine::IsCollidingWith(const Collider & other) const
 	{
 	case ColliderType::ColliderTypeCircle:
 	case ColliderType::ColliderTypePoint:
-
+	{
+		Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();
+		Physics* otherPhysics = other.GetOwner()->GetComponent<Physics>();
 		for (unsigned i = 0; i < lineSegments.size(); i++)
 		{
 			LineSegment myLine = LineSegment(GetLineWithTransform(i).start, GetLineWithTransform(i).end);
@@ -57,11 +59,24 @@ bool ColliderLine::IsCollidingWith(const Collider & other) const
 			//check if we intersected this frame
 			if ((t < 1 || t > 0) && intersected) {
 				if (reflection) {
-					MovingPointLineReflection(*other.GetOwner()->GetComponent<Transform>(), *other.GetOwner()->GetComponent<Physics>(), myLine, othersLine, intersection);
+					MovingPointLineReflection(*otherTransform, *otherPhysics, myLine, othersLine, intersection);
+				}
+				else
+				{
+					// Janky Resolution Code
+					// Find the displacement vector from our point's position and the intersection's position
+					Vector2D currentPosition = otherTransform->GetTranslation();
+					Vector2D displacementVector = intersection - currentPosition;
+					transform->SetTranslation(currentPosition + displacementVector);
+					// Solve the simple problem first and stop the player from falling vertically
+					Vector2D velocity = otherPhysics->GetVelocity();
+					velocity.y = 0;
+					physics->SetVelocity(velocity);
 				}
 				return true;
 			}
 		}
+	}
 
 	default:
 		return false;
