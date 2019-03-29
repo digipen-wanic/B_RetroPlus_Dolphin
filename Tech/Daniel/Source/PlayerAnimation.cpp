@@ -59,7 +59,7 @@ namespace Behaviors
 		animation = GetOwner()->GetComponent<Animation>();
 		physics = GetOwner()->GetComponent<Physics>();
 		transform = GetOwner()->GetComponent<Transform>();
-		playerMovement = GetOwner()->GetComponent<Behaviors::PlayerMovement>();
+		PlayerController = GetOwner()->GetComponent<Behaviors::PlayerController>();
 
 		// initialize with starting values
 		animation->Play(idleStart, 1, 1, false);
@@ -119,13 +119,13 @@ namespace Behaviors
 		}
 
 		// Landing from jumping
-		if (playerMovement->getOnGround() && currentState == StateJump)
+		if (PlayerController->getOnGround() && currentState == StateJump)
 		{
 			nextState = StateLand;
 		}
 
 		// Check for ladder movement
-		if (playerMovement->getOnLadder())
+		if (PlayerController->getOnLadder())
 		{
 			// Make sure player is moving to animate
 			if (physics->GetVelocity().y != 0.0f)
@@ -140,7 +140,7 @@ namespace Behaviors
 		}
 		
 		// Hammer animation
-		switch (playerMovement->getHammerStatus())
+		switch (PlayerController->getHammerStatus())
 		{
 			// Has hammer
 		case 1:
@@ -159,13 +159,13 @@ namespace Behaviors
 		}
 
 		// Currently dying (spinning animation)
-		if (playerMovement->getDeathStatus() == 1)
+		if (PlayerController->getDeathStatus() == 1)
 		{
 			nextState = StateDying;
 		}
 
 		// Dead (halo frame)
-		else if (playerMovement->getDeathStatus() == 2)
+		else if (PlayerController->getDeathStatus() == 2)
 		{
 			nextState = StateDead;
 		}

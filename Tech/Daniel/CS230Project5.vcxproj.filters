@@ -19,13 +19,13 @@
     <ClCompile Include="Source\stdafx.cpp">
       <Filter>Precompiled</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerMovement.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TestLevel.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerAnimation.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerController.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
   </ItemGroup>
@@ -33,13 +33,13 @@
     <ClInclude Include="Source\stdafx.h">
       <Filter>Precompiled</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerMovement.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
     <ClInclude Include="Source\TestLevel.h">
       <Filter>Game\Levels</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerAnimation.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerController.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>

@@ -50,7 +50,7 @@ Component* ColliderCircle::Clone() const
 // Debug drawing for colliders.
 void ColliderCircle::Draw()
 {
-	DebugDraw::GetInstance().AddCircle(transform->GetTranslation(), radius, Graphics::GetInstance().GetCurrentCamera(), Colors::White);
+	DebugDraw::GetInstance().AddCircle(transform->GetTranslation() + offset, radius, Graphics::GetInstance().GetCurrentCamera(), Colors::White);
 	DebugDraw::GetInstance().EndLineStrip(Graphics::GetInstance().GetCurrentCamera());
 }
 
@@ -81,7 +81,7 @@ bool ColliderCircle::IsCollidingWith(const Collider& other) const
 	Vector2D otherTranslation(other.GetOwner()->GetComponent<Transform>()->GetTranslation());
 
 	// Make this a circle
-	Circle thisCircle(transform->GetTranslation(), radius);
+	Circle thisCircle(transform->GetTranslation() + offset, radius);
 	
 	// check for collision based on collider type
 	switch (other.GetType())
@@ -109,16 +109,30 @@ bool ColliderCircle::IsCollidingWith(const Collider& other) const
 	return false;
 }
 
+// Sets offset of collider
+void ColliderCircle::SetOffset(Vector2D offset_)
+{
+	offset = offset_;
+}
+
+// Gets offset of collider
+Vector2D ColliderCircle::GetOffset() const
+{
+	return offset;
+}
+
 // Saves object data to a file.
 void ColliderCircle::Serialize(Parser& parser) const
 {
 	parser.WriteVariable("radius", radius);
+	parser.WriteVariable("offset", offset);
 }
 
 // Loads object data from a file.
 void ColliderCircle::Deserialize(Parser& parser)
 {
 	parser.ReadVariable("radius", radius);
+	parser.ReadVariable("offset", offset);
 }
 
 //------------------------------------------------------------------------------

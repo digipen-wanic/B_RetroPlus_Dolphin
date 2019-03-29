@@ -74,6 +74,10 @@ namespace Levels
 		unsigned columnsPlayer;
 		unsigned rowsPlayer;
 
+		// Screenshot
+		Texture* textureScreenshot;
+		SpriteSource* spriteSourceScreenshot;
+
 		// Hammer
 		Texture* textureHammer;
 		SpriteSource* spriteSourceHammer;

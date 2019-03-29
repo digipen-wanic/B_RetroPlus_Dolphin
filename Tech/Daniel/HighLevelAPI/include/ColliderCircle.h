@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include "Collider.h"
+#include <Vector2D.h>
 
 //------------------------------------------------------------------------------
 
@@ -26,10 +27,6 @@
 class ColliderCircle : public Collider
 {
 public:
-	//------------------------------------------------------------------------------
-	// Public Variables:
-	//------------------------------------------------------------------------------
-
 	//------------------------------------------------------------------------------
 	// Public Functions:
 	//------------------------------------------------------------------------------
@@ -64,6 +61,12 @@ public:
 	//	 Return the results of the collision check.
 	bool IsCollidingWith(const Collider& other) const override;
 
+	// Sets offset of collider
+	void SetOffset(Vector2D offset_);
+
+	// Gets offset of collider
+	Vector2D GetOffset() const;
+
 	// Saves object data to a file.
 	virtual void Serialize(Parser& parser) const override;
 
@@ -77,6 +80,9 @@ private:
 
 	// Radius of the circle collider.
 	float radius;
+
+	// Offset for collider
+	Vector2D offset;
 };
 
 //------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 Player
 {
-  numComponents : 7
+  numComponents : 8
   Transform
   {
     translation : { 0, -1150 }
@@ -25,14 +25,19 @@ Player
     angularVelocity : 0
     mass : 1
   }
-  Behaviors::PlayerMovement
+  Behaviors::PlayerController
   {
     PlayerWalkSpeed : 200
-    PlayerJumpSpeed : 300
-    gravity : { 0, -600 }
+    PlayerJumpSpeed : 400
+    gravity : { 0, -800 }
   }
   ColliderRectangle
   {
     extents : { 50, 50 }
+  }
+  ColliderCircle
+  {
+    radius : 30
+    offset : { 100, 0 }
   }
 }

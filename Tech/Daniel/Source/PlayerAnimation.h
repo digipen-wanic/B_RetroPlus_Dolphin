@@ -18,7 +18,7 @@
 #include "Component.h" // base class
 
 #include "Vector2D.h" // Vector2D
-#include "PlayerMovement.h"
+#include "PlayerController.h"
 
 //------------------------------------------------------------------------------
 
@@ -142,7 +142,7 @@ namespace Behaviors
 		Animation* animation;
 		Physics* physics;
 		Transform* transform;
-		PlayerMovement* playerMovement;
+		PlayerController* PlayerController;
 
 		// Flip
 		Vector2D originalScale;

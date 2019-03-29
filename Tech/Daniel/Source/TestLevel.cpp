@@ -81,6 +81,10 @@ namespace Levels
 		spriteSourcePlayer = new SpriteSource(columnsPlayer, rowsPlayer, texturePlayer);
 		meshPlayer = CreateQuadMesh(Vector2D(1.0f / columnsPlayer, 1.0f / rowsPlayer), Vector2D(0.5f, 0.5f));
 
+		// create resources for screenshot
+		textureScreenshot = Texture::CreateTextureFromFile("Screenshot.png");
+		spriteSourceScreenshot = new SpriteSource(1, 1, textureScreenshot);
+
 		// create resources for hammer
 		textureHammer = Texture::CreateTextureFromFile("Hammer.png");
 		spriteSourceHammer = new SpriteSource(1, 1, textureHammer);
@@ -141,6 +145,9 @@ namespace Levels
 
 		// Create test firedude
 		GOM.AddObject(*GOF.CreateObject("FireDude"));
+
+		// Set up background screenshot
+		//GOM.AddObject(*GOF.CreateObject("Screenshot", genericQuadMesh, spriteSourceScreenshot));
 	}
 
 	// Update Level 1.
@@ -165,6 +172,9 @@ namespace Levels
 
 		delete spriteSourceLadder;
 		delete textureLadder;
+
+		delete textureScreenshot;
+		delete spriteSourceScreenshot;
 
 		delete genericQuadMesh;
 

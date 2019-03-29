@@ -27,7 +27,7 @@
 #include "TestLevel.h"
 
 // Custom components
-#include "PlayerMovement.h"
+#include "PlayerController.h"
 #include "PlayerAnimation.h"
 
 //------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	{
 		using namespace Behaviors;
 
-		GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerMovement>();
+		GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerController>();
 		GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerAnimation>();
 	}
 
