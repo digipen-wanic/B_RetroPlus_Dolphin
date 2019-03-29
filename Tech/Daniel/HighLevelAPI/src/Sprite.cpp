@@ -116,7 +116,6 @@ void Sprite::SetFrame(unsigned int frameIndex_)
 	if (spriteSource == nullptr)
 		return;
 
-
 	// set new frame if less than frameCount
 	if (frameIndex < spriteSource->GetFrameCount())
 	{

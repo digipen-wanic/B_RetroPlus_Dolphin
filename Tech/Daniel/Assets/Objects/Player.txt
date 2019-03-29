@@ -1,11 +1,11 @@
 Player
 {
-  numComponents : 6
+  numComponents : 7
   Transform
   {
-    translation : { -150, -1200 }
+    translation : { 0, -1150 }
     rotation : 0
-    scale : { 100, 100 }
+    scale : { 200, 200 }
   }
   Sprite
   {
@@ -13,6 +13,9 @@ Player
     color : { 1 , 1 , 1 , 1 }
   }
   Animation
+  {
+  }
+  Behaviors::PlayerAnimation
   {
   }
   Physics

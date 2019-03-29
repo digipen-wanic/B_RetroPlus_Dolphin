@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
 // File Name:	PlayerMovement.h
-// Author(s):	Jeremy Kings (j.kings)
+// Author(s):	Daniel Walther (daniel.walther)
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
 //
@@ -87,6 +87,20 @@ namespace Behaviors
 		// Loads object data from a file.
 		virtual void Deserialize(Parser& parser) override;
 
+		// Returns whether the player is grounded
+		bool getOnGround() const;
+
+		// Returns whether the player is on a ladder
+		bool getOnLadder() const;
+
+		// Returns hammer status
+		// (0 = No hammer, 1 = Has hammer, 2 = Hit barrel on top, 3 = Hit barrel on side)
+		unsigned getHammerStatus() const;
+
+		// Returns player's death status
+		// (0 = Alive, 1 = Dying, 2 = Dead)
+		unsigned getDeathStatus() const;
+
 	private:
 		//------------------------------------------------------------------------------
 		// Private Functions:
@@ -97,9 +111,6 @@ namespace Behaviors
 
 		// Moves vertically based on input
 		void MoveVertical();
-
-		// Animate player based on movements
-		void Animate() const;
 
 		// Hammer sequence/timer
 		void HammerSequence(const float dt);
@@ -119,7 +130,6 @@ namespace Behaviors
 
 		// Components
 		Transform* transform;
-		Vector2D playerScale;
 		Physics* physics;
 
 		// Jumping
@@ -130,11 +140,11 @@ namespace Behaviors
 		bool onLadder;
 
 		// Hammer
-		bool hasHammer;
+		unsigned hammerStatus;
 		float hammerCooldown;
 
 		// Death
-		bool isDying;
+		unsigned deathStatus;
 		float deathDuration;
 	};
 }

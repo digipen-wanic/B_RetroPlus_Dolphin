@@ -43,8 +43,8 @@ namespace Behaviors
 		  gravity(0.0f, -300.0f),
 		  onGround(false),
 		  touchingLadder(false), onLadder(false),
-		  hasHammer(false), hammerCooldown(10.0f),
-		  isDying(false), deathDuration(5.0f)
+		  hammerStatus(0), hammerCooldown(10.0f),
+		  deathStatus(0), deathDuration(4.0f)
 	{
 	}
 
@@ -63,9 +63,6 @@ namespace Behaviors
 		transform = GetOwner()->GetComponent<Transform>();
 		physics = GetOwner()->GetComponent<Physics>();
 
-		// Get initial scale of player
-		playerScale = transform->GetScale();
-
 		// set map collision handler
 		GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(&PlayerMapCollisionHandler);
 
@@ -78,28 +75,28 @@ namespace Behaviors
 	//   dt = The (fixed) change in time since the last step.
 	void PlayerMovement::Update(float dt)
 	{
-		// Movement
-		MoveHorizontal();
-
-		// Can't jump or climb if hammer is active
-		if (!hasHammer)
-		{
-			MoveVertical();
-		}
-
-		// Animate player based on movement, etc.
-		Animate();
-
-		// Hammer sequence
-		if (hasHammer)
-		{
-			HammerSequence(dt);
-		}
-
 		// Death sequence
-		if (isDying)
+		if (deathStatus)
 		{
 			DeathSequence(dt);
+		}
+
+		// Not dying
+		else
+		{
+			// Horizontal walking
+			MoveHorizontal();
+
+			// Hammer sequence
+			if (hammerStatus)
+			{
+				HammerSequence(dt);
+			}
+			// Can't jump or climb if hammer is active
+			else
+			{
+				MoveVertical();
+			}
 		}
 	}
 	
@@ -129,30 +126,37 @@ namespace Behaviors
 		// if the other object is a hazard, restart the level
 		if (other.GetName() == "Barrel" || other.GetName() == "FireDude")
 		{
-			playerMovement->isDying = true;
+			// Set status to dying if not already
+			if (!playerMovement->deathStatus)
+			{
+				playerMovement->deathStatus = 1;
+			}
 		}
 
 		// Destroy and collect hammer
 		if (other.GetName() == "Hammer")
 		{
 			other.Destroy();
-			playerMovement->hasHammer = true;
+			playerMovement->hammerStatus = 1;
 		}
 
 		if (other.GetName() == "Ladder")
 		{
-			// Can't get on ladder if jumping
-			if (playerMovement->onGround)
+			// Can't get on ladder if jumping or have hammer
+			if (playerMovement->onGround && !playerMovement->hammerStatus)
 			{
 				// Make sure center of player is on ladder (between collider extents)
 				float otherExtentsX = other.GetComponent<ColliderRectangle>()->GetExtents().x;
 				float otherTranslationX = other.GetComponent<Transform>()->GetTranslation().x;
 				float playerTranslationX = playerMovement->transform->GetTranslation().x;
 
-				// Check between
-				if (playerTranslationX < otherTranslationX + otherExtentsX
-					&& playerTranslationX > otherTranslationX - otherExtentsX)
+				// Check between extents
+				if (playerTranslationX < otherTranslationX + otherExtentsX && playerTranslationX > otherTranslationX - otherExtentsX)
 				{
+					// Correct player's translation to ladder
+					// playerMovement->transform->SetTranslation(Vector2D(otherTranslationX, playerMovement->transform->GetTranslation().y));
+
+					// player is now touchingLadder
 					playerMovement->touchingLadder = true;
 				}
 			}
@@ -177,6 +181,32 @@ namespace Behaviors
 		parser.ReadVariable("PlayerWalkSpeed", PlayerWalkSpeed);
 		parser.ReadVariable("PlayerJumpSpeed", PlayerJumpSpeed);
 		parser.ReadVariable("gravity", gravity);
+	}
+
+	// Returns whether the player is grounded
+	bool PlayerMovement::getOnGround() const
+	{
+		return onGround;
+	}
+
+	// Returns whether the player is on a ladder
+	bool PlayerMovement::getOnLadder() const
+	{
+		return onLadder;
+	}
+
+	// Returns whether the player has a hammer
+	// (0 = No hammer, 1 = Has hammer, 2 = Hit barrel on top, 3 = Hit barrel on side)
+	unsigned PlayerMovement::getHammerStatus() const
+	{
+		return hammerStatus;
+	}
+
+	// Returns player's death status
+	// (0 = Alive, 1 = Dying, 2 = Dead)
+	unsigned PlayerMovement::getDeathStatus() const
+	{
+		return deathStatus;
 	}
 
 	//------------------------------------------------------------------------------
@@ -264,9 +294,10 @@ namespace Behaviors
 			onGround = false;
 		}
 
-		// Set touchingLadder to false if the player is moving horizontally
+		// Not touching/on ladder if the player is moving horizontally
 		if (physics->GetVelocity().x != 0.0f)
 		{
+			onLadder = false;
 			touchingLadder = false;
 		}
 
@@ -274,20 +305,6 @@ namespace Behaviors
 		if (!onLadder)
 		{
 			physics->AddForce(gravity);
-		}
-	}
-
-	// Animate player based on movements
-	void PlayerMovement::Animate() const
-	{
-		// Flip player's sprite to the direction of travel
-		if (physics->GetVelocity().x > 0)
-		{
-			transform->SetScale(playerScale);
-		}
-		else if (physics->GetVelocity().x < 0)
-		{
-			transform->SetScale(Vector2D(-playerScale.x, playerScale.y));
 		}
 	}
 
@@ -302,7 +319,7 @@ namespace Behaviors
 		if (timer >= hammerCooldown)
 		{
 			timer = 0.0f;
-			hasHammer = false;
+			hammerStatus = 0;
 		}
 	}
 
@@ -313,12 +330,14 @@ namespace Behaviors
 		static float timer = 0.0f;
 		timer += dt;
 
-		// Play death animation
-		if (static_cast<int>(floor(timer)) % 2)
-		{
+		// Stop player from moving
+		physics->SetVelocity(Vector2D(0.0f, 0.0f));
 
-		}
+		// Die after a few seconds
+		if (timer >= deathDuration - 2.0f)
+			deathStatus = 2;
 
+		// Restart level and finish stuff up
 		if (timer >= deathDuration)
 		{
 			// Restart and do other stuff here

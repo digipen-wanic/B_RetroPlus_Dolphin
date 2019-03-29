@@ -1,0 +1,14 @@
+FireDude
+{
+  numComponents : 2
+  Transform
+  {
+    translation : { -150, -1150 }
+    rotation : 0
+    scale : { 25, 25 }
+  }
+  ColliderRectangle
+  {
+    extents : { 50, 50 }
+  }
+}

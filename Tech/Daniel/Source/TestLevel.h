@@ -65,17 +65,23 @@ namespace Levels
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
+		Mesh* genericQuadMesh;
+
 		// Player
 		Mesh* meshPlayer;
 		Texture* texturePlayer;
-    SpriteSource* spriteSourcePlayer;
+		SpriteSource* spriteSourcePlayer;
 		unsigned columnsPlayer;
 		unsigned rowsPlayer;
+
+		// Hammer
+		Texture* textureHammer;
+		SpriteSource* spriteSourceHammer;
 
 		// Tilemap
 		Tilemap* dataMap;
 		Texture* textureMap;
-    SpriteSource* spriteSourceMap;
+		SpriteSource* spriteSourceMap;
 		Mesh* meshMap;
 		unsigned columnsMap;
 		unsigned rowsMap;

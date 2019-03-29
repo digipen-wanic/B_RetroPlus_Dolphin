@@ -48,7 +48,7 @@ namespace Levels
 		: Level("TestLevel"),
 		meshPlayer(nullptr), texturePlayer(nullptr), spriteSourcePlayer(nullptr),
 		dataMap(nullptr), textureMap(nullptr), spriteSourceMap(nullptr), meshMap(nullptr),
-		columnsPlayer(3), rowsPlayer(5),
+		columnsPlayer(5), rowsPlayer(6),
 		columnsMap(4), rowsMap(3)
 	{
 	}
@@ -73,10 +73,17 @@ namespace Levels
 			Graphics::GetInstance().SetBackgroundColor();
 		}
 
+		// generic quadmesh
+		genericQuadMesh = CreateQuadMesh(Vector2D(1.0f, 1.0f), Vector2D(0.5f, 0.5f));
+
 		// create resources for meshPlayer
 		texturePlayer = Texture::CreateTextureFromFile("Player.png");
 		spriteSourcePlayer = new SpriteSource(columnsPlayer, rowsPlayer, texturePlayer);
 		meshPlayer = CreateQuadMesh(Vector2D(1.0f / columnsPlayer, 1.0f / rowsPlayer), Vector2D(0.5f, 0.5f));
+
+		// create resources for hammer
+		textureHammer = Texture::CreateTextureFromFile("Hammer.png");
+		spriteSourceHammer = new SpriteSource(1, 1, textureHammer);
 	}
 
 	// Initialize the memory associated with Level 2.
@@ -120,8 +127,12 @@ namespace Levels
 		// Create test ladder
 		GOM.AddObject(*GOF.CreateObject("Ladder"));
 
-		// Create test hammer
-		GOM.AddObject(*GOF.CreateObject("Hammer"));
+		// Create test hammer(s)
+		GameObject* hammer1 = GOF.CreateObject("Hammer", genericQuadMesh, spriteSourceHammer);
+		GOM.AddObject(*hammer1);
+
+		// Create test firedude
+		GOM.AddObject(*GOF.CreateObject("FireDude"));
 
 		// Create Player
 		GOM.AddObject(*GOF.CreateObject("Player", meshPlayer, spriteSourcePlayer));
@@ -144,6 +155,11 @@ namespace Levels
 		delete texturePlayer;
 		delete meshPlayer;
 		
+		delete spriteSourceHammer;
+		delete textureHammer;
+
+		delete genericQuadMesh;
+
 		delete spriteSourceMap;
 		delete textureMap;
 		delete meshMap;
