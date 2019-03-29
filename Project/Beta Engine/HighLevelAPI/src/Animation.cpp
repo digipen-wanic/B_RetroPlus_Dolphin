@@ -84,6 +84,21 @@ void Animation::Play(float frameDurationInput, bool isLoopingInput, bool playInR
 	isDone = false;
 }
 
+void Animation::Play(float duration, float start, float end, bool loop)
+{
+	isRunning = true;
+	isDone = false;
+	frameDuration = duration;
+	frameDelay = frameDuration;
+	frameStart = start;
+	frameIndex = frameStart;
+	frameEnd = end;
+	playInReverse = end < start;
+	isLooping = loop;
+
+	sprite->SetFrame(frameIndex);
+}
+
 void Animation::FixedUpdate(float dt)
 {
 	//std::cout << "Animation::FixedUpdate" << std::endl;

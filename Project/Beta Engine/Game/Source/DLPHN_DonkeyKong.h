@@ -12,6 +12,7 @@
 // Forward Declarations
 class GameObject;
 class Animation;
+class Sprite;
 
 namespace DLPHN
 {
@@ -27,14 +28,22 @@ namespace DLPHN
 	private:
 		// The current AI state for Donkey Kong
 		DK_AIState current;
-		// The amount of time DK stays in his idle state
-		const float idleTime;
-		// The timer keeping track of how much time DK is in his idle animation
-		float idleTimer;
+		// The previous state for DK
+		DK_AIState prev;
+		// The maximum amount of times DK goes through his idle state
+		const int maxIdleCount;
+		// Counts how many times DK goes through his idle state
+		int idleCount;
+		// The maximum amount of barrels DK is allowed to throw at a time
+		const int maxBarrelThrows;
+		// Counts how many times DK throws a barrel
+		int barrelThrows;
 		// The archetype for the barrel
 		GameObject* barrelArchetype;
 		// The animation that we are controlling
 		Animation* animation;
+		// DK's sprite
+		Sprite* sprite;
 
 		// Spawns a barrel and throws it down the beams
 		void ThrowBarrel() const;

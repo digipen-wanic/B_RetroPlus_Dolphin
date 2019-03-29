@@ -53,6 +53,14 @@ public:
 	//	 isLooping = True if the animation loops, false otherwise.
 	void Play(float frameDuration, bool isLooping, bool playInReverse = false);
 
+	// Plays a simple animation from the start frame to the finish frame
+	// Params:
+	//	frameDuation: How long each frames lasts
+	//	start: The starting frame of the animation
+	//	end: The ending frame of the animation
+	//	looping: Whether the animation loops
+	void Play(float frameDuration, float start, float end, bool looping);
+
 	// Update the animation.
 	// Params:
 	//	 dt = Change in time (in seconds) since the last game loop.

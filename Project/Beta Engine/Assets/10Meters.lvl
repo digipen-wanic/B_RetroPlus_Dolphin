@@ -25,20 +25,20 @@ LevelEditor
         tilemapLoc : Default
       }
     }
-    DonkeyKong
+    DonkeyKong_2
     {
       numComponents : 5
       Transform
       {
-        translation : { -99.5, 450.5 }
+        translation : { -99.5, 100.5 }
         rotation : 0
-        scale : { 250, 250 }
+        scale : { 500, 500 }
       }
       Sprite
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Circle
+        spriteSourceName : DonkeyKong
       }
       Animation
       {
