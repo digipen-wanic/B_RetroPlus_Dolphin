@@ -246,7 +246,7 @@ void GameObjectManager::CheckCollisions()
 		if (obj->GetComponent<Collider>() != nullptr)
 		{
 			// store object's collider
-			Collider* cldr = static_cast<Collider*>(obj->GetComponent<Collider>());
+			Collider* cldr = obj->GetComponent<Collider>();
 
 			// Loop through each object after obj
 			for (size_t j = i + 1; j < gameObjectActiveList.size(); j++)
@@ -261,7 +261,7 @@ void GameObjectManager::CheckCollisions()
 				if (otherObj->GetComponent<Collider>() != nullptr)
 				{
 					// store other object's collider
-					Collider* otherCldr = static_cast<Collider*>(otherObj->GetComponent<Collider>());
+					Collider* otherCldr = otherObj->GetComponent<Collider>();
 					
 					// Check for collision
 					cldr->CheckCollision(*otherCldr);

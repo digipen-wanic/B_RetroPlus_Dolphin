@@ -148,6 +148,7 @@ namespace Behaviors
 		Transform* transform;
 		Physics* physics;
 		Vector2D circleOffset;
+		GameObject* playerHammer;
 
 		// Jumping
 		bool onGround;

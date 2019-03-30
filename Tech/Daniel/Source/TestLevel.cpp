@@ -132,7 +132,10 @@ namespace Levels
 
 		GOM.AddObject(*Tilemap);
 
-		// Create Player
+		// Create playerHammer
+		GOM.AddObject(*GOF.CreateObject("PlayerHammer"));
+
+		// Create player
 		GOM.AddObject(*GOF.CreateObject("Player", meshPlayer, spriteSourcePlayer));
 
 		// Create test ladder

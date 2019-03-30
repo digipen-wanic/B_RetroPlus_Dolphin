@@ -1,0 +1,15 @@
+PlayerHammer
+{
+  numComponents : 2
+  Transform
+  {
+    translation : { 0, -1150 }
+    rotation : 0
+    scale : { 200, 200 }
+  }
+  ColliderCircle
+  {
+    radius : 30
+    offset : { 100, 0 }
+  }
+}

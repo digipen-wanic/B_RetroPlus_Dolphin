@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
 // File Name:	ColliderCircle.h
-// Author(s):	Jeremy Kings (j.kings)
+// Author(s):	Daniel Walther (daniel.walther)
 // Project:		BetaFramework
 // Course:		WANIC VGP2
 //

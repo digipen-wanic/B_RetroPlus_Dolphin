@@ -3,7 +3,7 @@ Hammer
   numComponents : 3
   Transform
   {
-    translation : { 150, -1150 }
+    translation : { 0, -1150 }
     rotation : 0
     scale : { 100, 100 }
   }
@@ -14,6 +14,6 @@ Hammer
   }
   ColliderRectangle
   {
-    extents : { 50, 50 }
+    extents : { 30, 50 }
   }
 }

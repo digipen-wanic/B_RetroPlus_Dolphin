@@ -1,9 +1,9 @@
 Player
 {
-  numComponents : 8
+  numComponents : 7
   Transform
   {
-    translation : { 0, -1150 }
+    translation : { 150, -1150 }
     rotation : 0
     scale : { 200, 200 }
   }
@@ -34,10 +34,5 @@ Player
   ColliderRectangle
   {
     extents : { 50, 50 }
-  }
-  ColliderCircle
-  {
-    radius : 30
-    offset : { 100, 0 }
   }
 }

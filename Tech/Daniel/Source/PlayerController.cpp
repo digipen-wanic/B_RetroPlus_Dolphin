@@ -63,17 +63,20 @@ namespace Behaviors
 		// get object components
 		transform = GetOwner()->GetComponent<Transform>();
 		physics = GetOwner()->GetComponent<Physics>();
+
+		// Get collider for player hammer
+		playerHammer = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("PlayerHammer");
 		
 		// Save offset and hide circle in player
-		circleOffset = GetOwner()->GetComponent<ColliderCircle>()->GetOffset();
-		GetOwner()->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
+		circleOffset = playerHammer->GetComponent<ColliderCircle>()->GetOffset();
+		playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
 
 		// set map collision handler
 		GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(&PlayerMapCollisionHandler);
 
 		// set player collision handler
 		GetOwner()->GetComponent<ColliderRectangle>()->SetCollisionHandler(&PlayerCollisionHandler);
-		GetOwner()->GetComponent<ColliderCircle>()->SetCollisionHandler(&HammerCollisionHandler);
+		playerHammer->GetComponent<ColliderCircle>()->SetCollisionHandler(&HammerCollisionHandler);
 	}
 
 	// Fixed update function for this component.
@@ -81,6 +84,9 @@ namespace Behaviors
 	//   dt = The (fixed) change in time since the last step.
 	void PlayerController::Update(float dt)
 	{
+		// Keep playerHammer with player
+		playerHammer->GetComponent<Transform>()->SetTranslation(transform->GetTranslation());
+		
 		// Death sequence
 		if (deathStatus)
 		{
@@ -345,18 +351,18 @@ namespace Behaviors
 		// Offset circle to match hammer
 		if (physics->GetVelocity().x > 0)
 		{
-			GetOwner()->GetComponent<ColliderCircle>()->SetOffset(circleOffset);
+			playerHammer->GetComponent<ColliderCircle>()->SetOffset(circleOffset);
 		}
 		else if (physics->GetVelocity().x < 0)
 		{
-			GetOwner()->GetComponent<ColliderCircle>()->SetOffset(Vector2D(-circleOffset.x, circleOffset.y));
+			playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(-circleOffset.x, circleOffset.y));
 		}
 
 		// Only run hammer for hammerCooldown seconds
 		if (timer >= hammerCooldown)
 		{
 			// Hide collidercircle in player
-			GetOwner()->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
+			playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
 
 			// Reset variables
 			timer = 0.0f;
