@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include "Collider.h"
+#include "Vector2D.h"
 
 //------------------------------------------------------------------------------
 
@@ -63,6 +64,12 @@ public:
 	//   radius = The circle collider's new radius.
 	void SetRadius(float radius);
 
+	// Sets offset of collider
+	void SetOffset(Vector2D offset_);
+
+	// Gets offset of collider
+	Vector2D GetOffset() const;
+
 	// Check for collision between a circle and another arbitrary collider.
 	// Params:
 	//	 other = Reference to the second circle collider component.
@@ -77,6 +84,9 @@ private:
 
 	// Radius of the circle collider.
 	float radius;
+
+	// Offset for collider
+	Vector2D offset;
 };
 
 //------------------------------------------------------------------------------

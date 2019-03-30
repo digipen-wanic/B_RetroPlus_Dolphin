@@ -36,6 +36,7 @@ void ColliderCircle::Deserialize(Parser & parser)
 	BaseDeserialize(parser);
 
 	parser.ReadVariable("radius", radius);
+	parser.ReadVariable("offset", offset);
 }
 
 void ColliderCircle::Serialize(Parser & parser) const
@@ -43,11 +44,12 @@ void ColliderCircle::Serialize(Parser & parser) const
 	BaseSerialize(parser);
 
 	parser.WriteVariable("radius", radius);
+	parser.WriteVariable("offset", offset);
 }
 
 void ColliderCircle::Draw()
 {
-	DebugDraw::GetInstance().AddCircle(transform->GetTranslation(), radius, Graphics::GetInstance().GetCurrentCamera(), Color(0,1,0,1));
+	DebugDraw::GetInstance().AddCircle(transform->GetTranslation() + offset, radius, Graphics::GetInstance().GetCurrentCamera(), Color(0,1,0,1));
 }
 
 float ColliderCircle::GetRadius() const
@@ -60,25 +62,37 @@ void ColliderCircle::SetRadius(float _radius)
 	radius = _radius;
 }
 
+// Sets offset of collider
+void ColliderCircle::SetOffset(Vector2D offset_)
+{
+	offset = offset_;
+}
+
+// Gets offset of collider
+Vector2D ColliderCircle::GetOffset() const
+{
+	return offset;
+}
+
 bool ColliderCircle::IsCollidingWith(const Collider & other) const
 {
 	Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();
 
 	//if the other collider is a point they just didn't collide (they missed just barely)
 	if (other.GetType() == ColliderType::ColliderTypePoint) {
-		return PointCircleIntersection(otherTransform->GetTranslation(), Circle(transform->GetTranslation(), radius));
+		return PointCircleIntersection(otherTransform->GetTranslation(), Circle(transform->GetTranslation() + offset, radius));
 	}
 
 	//if the other collider is a rectangle then test if they collided
 	if (other.GetType() == ColliderType::ColliderTypeRectangle) {
 		const ColliderRectangle& rect = static_cast<const ColliderRectangle&>(other);
-		return RectangleCircleIntersection(BoundingRectangle(otherTransform->GetTranslation(), rect.GetExtents()), Circle(transform->GetTranslation(), radius));
+		return RectangleCircleIntersection(BoundingRectangle(otherTransform->GetTranslation(), rect.GetExtents()), Circle(transform->GetTranslation() + offset, radius));
 	}
 
 	//if the other collider is circle then check if they collided
 	if (other.GetType() == ColliderType::ColliderTypeCircle) {
 		const ColliderCircle& circ = static_cast<const ColliderCircle&>(other);
-		return CircleCircleIntersection(Circle(transform->GetTranslation(), radius), Circle(otherTransform->GetTranslation(), circ.GetRadius()));
+		return CircleCircleIntersection(Circle(transform->GetTranslation() + offset, radius), Circle(otherTransform->GetTranslation(), circ.GetRadius()));
 	}
 
 	//other wise they didn't collide

@@ -67,7 +67,7 @@ void Parser::ReadSkip(const std::string & text)
 
 	//If the contents of the string don't match the name parameter, throw a ParseException with the file name and a message about how a variable with the given name could not be found.
 	if (word != text) {
-		throw ParseException(filename, "the text " + text + "didn't match " + word + ". ERROR 2");
+		throw ParseException(filename, "the text " + text + " didn't match " + word + ". ERROR 2");
 	}
 }
 
@@ -161,7 +161,7 @@ void Parser::Read2DArrayVariable(const std::string& name, int**& variable, int c
 
 	//If the contents of the string don't match the name parameter, throw a ParseException, passing it the name and filename.
 	if (word != name) {
-		throw ParseException(filename, "the name " + name + "didn't match " + word + ". ERROR 1");
+		throw ParseException(filename, "the name " + name + " didn't match " + word + ". ERROR 1");
 	}
 
 	//skip forward in the stream to after the next colon character

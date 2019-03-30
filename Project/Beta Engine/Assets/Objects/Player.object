@@ -1,0 +1,49 @@
+Player
+{
+	numComponents : 7
+	
+	Transform
+	{
+		translation : { 150, -1150 }
+		rotation : 0
+		scale : { 200, 200 }
+	}
+	
+	Sprite
+	{
+		frameIndex : 0
+		color : { 1, 1, 1, 1 }
+		spriteSourceName : Player
+	}
+	
+	Animation
+	{
+	}
+	
+	DLPHN::PlayerAnimation
+	{
+	}
+	
+	Physics
+	{
+		acceleration : { 0, 0 }
+		velocity : { 0, 0 }
+		angularVelocity : 0
+		mass : 1
+		gravity : { 0, 0 }
+	}
+	
+	DLPHN::PlayerController
+	{
+		PlayerWalkSpeed : 200
+		PlayerJumpSpeed : 400
+		gravity : { 0, -800 }
+	}
+	
+	ColliderRectangle
+	{
+		CollisionGroup : default
+		CollisionFlags : all
+		extents : { 50, 50 }
+	}
+}

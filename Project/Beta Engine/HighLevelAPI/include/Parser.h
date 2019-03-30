@@ -103,7 +103,7 @@ public:
 
 		//If the contents of the string don't match the name parameter, throw a ParseException, passing it the name and filename.
 		if (word != name) {
-			throw ParseException(filename, "the name " + name + "didn't match " + word + ". ERROR 1");
+			throw ParseException(filename, "the name " + name + " didn't match " + word + ". ERROR 1");
 		}
 
 		//skip forward in the stream to after the next colon character
@@ -124,7 +124,7 @@ public:
 
 		//If the contents of the string don't match the name parameter, throw a ParseException, passing it the name and filename.
 		if (word != name) {
-			throw ParseException(filename, "the name " + name + "didn't match " + word + ". ERROR 1");
+			throw ParseException(filename, "the name " + name + " didn't match " + word + ". ERROR 1");
 		}
 
 		//skip forward in the stream to after the next colon character

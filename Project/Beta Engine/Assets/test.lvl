@@ -1,0 +1,323 @@
+LevelEditor
+{
+  numGameObjects : 13
+  {
+    TileMap
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -300, 400 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteTilemap
+      {
+        frameIndex : 4
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : TileMap
+        tilemapLoc : Default
+      }
+      ColliderTilemap
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        tilemapLoc : Default
+      }
+    }
+    Monkey
+    {
+      numComponents : 6
+      Transform
+      {
+        translation : { 100.5, -125 }
+        rotation : 0
+        scale : { 100, 100 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : MonkeyWalk
+      }
+      Animation
+      {
+      }
+      Physics
+      {
+        acceleration : { 0, -275 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, -275 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 50, 50 }
+      }
+      Behaviors::MonkeyMovement
+      { } 
+    }
+    Circle
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { -141.5, 200.5 }
+        rotation : 0
+        scale : { -137, -47 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Circle
+      }
+    }
+    Monkey_1
+    {
+      numComponents : 6
+      Transform
+      {
+        translation : { -123.5, -125 }
+        rotation : 0
+        scale : { 100, 100 }
+      }
+      Sprite
+      {
+        frameIndex : 12
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : MonkeyIdle
+      }
+      Animation
+      {
+      }
+      Physics
+      {
+        acceleration : { 0, -275 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, -275 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 50, 50 }
+      }
+      Behaviors::MonkeyMovement
+      { } 
+    }
+    PlayerHammer
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 150.5, 250.5 }
+        rotation : 0
+        scale : { 200, 200 }
+      }
+      ColliderCircle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        radius : 30
+        offset : { 100, 0 }
+      }
+    }
+    Player
+    {
+      numComponents : 7
+      Transform
+      {
+        translation : { -175, -125 }
+        rotation : 0
+        scale : { 200, 200 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Player
+      }
+      Animation
+      {
+      }
+      Physics
+      {
+        acceleration : { 0, 0 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, 0 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 50, 50 }
+      }
+      DLPHN::PlayerAnimation
+      { } 
+      DLPHN::PlayerController
+      { PlayerWalkSpeed : 200 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
+    }
+    Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 200.5, -149.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Ladder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_1
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 200.5, -49.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Ladder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_2
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 200.5, -99.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Ladder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_3
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 200.5, 0.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Ladder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_4
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 200.5, 50.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Ladder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_5
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 200.5, 100.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Ladder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Hammer
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 400.5, -49.5 }
+        rotation : 0
+        scale : { 100, 100 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Hammer
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 30, 50 }
+      }
+    }
+  }
+}

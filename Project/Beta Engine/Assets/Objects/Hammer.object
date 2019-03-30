@@ -1,0 +1,25 @@
+Hammer
+{
+	numComponents : 3
+	
+	Transform
+	{
+		translation : { 0, -1150 }
+		rotation : 0
+		scale : { 100, 100 }
+	}
+	
+	Sprite
+	{
+		frameIndex : 0
+		color : { 1 , 1 , 1 , 1 }
+		spriteSourceName : Hammer
+	}
+	
+	ColliderRectangle
+	{
+		CollisionGroup : default
+		CollisionFlags : all
+		extents : { 30, 50 }
+	}
+}

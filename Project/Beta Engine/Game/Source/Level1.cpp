@@ -13,21 +13,20 @@
 #include <Space.h>
 #include "Level1.h"
 
-//Components
+// Components
 #include <SpriteText.h>
 #include <Transform.h>
 #include <Physics.h>
 #include <ColliderTilemap.h>
 #include <SpriteTilemap.h>
-#include "MonkeyMovement.h"
 
-//Resources
+// Resources
 #include <Mesh.h>
 #include <Color.h>
 #include <Tilemap.h>
 #include <SpriteSource.h>
 
-//Systems
+// Systems
 #include <GameObjectFactory.h>
 #include <ResourceManager.h>
 #include <System.h>
@@ -55,9 +54,6 @@ void Levels::Level1::Load()
 
 	Graphics::GetInstance().GetCurrentCamera().Reset();
 
-	////Register Custom Components
-	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::MonkeyMovement>();
-
 	//Setup Sounds
 	soundManager = Engine::GetInstance().GetModule<SoundManager>();
 	soundManager->AddMusic("Asteroid_Field.mp3");
@@ -66,7 +62,7 @@ void Levels::Level1::Load()
 	soundManager->AddBank("Master Bank.strings.bank");
 	soundManager->AddBank("Master Bank.bank");
 
-	SetFileLocation("Assets/10Meters.lvl");
+	SetFileLocation("Assets/test.lvl");
 }
 
 void Levels::Level1::Initialize()
