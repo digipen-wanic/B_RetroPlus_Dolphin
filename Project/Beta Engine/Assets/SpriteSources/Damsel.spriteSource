@@ -1,0 +1,8 @@
+Circle
+{
+	textureName : DLPHN_damsel.png
+    textureRows : 1
+    textureColumns : 2
+	frameCount : 1
+	frameStart : 0
+}

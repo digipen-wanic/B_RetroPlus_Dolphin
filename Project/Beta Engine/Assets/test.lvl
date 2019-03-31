@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 13
+  numGameObjects : 32
   {
     TileMap
     {
@@ -111,12 +111,28 @@ LevelEditor
       Behaviors::MonkeyMovement
       { } 
     }
+    BeamDiscrete1
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 0.5, -99.5 }
+        rotation : 0
+        scale : { 1190, 80 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BeamDiscrete1
+      }
+    }
     PlayerHammer
     {
       numComponents : 2
       Transform
       {
-        translation : { 150.5, 250.5 }
+        translation : { 250.5, 300.5 }
         rotation : 0
         scale : { 200, 200 }
       }
@@ -133,7 +149,7 @@ LevelEditor
       numComponents : 7
       Transform
       {
-        translation : { -175, -125 }
+        translation : { -275, -125 }
         rotation : 0
         scale : { 200, 200 }
       }
@@ -167,18 +183,12 @@ LevelEditor
     }
     Ladder
     {
-      numComponents : 3
+      numComponents : 2
       Transform
       {
-        translation : { 200.5, -149.5 }
+        translation : { 400.5, -149.5 }
         rotation : 0
         scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Ladder
       }
       ColliderRectangle
       {
@@ -187,114 +197,20 @@ LevelEditor
         extents : { 10, 30 }
       }
     }
-    Ladder_1
+    LadderSprite
     {
-      numComponents : 3
+      numComponents : 2
       Transform
       {
-        translation : { 200.5, -49.5 }
+        translation : { 400.5, -99.5 }
         rotation : 0
-        scale : { 190, 190 }
+        scale : { 50, 50 }
       }
       Sprite
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Ladder
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_2
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { 200.5, -99.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Ladder
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_3
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { 200.5, 0.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Ladder
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_4
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { 200.5, 50.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Ladder
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_5
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { 200.5, 100.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Ladder
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
+        spriteSourceName : LadderSprite
       }
     }
     Hammer
@@ -302,7 +218,7 @@ LevelEditor
       numComponents : 3
       Transform
       {
-        translation : { 400.5, -49.5 }
+        translation : { 200.5, -99.5 }
         rotation : 0
         scale : { 100, 100 }
       }
@@ -317,6 +233,358 @@ LevelEditor
         CollisionGroup : default
         CollisionFlags : all
         extents : { 30, 50 }
+      }
+    }
+    Ladder_1
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, -99.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_2
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, -49.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_3
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 50.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_4
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 150.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_5
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 250.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_6
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 400.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    LadderSprite_1
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, -49.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_2
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 50.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_3
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 0.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_4
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 0.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_5
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 50.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_6
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 100.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_7
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 100.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_8
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 150.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_9
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 200.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_10
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 250.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_11
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 250.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_12
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 350.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_13
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 300.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_14
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 400.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_15
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 400.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+    }
+    LadderSprite_16
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 400.5, 450.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
       }
     }
   }

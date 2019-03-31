@@ -1,19 +1,12 @@
 Ladder
 {
-	numComponents : 3
+	numComponents : 2
 	
 	Transform
 	{
 		translation : { 900, -1150 }
 		rotation : 0
 		scale : { 190, 190 }
-	}
-	
-	Sprite
-	{
-		frameIndex : 0
-		color : { 1 , 1 , 1 , 1 }
-		spriteSourceName : Ladder
 	}
 	
 	ColliderRectangle

@@ -1,0 +1,8 @@
+LadderSprite
+{
+	textureName : DLPHN_allLadders.png
+	textureRows : 4
+	textureColumns : 3
+	frameCount : 0
+	frameStart : 0
+}

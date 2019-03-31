@@ -1,0 +1,8 @@
+BeamDiscrete1
+{
+	textureName : DLPHN_beamsDiscrete_1.png
+	textureRows : 1
+	textureColumns : 1
+	frameCount : 0
+	frameStart : 0
+}
