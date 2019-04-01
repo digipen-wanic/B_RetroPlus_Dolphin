@@ -54,6 +54,8 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 	{
 		// Find the offset if the collider is a point
 		const ColliderPoint& point = dynamic_cast<const ColliderPoint&>(other);
+		// Find the offset if the collider is a circle
+		const ColliderCircle* circle = dynamic_cast<const ColliderCircle*>(&other);
 		Vector2D offset = Vector2D();
 		if (&point)
 		{
@@ -66,6 +68,11 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 		for (unsigned i = 0; i < lineSegments.size(); i++)
 		{
 			LineSegment myLine = LineSegment(GetLineWithTransform(i).start, GetLineWithTransform(i).end);
+			if (circle)
+			{
+				// Find the radius of the collider
+				offset = circle->GetRadius() * myLine.normal;
+			}
 			Vector2D intersection = Vector2D(0, 0);
 			float t = 0;
 

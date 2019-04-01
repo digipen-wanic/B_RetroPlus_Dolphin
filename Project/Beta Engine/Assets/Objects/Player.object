@@ -9,6 +9,18 @@ Player
 		scale : { 200, 200 }
 	}
 	
+	ColliderRectangle
+	{
+		CollisionGroup : default
+		CollisionFlags : all
+		extents : { 50, 50 }
+	}
+	
+	ColliderCircle
+	{
+		
+	}
+	
 	Sprite
 	{
 		frameIndex : 0
@@ -38,12 +50,5 @@ Player
 		PlayerWalkSpeed : 200
 		PlayerJumpSpeed : 400
 		gravity : { 0, -800 }
-	}
-	
-	ColliderRectangle
-	{
-		CollisionGroup : default
-		CollisionFlags : all
-		extents : { 50, 50 }
 	}
 }

@@ -76,8 +76,10 @@ namespace DLPHN
 		GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(&PlayerMapCollisionHandler);
 
 		// set player collision handler
-		GetOwner()->GetComponent<ColliderPoint>()->SetCollisionHandler(&PlayerCollisionHandler);
-		playerHammer->GetComponent<ColliderCircle>()->SetCollisionHandler(&HammerCollisionHandler);
+		ColliderPoint* playerCollider = GetOwner()->GetComponent<ColliderPoint>();
+		playerCollider->SetCollisionHandler(&PlayerCollisionHandler);
+		ColliderCircle* hammerCollider = playerHammer->GetComponent<ColliderCircle>();
+		hammerCollider->SetCollisionHandler(&HammerCollisionHandler);
 	}
 
 	// Fixed update function for this component.
