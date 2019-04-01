@@ -3,6 +3,6 @@ DonkeyKong
 	textureName : DLPHN_dk.png
 	textureRows : 3
 	textureColumns : 3
-	frameCount : 0
-	frameStart : 7
+	frameCount : 7
+	frameStart : 0
 }

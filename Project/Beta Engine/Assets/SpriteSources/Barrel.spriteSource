@@ -1,0 +1,8 @@
+Barrel
+{
+	textureName : DLPHN_barrelsRoll.png
+	textureRows : 3
+	textureColumns : 2
+	frameCount : 6
+	frameStart : 0
+}
