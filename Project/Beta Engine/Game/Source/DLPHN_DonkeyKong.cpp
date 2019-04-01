@@ -181,9 +181,9 @@ namespace DLPHN
 
 	void DonkeyKong::ThrowBarrel(const Vector2D& throwOffset)
 	{
-		GameObject* barrel = new GameObject(*barrelArchetype);
-		GetOwner()->GetSpace()->GetObjectManager().AddObject(*barrel);
-		Transform* barrelTransform = barrel->GetComponent<Transform>();
-		barrelTransform->SetTranslation(GetOwner()->GetComponent<Transform>()->GetTranslation() + throwOffset);
+		//GameObject* barrel = new GameObject(*barrelArchetype);
+		//GetOwner()->GetSpace()->GetObjectManager().AddObject(*barrel);
+		//Transform* barrelTransform = barrel->GetComponent<Transform>();
+		//barrelTransform->SetTranslation(GetOwner()->GetComponent<Transform>()->GetTranslation() + throwOffset);
 	}
 }

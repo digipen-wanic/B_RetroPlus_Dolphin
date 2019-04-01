@@ -6,7 +6,7 @@ Player
 	{
 		translation : { 150, -1150 }
 		rotation : 0
-		scale : { 200, 200 }
+		scale : { 190, 190 }
 	}
 	
 	ColliderRectangle
@@ -14,11 +14,6 @@ Player
 		CollisionGroup : default
 		CollisionFlags : all
 		extents : { 50, 50 }
-	}
-	
-	ColliderCircle
-	{
-		
 	}
 	
 	Sprite
@@ -47,7 +42,7 @@ Player
 	
 	DLPHN::PlayerController
 	{
-		PlayerWalkSpeed : 200
+		PlayerWalkSpeed : 150
 		PlayerJumpSpeed : 400
 		gravity : { 0, -800 }
 	}

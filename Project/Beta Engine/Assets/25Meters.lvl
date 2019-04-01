@@ -73,9 +73,9 @@ LevelEditor
       numComponents : 8
       Transform
       {
-        translation : { -289, -383.5 }
+        translation : { -288.5, -366.5 }
         rotation : 0
-        scale : { 140, 140 }
+        scale : { 190, 190 }
       }
       Sprite
       {
@@ -109,7 +109,7 @@ LevelEditor
       DLPHN::PlayerAnimation
       { } 
       DLPHN::PlayerController
-      { PlayerWalkSpeed : 200 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
+      { PlayerWalkSpeed : 150 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
     }
     DonkeyKong
     {
@@ -217,7 +217,7 @@ LevelEditor
       {
         frameIndex : 5
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : BrokenLadder
+        spriteSourceName : LadderSprite
       }
       ColliderRectangle
       {
@@ -239,7 +239,7 @@ LevelEditor
       {
         frameIndex : 1
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : BrokenLadder
+        spriteSourceName : LadderSprite
       }
       ColliderRectangle
       {
@@ -305,7 +305,7 @@ LevelEditor
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : BrokenLadder
+        spriteSourceName : LadderSprite
       }
       ColliderRectangle
       {

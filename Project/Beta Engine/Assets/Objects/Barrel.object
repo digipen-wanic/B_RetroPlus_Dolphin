@@ -1,11 +1,24 @@
 Barrel
 {
-	numComponents : 5
+	numComponents : 6
 	Transform
 	{
 		translation : { -99.5, 0 }
 		rotation : 0
 		scale : { 80, 80 }
+	}
+	
+	Physics
+	{
+		acceleration : { 0, 0 }
+		velocity : { 0, 0 }
+		angularVelocity : 0
+		mass : 1
+		gravity : { 0, 0 }
+	}
+	
+	Animation
+	{
 	}
 	
 	Sprite
@@ -15,15 +28,11 @@ Barrel
 		spriteSourceName : Barrel
 	}
 	
-	Animation
-	{
-	}
-	
 	ColliderCircle
 	{
 		CollisionGroup : default
 		CollisionFlags : all
-		radius : 40
+		radius : 30
 		offset : { 0, 10 }
 	}
 	

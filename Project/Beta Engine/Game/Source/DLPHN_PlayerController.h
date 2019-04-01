@@ -25,6 +25,7 @@
 
 class Transform;
 class Physics;
+class Sprite;
 struct MapCollision;
 
 //------------------------------------------------------------------------------
@@ -151,6 +152,7 @@ namespace DLPHN
 		// Components
 		Transform* transform;
 		Physics* physics;
+		Sprite* sprite;
 		float circleOffset;
 		GameObject* playerHammer;
 

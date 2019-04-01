@@ -38,9 +38,9 @@ namespace DLPHN
 		  walkStart(0), walkEnd(2),
 		  jumpStart(3), landStart(4),
 		  idleStart(0),
-		  climbStart(10), climbEnd(11),
-		  hammerStart(17), hammerEnd(19), hammerTopStart(18), hammerSideStart(19),
-		  dyingStart(25), dyingEnd(28), deadStart(29)
+		  climbStart(5), climbEnd(6),
+		  hammerStart(13), hammerEnd(16), hammerTopStart(16), hammerSideStart(15),
+		  dyingStart(17), dyingEnd(20), deadStart(21)
 	{
 	}
 
@@ -62,7 +62,7 @@ namespace DLPHN
 		PlayerController = GetOwner()->GetComponent<DLPHN::PlayerController>();
 
 		// initialize with starting values
-		animation->Play(idleStart, 1, 1, false);
+		animation->Play(1, idleStart, 1, false);
 		originalScale = transform->GetScale();
 	}
 
@@ -231,7 +231,7 @@ namespace DLPHN
 
 			// Hammer idle/walk
 			case StateHasHammer:
-				animation->Play(0.05f, hammerStart, hammerEnd, true);
+				animation->Play(0.1f, hammerStart, hammerEnd, true);
 				break;
 				
 			// Hit a barrel on the top

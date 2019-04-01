@@ -16,15 +16,16 @@
 #include "stdafx.h"
 #include "DLPHN_PlayerController.h"
 
-#include "Input.h"
-#include "Parser.h"
-#include "Physics.h"
-#include "Space.h"
-#include "Transform.h"
+#include <ColliderCircle.h>
+#include <ColliderPoint.h>
+#include <ColliderRectangle.h>
+#include <Input.h>
+#include <Parser.h>
+#include <Physics.h>
+#include <Space.h>
+#include <Sprite.h>
+#include <Transform.h>
 
-#include "ColliderRectangle.h"
-#include "ColliderCircle.h"
-#include "ColliderPoint.h"
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -64,10 +65,11 @@ namespace DLPHN
 		// get object components
 		transform = GetOwner()->GetComponent<Transform>();
 		physics = GetOwner()->GetComponent<Physics>();
+		sprite = GetOwner()->GetComponent<Sprite>();
 
 		// Get collider for player hammer
 		playerHammer = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("PlayerHammer");
-		
+
 		// Save offset and hide circle in player
 		circleOffset = playerHammer->GetComponent<ColliderCircle>()->GetOffset().x;
 		playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
@@ -84,12 +86,12 @@ namespace DLPHN
 
 	// Fixed update function for this component.
 	// Params:
-	//   dt = The (fixed) change in time since the last step.
+	//   dt = The change in time since the last step.
 	void PlayerController::Update(float dt)
 	{
 		// Keep playerHammer with player
 		playerHammer->GetComponent<Transform>()->SetTranslation(transform->GetTranslation());
-		
+
 		// Death sequence
 		if (deathStatus)
 		{
@@ -156,7 +158,7 @@ namespace DLPHN
 			Vector2D displacementVector = intersection - currentPosition;
 
 			Vector2D velocity = physics->GetVelocity();
-			if (velocity.y < 0)
+			if (displacementVector.y > 0 && velocity.y < 0)
 			{
 				velocity.y = 0;
 				// Solve the simple problem first and stop the player from falling vertically
@@ -289,12 +291,14 @@ namespace DLPHN
 			if (input.CheckHeld(VK_RIGHT) && !input.CheckHeld(VK_LEFT))
 			{
 				physics->SetVelocity(Vector2D(PlayerWalkSpeed, physics->GetVelocity().y));
+				//transform->SetTranslation(Vector2D(transform->GetTranslation().x + PlayerWalkSpeed, transform->GetTranslation().y));
 			}
 
 			// Move left with left arrow
 			else if (input.CheckHeld(VK_LEFT) && !input.CheckHeld(VK_RIGHT))
 			{
 				physics->SetVelocity(Vector2D(-PlayerWalkSpeed, physics->GetVelocity().y));
+				//transform->SetTranslation(Vector2D(transform->GetTranslation().x - PlayerWalkSpeed, transform->GetTranslation().y));
 			}
 
 			// Idle
@@ -373,22 +377,27 @@ namespace DLPHN
 		static float timer = 0.0f;
 		timer += dt;
 
-		if (fmod(timer, 0.2f) > 0.1f)
+		// Determine what frame is being displayed
+		// (13, 15: side) (14, 16: top)
+		switch (sprite->GetFrame())
 		{
-			// Offset circle to match hammer (side)
-			if (physics->GetVelocity().x > 0)
-			{
-				playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(circleOffset, 0.0f));
-			}
-			else if (physics->GetVelocity().x < 0)
+		case 13:
+		case 15:
+			// Determine what direction player is facing
+			if (transform->GetScale().x < 0)
 			{
 				playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(-circleOffset, 0.0f));
 			}
-		}
-		else
-		{
-			// Offset circle to match hammer (up)
+			else
+			{
+				playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(circleOffset, 0.0f));
+			}
+			break;
+
+		case 14:
+		case 16:
 			playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, circleOffset));
+			break;
 		}
 
 		// Only run hammer for hammerCooldown seconds

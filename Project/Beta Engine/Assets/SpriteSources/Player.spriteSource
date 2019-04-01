@@ -1,7 +1,7 @@
 Player
 {
 	textureName : DLPHN_player.png
-	textureRows : 6
+	textureRows : 5
 	textureColumns : 5
 	frameCount : 0
 	frameStart : 0

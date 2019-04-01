@@ -22,25 +22,7 @@
   Copyright (C) 2013 Microsoft. All rights reserved.
   
   compilation header save succeeded; see C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_TextPS.h
-  TwPrecomp.cpp
-  LoadOGL.cpp
-  LoadOGLCore.cpp
-  TwBar.cpp
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(1803): warning C4456: declaration of 'str' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(1658): note: see declaration of 'str'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(5068): warning C4456: declaration of 'LevelSpace' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(4870): note: see declaration of 'LevelSpace'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6674): warning C4456: declaration of 'Atom' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6654): note: see declaration of 'Atom'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6702): warning C4456: declaration of 'Atom' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6654): note: see declaration of 'Atom'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6730): warning C4456: declaration of 'Atom' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6654): note: see declaration of 'Atom'
-  TwColors.cpp
-  TwDirect3D10.cpp
   TwDirect3D11.cpp
-  TwDirect3D9.cpp
-  TwFonts.cpp
   TwMgr.cpp
 c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6152): warning C4456: declaration of 'Var' hides previous local declaration
   c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6133): note: see declaration of 'Var'
@@ -61,26 +43,7 @@ c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\
 c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6250): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
 c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6256): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
 c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6265): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-  TwOpenGL.cpp
   Generating Code...
-  TwEventGLFW.c
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(26): warning C4100: 'mode': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(26): warning C4100: 'win': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(45): warning C4100: 'modes': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(45): warning C4100: 'scanCode': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(45): warning C4100: 'win': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(188): warning C4100: 'win': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(200): warning C4100: 'win': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(204): warning C4100: 'axisX': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(204): warning C4100: 'win': unreferenced formal parameter
-  TwEventGLUT.c
-  TwEventSDL.c
-  TwEventSDL12.c
-  TwEventSDL13.c
-  TwEventWin.c
-  Generating Code...
-  TwEventSFML.cpp
-  TwOpenGLCore.cpp
-  Generating Code...
+  LINK : ../lib/debug\AntTweakBar64.dll not found or not built by the last incremental link; performing full link
      Creating library ../lib/debug\AntTweakBar64.lib and object ../lib/debug\AntTweakBar64.exp
   AntTweakBar.vcxproj -> C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\../lib/debug\AntTweakBar64.dll
