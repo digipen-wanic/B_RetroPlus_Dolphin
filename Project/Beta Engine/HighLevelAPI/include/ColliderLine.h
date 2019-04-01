@@ -68,9 +68,10 @@ public:
 	// Check for collision between a line collider and another arbitrary collider.
 	// Params:
 	//	 other = Reference to the other collider component.
+	//	 intersection = Returns the point of intersection between the colliders
 	// Returns:
 	//	 Return the results of the collision check.
-	bool IsCollidingWith(const Collider& other) const override;
+	bool IsCollidingWith(const Collider& other, Vector2D* intersection = nullptr) const override;
 
 	// Save object data to file.
 	// Params:

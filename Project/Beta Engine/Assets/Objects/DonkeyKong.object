@@ -5,10 +5,10 @@ DonkeyKong
 	{
 		translation : { 0, 0 }
 		rotation : 0
-		scale : { 500, 500 }
+		scale : { 250, 250 }
 	}
    
-   Sprite
+	Sprite
 	{
 		frameIndex : 0
 		color : { 1, 1, 1, 1 }
@@ -23,7 +23,7 @@ DonkeyKong
 	{
 		CollisionGroup : default
 		CollisionFlags : all
-		extents : { 250, 250 }
+		extents : { 175, 175 }
 	}
 	
 	DLPHN::DonkeyKong

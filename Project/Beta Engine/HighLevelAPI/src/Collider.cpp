@@ -90,12 +90,13 @@ void Collider::CheckCollision(const Collider & other)
 	}
 
 	//handle the auctual collision maths, math gets shortcircited if canCollide is false
-	if (canCollide && IsCollidingWith(other)) {
+	Vector2D intersection;
+	if (canCollide && IsCollidingWith(other, &intersection)) {
 		if (this->handler != nullptr) {
-			this->handler(*this->GetOwner(), *other.GetOwner());
+			this->handler(*this->GetOwner(), *other.GetOwner(), intersection);
 		}
 		if (other.handler != nullptr) {
-			other.handler(*other.GetOwner(), *this->GetOwner());
+			other.handler(*other.GetOwner(), *this->GetOwner(), intersection);
 		}
 	}
 }

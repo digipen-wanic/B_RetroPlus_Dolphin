@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include "Collider.h"
+#include "Vector2D.h"
 
 //------------------------------------------------------------------------------
 
@@ -55,12 +56,22 @@ public:
 	// Debug drawing for colliders.
 	void Draw() override;
 
+	// Gets the point's offset
+	// Returns: The collider's offset
+	const Vector2D& GetOffset() const;
+
 	// Check for collision between a point and another arbitrary collider.
 	// Params:
 	//	 other = Reference to the second point collider component.
+	//	 intersection = Returns null because this functionality only works with line collisions
 	// Returns:
 	//	 Return the results of the collision check.
-	bool IsCollidingWith(const Collider& other) const override;
+	bool IsCollidingWith(const Collider& other, Vector2D* intersection = nullptr) const override;
+private:
+	//------------------------------------------------------------------------------
+	// Private Variables 
+	//------------------------------------------------------------------------------
+	Vector2D offset;
 };
 
 //------------------------------------------------------------------------------

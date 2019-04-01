@@ -7,6 +7,7 @@
 #include <Transform.h>
 #include <ColliderPoint.h>
 #include <ColliderCircle.h>
+#include <Vector2D.h>
 #include <Parser.h>
 
 ColliderLine::ColliderLine(bool _reflection) : Collider(ColliderType::ColliderTypeLines)
@@ -37,15 +38,29 @@ void ColliderLine::AddLineSegment(const Vector2D & p0, const Vector2D & p1)
 	lineSegments.push_back(LineSegment(p0, p1));
 }
 
-bool ColliderLine::IsCollidingWith(const Collider & other) const
+bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectionPtr) const
 {
-	LineSegment othersLine = LineSegment(other.GetOwner()->GetComponent<Physics>()->GetOldTranslation(), other.GetOwner()->GetComponent<Transform>()->GetTranslation());
+	Physics* otherPhysics = other.GetOwner()->GetComponent<Physics>();
+	// If the other object's physics are missing then we are going ignore the collisions
+	if (!otherPhysics)
+		return false;
+
+	LineSegment othersLine;
 
 	switch (other.GetType())
 	{
 	case ColliderType::ColliderTypeCircle:
 	case ColliderType::ColliderTypePoint:
 	{
+		// Find the offset if the collider is a point
+		const ColliderPoint& point = dynamic_cast<const ColliderPoint&>(other);
+		Vector2D offset = Vector2D();
+		if (&point)
+		{
+			offset = point.GetOffset();
+		}
+
+		othersLine = LineSegment(otherPhysics->GetOldTranslation() + offset, other.GetOwner()->GetComponent<Transform>()->GetTranslation() + offset);
 		Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();
 		Physics* otherPhysics = other.GetOwner()->GetComponent<Physics>();
 		for (unsigned i = 0; i < lineSegments.size(); i++)
@@ -58,20 +73,12 @@ bool ColliderLine::IsCollidingWith(const Collider & other) const
 
 			//check if we intersected this frame
 			if ((t < 1 || t > 0) && intersected) {
+				if (intersectionPtr)
+				{
+					*intersectionPtr = intersection;
+				}
 				if (reflection) {
 					MovingPointLineReflection(*otherTransform, *otherPhysics, myLine, othersLine, intersection);
-				}
-				else
-				{
-					// Janky Resolution Code
-					// Find the displacement vector from our point's position and the intersection's position
-					Vector2D currentPosition = otherTransform->GetTranslation();
-					Vector2D displacementVector = intersection - currentPosition;
-					transform->SetTranslation(currentPosition + displacementVector);
-					// Solve the simple problem first and stop the player from falling vertically
-					Vector2D velocity = otherPhysics->GetVelocity();
-					velocity.y = 0;
-					physics->SetVelocity(velocity);
 				}
 				return true;
 			}

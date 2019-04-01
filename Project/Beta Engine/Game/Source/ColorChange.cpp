@@ -54,8 +54,9 @@ void Behaviors::ColorChange::Serialize(Parser & parser) const
 	parser.WriteVariable("collidedColorTime", collidedColorTime);
 }
 
-void Behaviors::ColorChangeCollisionHandler(GameObject & object, GameObject & other)
+void Behaviors::ColorChangeCollisionHandler(GameObject & object, GameObject & other, const Vector2D& intersection)
 {
+	UNREFERENCED_PARAMETER(intersection);
 	UNREFERENCED_PARAMETER(other);
 	ColorChange* objectColorChange = object.GetComponent<ColorChange>();
 

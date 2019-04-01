@@ -57,7 +57,7 @@ void ColliderRectangle::SetExtents(const Vector2D & _extents)
 	extents = _extents;
 }
 
-bool ColliderRectangle::IsCollidingWith(const Collider & other) const
+bool ColliderRectangle::IsCollidingWith(const Collider & other, Vector2D* intersection) const
 {
 	//if the other collider is a point then do things
 	if (other.GetType() == ColliderType::ColliderTypePoint) {

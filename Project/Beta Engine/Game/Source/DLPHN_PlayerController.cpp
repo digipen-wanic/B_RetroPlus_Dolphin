@@ -24,6 +24,7 @@
 
 #include "ColliderRectangle.h"
 #include "ColliderCircle.h"
+#include "ColliderPoint.h"
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -75,7 +76,7 @@ namespace DLPHN
 		GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(&PlayerMapCollisionHandler);
 
 		// set player collision handler
-		GetOwner()->GetComponent<ColliderRectangle>()->SetCollisionHandler(&PlayerCollisionHandler);
+		GetOwner()->GetComponent<ColliderPoint>()->SetCollisionHandler(&PlayerCollisionHandler);
 		playerHammer->GetComponent<ColliderCircle>()->SetCollisionHandler(&HammerCollisionHandler);
 	}
 
@@ -135,11 +136,33 @@ namespace DLPHN
 	// Params:
 	//   object = The Player.
 	//   other  = The object the Player is colliding with.
-	void PlayerCollisionHandler(GameObject& object, GameObject& other)
+	void PlayerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection)
 	{
 		UNREFERENCED_PARAMETER(object);
 
 		PlayerController* playerController = object.GetComponent<PlayerController>();
+
+		// Check whether the player touched a beam or not
+		if (other.GetName() == "BeamDiscrete1")
+		{
+			// Janky Resolution Code
+			// Find the displacement vector from our point's position and the intersection's position
+			Transform* transform = object.GetComponent<Transform>();
+			Physics* physics = object.GetComponent<Physics>();
+			ColliderPoint* point = object.GetComponent<ColliderPoint>();
+			Vector2D currentPosition = transform->GetTranslation() + point->GetOffset();
+			Vector2D displacementVector = intersection - currentPosition;
+
+			Vector2D velocity = physics->GetVelocity();
+			if (displacementVector.y > 0 && velocity.y < 0)
+			{
+				velocity.y = 0;
+				// Solve the simple problem first and stop the player from falling vertically
+				transform->SetTranslation(currentPosition + displacementVector - point->GetOffset());
+				physics->SetVelocity(velocity);
+			}
+			playerController->onGround = true;
+		}
 
 		// Make sure player doesn't have hammer
 		if (!playerController->hammerStatus)
@@ -189,7 +212,7 @@ namespace DLPHN
 	// Params:
 	//   object = The hammer.
 	//   other  = The object the Player is colliding with.
-	void HammerCollisionHandler(GameObject& object, GameObject& other)
+	void HammerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection)
 	{
 		UNREFERENCED_PARAMETER(object);
 

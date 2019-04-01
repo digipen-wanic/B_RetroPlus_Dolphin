@@ -113,10 +113,10 @@ LevelEditor
     }
     BeamDiscrete1
     {
-      numComponents : 2
+      numComponents : 3
       Transform
       {
-        translation : { 0.5, -99.5 }
+        translation : { 0.5, -109.5 }
         rotation : 0
         scale : { 1190, 80 }
       }
@@ -126,6 +126,15 @@ LevelEditor
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : BeamDiscrete1
       }
+	  ColliderLine
+	  {
+		CollisionGroup : default
+		CollisionFlags : all
+		LineTypeRelitive : 0
+		Reflection : 0
+		NumberOfLines : 1
+		Line : { {-500, -100}, {500, -100} }
+	  }
     }
     PlayerHammer
     {
@@ -136,6 +145,7 @@ LevelEditor
         rotation : 0
         scale : { 200, 200 }
       }
+
       ColliderCircle
       {
         CollisionGroup : default
@@ -146,7 +156,7 @@ LevelEditor
     }
     Player
     {
-      numComponents : 7
+      numComponents : 8
       Transform
       {
         translation : { -275, -125 }
@@ -170,6 +180,12 @@ LevelEditor
         mass : 1
         gravity : { 0, 0 }
       }
+	  ColliderPoint
+	  {
+		CollisionGroup : default
+        CollisionFlags : all
+		offset : { 0, -50 }
+	  }
       ColliderRectangle
       {
         CollisionGroup : default

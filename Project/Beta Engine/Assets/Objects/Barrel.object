@@ -1,27 +1,33 @@
 Barrel
-    {
-      numComponents : 5
-      Transform
-      {
-        translation : { -99.5, 0 }
-        rotation : 0
-        scale : { 5, 6 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Circle
-      }
-      Animation
-      {
-      }
-      ColliderCircle
-      {
+{
+	numComponents : 5
+	Transform
+	{
+		translation : { -99.5, 0 }
+		rotation : 0
+		scale : { 80, 80 }
+	}
+	
+	Sprite
+	{
+		frameIndex : 0
+		color : { 1 , 1 , 1 , 1 }
+		spriteSourceName : Barrel
+	}
+	
+	Animation
+	{
+	}
+	
+	ColliderCircle
+	{
 		CollisionGroup : default
 		CollisionFlags : all
-        radius : 5.5
-      }
-      DLPHN::Barrel
-      { } 
-    }
+		radius : 40
+		offset : { 0, 10 }
+	}
+	
+	DLPHN::Barrel
+	{ 
+	} 
+}

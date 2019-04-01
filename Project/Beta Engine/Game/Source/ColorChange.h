@@ -17,6 +17,7 @@
 
 #include "Component.h" // base class
 #include <Color.h>	// Color
+#include <Vector2D.h>
 
 //------------------------------------------------------------------------------
 
@@ -68,7 +69,8 @@ namespace Behaviors
 		// Params:
 		//   object = The first object.
 		//   other  = The other object the first object is colliding with.
-		friend void ColorChangeCollisionHandler(GameObject& object, GameObject& other);
+		//   intersection = The intersection between both objects, but only works with line collisions
+		friend void ColorChangeCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 	private:
 		//------------------------------------------------------------------------------

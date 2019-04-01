@@ -74,7 +74,7 @@ Vector2D ColliderCircle::GetOffset() const
 	return offset;
 }
 
-bool ColliderCircle::IsCollidingWith(const Collider & other) const
+bool ColliderCircle::IsCollidingWith(const Collider & other, Vector2D* intersection) const
 {
 	Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();
 

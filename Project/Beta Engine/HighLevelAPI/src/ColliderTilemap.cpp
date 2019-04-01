@@ -20,6 +20,7 @@
 #include "Tilemap.h"
 #include <ResourceManager.h>
 #include <Parser.h>
+#include <Vector2D.h>
 
 ColliderTilemap::ColliderTilemap() : Collider(ColliderType::ColliderTypeTilemap)
 {
@@ -55,7 +56,7 @@ void ColliderTilemap::Draw()
 	//TODO::DebugDraw
 }
 
-bool ColliderTilemap::IsCollidingWith(const Collider & other) const
+bool ColliderTilemap::IsCollidingWith(const Collider & other, Vector2D* intersection) const
 {
 	//get components
 	Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();;

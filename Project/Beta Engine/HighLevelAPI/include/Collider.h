@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include "Component.h"
+#include "Vector2D.h"
 
 //------------------------------------------------------------------------------
 
@@ -58,7 +59,7 @@ struct MapCollision
 // Params:
 //   callingObject = The object whose handler is being called.
 //   otherObject = The other object that the object collided with.
-typedef void(*CollisionEventHandler)(GameObject& callingObject, GameObject& otherObject);
+typedef void(*CollisionEventHandler)(GameObject& callingObject, GameObject& otherObject, const Vector2D& intersection);
 
 // Function pointer for tilemap collision event handlers.
 // Params:
@@ -99,7 +100,8 @@ public:
 	// Perform intersection test between two arbitrary colliders.
 	// Params:
 	//	 other = Reference to the second collider component.
-	virtual bool IsCollidingWith(const Collider& other) const = 0;
+	//	 intersection = If the collider is a line, then we can say how far along the line we intersected
+	virtual bool IsCollidingWith(const Collider& other, Vector2D* intersection = nullptr) const = 0;
 
 	// Get the type of this component.
 	ColliderType GetType() const;

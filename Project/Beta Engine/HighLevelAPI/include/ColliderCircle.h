@@ -73,9 +73,10 @@ public:
 	// Check for collision between a circle and another arbitrary collider.
 	// Params:
 	//	 other = Reference to the second circle collider component.
+	//	 intersection = Pointer returning null, only works with line colliders
 	// Returns:
 	//	 Return the results of the collision check.
-	bool IsCollidingWith(const Collider& other) const override;
+	bool IsCollidingWith(const Collider& other, Vector2D* intersection = nullptr) const override;
 
 private:
 	//------------------------------------------------------------------------------

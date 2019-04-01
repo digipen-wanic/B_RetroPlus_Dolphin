@@ -48,13 +48,15 @@ namespace DLPHN
 	// Params:
 	//   object = The Player.
 	//   other  = The object the Player is colliding with.
-	void PlayerCollisionHandler(GameObject& object, GameObject& other);
+	//   intersection = The intersection between both objects, but only works with line collisions
+	void PlayerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 	// Collision handler for hammer.
 	// Params:
 	//   object = The hammer.
 	//   other  = The object the Player is colliding with.
-	void HammerCollisionHandler(GameObject& object, GameObject& other);
+	//   intersection = The intersection between both objects, but only works with line collisions
+	void HammerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 	class PlayerController : public Component
 	{
@@ -89,13 +91,15 @@ namespace DLPHN
 		// Params:
 		//   object = The Player.
 		//   other  = The object the Player is colliding with.
-		friend void PlayerCollisionHandler(GameObject& object, GameObject& other);
+		//   intersection = The intersection between both objects, but only works with line collisions
+		friend void PlayerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 		// Collision handler for hammer.
 		// Params:
 		//   object = The hammer.
 		//   other  = The object the Player is colliding with.
-		friend void HammerCollisionHandler(GameObject& object, GameObject& other);
+		//   intersection = The intersection between both objects, but only works with line collisions
+		friend void HammerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 		// Saves object data to a file.
 		virtual void Serialize(Parser& parser) const override;

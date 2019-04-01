@@ -57,6 +57,14 @@ void Levels::Level1::Load()
 	//Setup Sounds
 	soundManager = Engine::GetInstance().GetModule<SoundManager>();
 	soundManager->AddMusic("Asteroid_Field.mp3");
+	soundManager->AddMusic("DLPHN_music_main.wav");
+	soundManager->AddMusic("DLPHN_music_startJingle.wav");
+	soundManager->AddMusic("DLPHN_music_theme.wav");
+	soundManager->AddEffect("DLPHN_sound_death.wav");
+	soundManager->AddEffect("DLPHN_sound_jumpstandin.wav");
+	soundManager->AddEffect("DLPHN_sound_jumpSuccess.wav");
+	soundManager->AddEffect("DLPHN_sound_LevelStartFinal.wav");
+	soundManager->AddEffect("DLPHN_sound_win.wav");
 	soundManager->AddEffect("teleport.wav");
 
 	soundManager->AddBank("Master Bank.strings.bank");

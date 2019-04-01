@@ -1,31 +1,54 @@
-//============================================================
-// Author: David Wong Cascante
-// File Name: DLPHN_DonkeyKong.cpp
-// Date Created: March 27 2019
-//============================================================
+//------------------------------------------------------------------------------
+//
+// File Name:	DLPHN_DonkeyKong.cpp
+// Author(s):	David Wong Cascanate (david.wongcascante)
+// Project:		Donkey Kong
+// Course:		WANIC VGP2 2018-2019
+//
+// Copyright © 2018 DigiPen (USA) Corporation.
+//
+//------------------------------------------------------------------------------
 
-// Includes
+//------------------------------------------------------------------------------
+// Include Files:
+//------------------------------------------------------------------------------
 #include <stdafx.h>
 #include "DLPHN_DonkeyKong.h"
 
+#include <Space.h>
 #include <GameObject.h>
+#include <Transform.h>
+#include <GameObjectFactory.h>
 #include <GameObjectManager.h>
+#include <Engine.h>
+#include <SoundManager.h>
 #include <Space.h>
 #include <Animation.h>
 #include <Sprite.h>
 #include <Random.h>
 
-// Defines 
+//------------------------------------------------------------------------------
+// Defines:
+//------------------------------------------------------------------------------
 #define AVOID_ANIMATIONS true
 
-// Public Member Functions
 namespace DLPHN
 {
+	//------------------------------------------------------------------------------
+	// Public Member Functions:
+	//------------------------------------------------------------------------------
+
 	DonkeyKong::DonkeyKong()
 		: Component("DonkeyKong"), current(DK_AIState::GRAB_BARREL), prev(DK_AIState::IDLE),
-		idleCount(0), maxIdleCount(2), maxBarrelThrows(2), barrelThrows(0), 
-		barrelArchetype(nullptr), animation(nullptr), throwTimer_(0.0f), throwDuration_(0.4f)
+		idleCount(0), maxIdleCount(2), maxBarrelThrows(2), barrelThrows(0),
+		barrelArchetype(nullptr), animation(nullptr), throwTimer(0.0f), throwDuration(0.8f),
+		idleTimer(0), idleDuration(0.4f)
 	{
+	}
+
+	DonkeyKong::~DonkeyKong()
+	{
+		Shutdown();
 	}
 
 	Component* DonkeyKong::Clone() const
@@ -33,18 +56,21 @@ namespace DLPHN
 		return new DonkeyKong(*this);
 	}
 
-	void DonkeyKong::Load()
-	{
-		// Finding the barrel archetype by name
-		barrelArchetype = GetOwner()->GetSpace()->GetObjectManager().GetArchetypeByName("Barrel");
-	}
-
 	void DonkeyKong::Initialize()
 	{
+		// Finding the barrel archetype by name
+		barrelArchetype = GameObjectFactory::GetInstance().CreateObject("Barrel");
 		current = DK_AIState::GRAB_BARREL;
 		// Get the DK's animations
 		animation = GetOwner()->GetComponent<Animation>();
 		sprite = GetOwner()->GetComponent<Sprite>();
+		transform = GetOwner()->GetComponent<Transform>();
+		// Play a single run throw the idle animation
+		animation->Play(0.4f, 5, 6, false);
+		++idleCount;
+		// Set up the beating chest sound effect
+		soundManager = Engine::GetInstance().GetModule<SoundManager>();
+		soundManager->AddEffect("DLPHN_sound_donkeyBeatingChest.wav");
 	}
 
 	void DonkeyKong::Update(float dt)
@@ -53,22 +79,38 @@ namespace DLPHN
 		switch (current)
 		{
 		case DK_AIState::IDLE:
-			if (prev != current)
+			if (current != prev)
 			{
-				idleCount = 0;
+				idleTimer = 0;
+				maxIdleCount = RandomRange(2, 4);
+				++idleCount;
+				// Set the beginning of his animation
+				sprite->SetFrame(5);
+				// Play the chest beating sound effect
+				soundManager->PlaySound("DLPHN_sound_donkeyBeatingChest.wav");
 			}
 			prev = current;
-
-			if (!animation->IsRunning())
+			idleTimer += dt;
+			if (idleTimer > idleDuration)
 			{
 				// Play his idle animation twice before changing animations
 				if (idleCount < maxIdleCount)
 				{
 					++idleCount;
-					animation->Play(0.4f, 5,6 , false);
+					idleTimer = 0;
+					soundManager->PlaySound("DLPHN_sound_donkeyBeatingChest.wav");
+					if (sprite->GetFrame() == 5)
+					{
+						sprite->SetFrame(6);
+					}
+					else
+					{
+						sprite->SetFrame(5);
+					}
 				}
 				else
 				{
+					idleCount = 0;
 					current = DK_AIState::GRAB_BARREL;
 				}
 			}
@@ -103,10 +145,10 @@ namespace DLPHN
 				}
 			}
 			prev = current;
-			if (throwTimer_ > throwDuration_)
+			if (throwTimer > throwDuration)
 			{
-				throwTimer_ = 0;
-				ThrowBarrel();
+				throwTimer = 0;
+				ThrowBarrel(Vector2D());
 				++barrelThrows;
 				// Decide whether to throw another barrel
 				if (RandomRange(barrelThrows, maxBarrelThrows) != 2)
@@ -121,14 +163,22 @@ namespace DLPHN
 			}
 			else
 			{
-				throwTimer_ += dt;
+				throwTimer += dt;
 			}
 			break;
 		}
 	}
 
-	void DonkeyKong::ThrowBarrel() const
+	void DonkeyKong::Shutdown()
 	{
+		delete barrelArchetype;
+	}
 
+	void DonkeyKong::ThrowBarrel(const Vector2D& throwOffset)
+	{
+		GameObject* barrel = new GameObject(*barrelArchetype);
+		GetOwner()->GetSpace()->GetObjectManager().AddObject(*barrel);
+		Transform* barrelTransform = barrel->GetComponent<Transform>();
+		barrelTransform->SetTranslation(GetOwner()->GetComponent<Transform>()->GetTranslation() + throwOffset);
 	}
 }

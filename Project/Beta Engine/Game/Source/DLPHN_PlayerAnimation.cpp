@@ -176,12 +176,25 @@ namespace DLPHN
 	{
 		if (currentState != nextState)
 		{
+			State prevState = currentState;
 			currentState = nextState;
 			switch (currentState)
 			{
 			// Play idle animation
 			case StateIdle:
-				animation->Play(1, idleStart, 1, false);
+				if (prevState == StateWalk)
+				{
+					// Dear Daniel,
+					// Turns out that Jumpman doesn't have an idle animation, he just stops whatever animation he had while walking.
+					// Sincerely,
+					// David Wong
+					animation->Stop();
+				}
+				else
+				{
+					//animation->Play(1, idleStart, 1, false);
+					animation->Play(1, idleStart, idleStart, false);
+				}
 				break;
 
 			// Play walking animation

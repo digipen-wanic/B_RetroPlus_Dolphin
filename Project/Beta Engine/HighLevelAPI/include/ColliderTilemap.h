@@ -71,9 +71,10 @@ public:
 	// Check for collision between a tilemap and another arbitrary collider.
 	// Params:
 	//	 other = Reference to the second collider component.
+	//	 intersection = Retunrs null beacuse it only works with line intersections
 	// Returns:
 	//	 Return the results of the collision check.
-	bool IsCollidingWith(const Collider& other) const override;
+	bool IsCollidingWith(const Collider& other, Vector2D* intersection = nullptr) const override;
 
 	// Sets the tilemap to use for this collider.
 	// Params:
