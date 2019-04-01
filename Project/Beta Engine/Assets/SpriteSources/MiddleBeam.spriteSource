@@ -1,8 +1,8 @@
 MiddleBeam
 {
 	textureName : DLPHN_beamsDiscreet_6.png
-	textureRows : 0
-	textureColumns : 0
+	textureRows : 1
+	textureColumns : 1
 	frameCount : 1
 	frameStart : 0
 }

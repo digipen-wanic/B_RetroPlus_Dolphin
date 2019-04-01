@@ -81,7 +81,7 @@ LevelEditor
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : MiddleBeam
+        spriteSourceName : BeamDiscrete1
       }
       ColliderLine
       {
@@ -99,15 +99,15 @@ LevelEditor
       numComponents : 3
       Transform
       {
-        translation : { 0, -150.5 }
+        translation : { 0, -250.5 }
         rotation : 0
-        scale : { 960, 69 }
+        scale : { 850, 45 }
       }
       Sprite
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : BeamDiscrete1
+        spriteSourceName : MiddleBeam
       }
       ColliderLine
       {
