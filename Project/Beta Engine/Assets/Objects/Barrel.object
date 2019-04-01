@@ -38,5 +38,6 @@ Barrel
 	
 	DLPHN::Barrel
 	{ 
+		speed : 170
 	} 
 }
