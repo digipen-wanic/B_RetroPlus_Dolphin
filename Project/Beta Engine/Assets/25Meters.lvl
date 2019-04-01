@@ -590,12 +590,12 @@ LevelEditor
         extents : { 10, 10 }
       }
     }
-	Ladder_1
+	Ladder
     {
       numComponents : 3
       Transform
       {
-        translation : { -112, 300 }
+        translation : { -112, 296}
         rotation : 0
         scale : { 128, 128 }
       }
@@ -603,7 +603,7 @@ LevelEditor
       {
         frameIndex : 4
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : BrokenLadder
+        spriteSourceName : LadderSprite
       }
       ColliderRectangle
       {
