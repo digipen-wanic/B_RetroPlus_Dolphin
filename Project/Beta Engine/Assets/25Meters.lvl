@@ -1,0 +1,125 @@
+LevelEditor
+{
+  numGameObjects : 5
+  {
+    TileMap
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -300, 400 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteTilemap
+      {
+        frameIndex : 4
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : TileMap
+        tilemapLoc : Default
+      }
+      ColliderTilemap
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        tilemapLoc : Default
+      }
+    }
+    BeamDiscrete1
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 0, -418.5 }
+        rotation : 0
+        scale : { 960, 69 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BeamDiscrete1
+      }
+    }
+    Player
+    {
+      numComponents : 7
+      Transform
+      {
+        translation : { -289, -383.5 }
+        rotation : 0
+        scale : { 140, 140 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Player
+      }
+      Animation
+      {
+      }
+      Physics
+      {
+        acceleration : { 0, 0 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, 0 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 50, 50 }
+      }
+      DLPHN::PlayerAnimation
+      { } 
+      DLPHN::PlayerController
+      { PlayerWalkSpeed : 200 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
+    }
+    DonkeyKong
+    {
+      numComponents : 5
+      Transform
+      {
+        translation : { -288, 314 }
+        rotation : 0
+        scale : { 280, 280 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : DonkeyKong
+      }
+      Animation
+      {
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 100, 100 }
+      }
+      DLPHN::DonkeyKong
+      { } 
+    }
+    BGReference
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 0, 0 }
+        rotation : 0
+        scale : { 1024, 976 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 0.9 , 1 , 1 , 0.3 }
+        spriteSourceName : BGReference
+      }
+    }
+  }
+}

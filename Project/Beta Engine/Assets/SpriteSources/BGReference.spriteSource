@@ -1,0 +1,8 @@
+BGReference
+{
+	textureName : Donkey_Kong_NES_Screenshot.png
+	textureRows : 1
+	textureColumns : 1
+	frameCount : 0
+	frameStart : 0
+}
