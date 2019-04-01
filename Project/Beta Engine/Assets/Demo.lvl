@@ -1,0 +1,390 @@
+LevelEditor
+{
+  numGameObjects : 18
+  {
+    TileMap
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -350, 400 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteTilemap
+      {
+        frameIndex : 4
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : TileMap
+        tilemapLoc : Default
+      }
+      ColliderTilemap
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        tilemapLoc : Default
+      }
+    }
+    PlayerHammer
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 250.5, 300.5 }
+        rotation : 0
+        scale : { 200, 200 }
+      }
+      ColliderCircle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        radius : 20
+        offset : { 100, 0 }
+      }
+    }
+    BeamDiscrete1
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 0, -418.5 }
+        rotation : 0
+        scale : { 960, 69 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BeamDiscrete1
+      }
+      ColliderLine
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        LineTypeRelitive : 0
+        Reflection : 0
+        NumberOfLines : 2
+        Line : { { -480, 0 }, { 4, 0 } }
+        Line : { { 480, 25 }, { 4, 0 } }
+      }
+    }
+    DonkeyKong
+    {
+      numComponents : 5
+      Transform
+      {
+        translation : { -288, 314 }
+        rotation : 0
+        scale : { 280, 280 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : DonkeyKong
+      }
+      Animation
+      {
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 100, 100 }
+      }
+      DLPHN::DonkeyKong
+      { } 
+    }
+    Damsel
+    {
+      numComponents : 4
+      Transform
+      {
+        translation : { -165, 358 }
+        rotation : 0
+        scale : { 140, 140 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Damsel
+      }
+      Animation
+      {
+      }
+      DLPHN::Damsel
+      { } 
+    }
+    Hammer
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -399.5, -349.5 }
+        rotation : 0
+        scale : { 100, 100 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Hammer
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 30, 50 }
+      }
+    }
+    Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, -399.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_1
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, -299.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_2
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, -199.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_3
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, -99.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_4
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, 0.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_5
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, 100.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_6
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, 200.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_7
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, 300.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_8
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, 400.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder_9
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -49.5, 500.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Barrel
+    {
+      numComponents : 5
+      Transform
+      {
+        translation : { 200.5, -300.5 }
+        rotation : 0
+        scale : { 80, 80 }
+      }
+      Animation
+      {
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Barrel
+      }
+      ColliderCircle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        radius : 30
+        offset : { 0, 10 }
+      }
+      DLPHN::Barrel
+      { speed : 170 } 
+    }
+  }
+}
