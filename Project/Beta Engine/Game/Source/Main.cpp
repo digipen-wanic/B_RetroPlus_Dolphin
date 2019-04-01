@@ -30,6 +30,7 @@
 #include "DLPHN_PlayerController.h"
 #include "DLPHN_PlayerAnimation.h"
 #include "DLPHN_Damsel.h"
+#include "DLPHN_Barrel.h"
 
 // Initial game state
 #include "Level1.h"
@@ -67,6 +68,7 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::PlayerController>();
 	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::PlayerAnimation>();
 	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::Damsel>();
+	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::Barrel>();
 
 	// Add Sound Manager
 	Engine::GetInstance().AddModule(new SoundManager());

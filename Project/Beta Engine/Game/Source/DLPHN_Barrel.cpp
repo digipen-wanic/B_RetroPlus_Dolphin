@@ -30,7 +30,7 @@ namespace DLPHN
 	Barrel::Barrel()
 		: Component("Barrel"),
 		  physics(nullptr), animation(nullptr), transform(nullptr),
-		  rollLength(4),
+		  rollLength(3),
 		  speed(10.0f)
 	{
 	}
@@ -58,7 +58,7 @@ namespace DLPHN
 
 		// Set gravity of barrel
 		// physics->SetGravity(Vector2D(0, -1));
-		physics->SetVelocity(Vector2D(0, -1));
+		physics->SetVelocity(Vector2D(0, -speed));
 
 		// Start animation
 		animation->Play(0.2f, 0, rollLength, true);
