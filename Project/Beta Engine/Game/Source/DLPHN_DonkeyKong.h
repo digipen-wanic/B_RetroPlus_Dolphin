@@ -49,6 +49,10 @@ namespace DLPHN
 		float throwTimer;
 		// How long the throwing lasts
 		float throwDuration;
+		// Whether DK has thrown a barrel since the cycle began
+		bool barrelCycleThrown;
+		// The offset from the timer where DK actually throws the barrel, and not just pose
+		float throwTimerOffset;
 		// The archetype for the barrel
 		GameObject* barrelArchetype;
 		// The animation that we are controlling

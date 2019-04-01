@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 10
+  numGameObjects : 13
   {
     TileMap
     {
@@ -64,8 +64,9 @@ LevelEditor
         CollisionFlags : all
 		LineTypeRelitive : 0
 		Reflection : 0
-		NumberOfLines : 1
-		Line : {{ -480, 0 }, { 4 , 0 }}
+		NumberOfLines : 2
+		Line : {{ -480 , 0 }, { 4 , 0 }}
+		Line : {{ 480 , 25 }, { 4 , 0 }}
 	  }
     }
     Player
@@ -86,7 +87,19 @@ LevelEditor
       Animation
       {
       }
-      Physics
+	  ColliderPoint
+	  {
+		CollisionGroup : default
+		CollisionFlags : all
+		offset : { 0, -35 }
+	  }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 35 , 35 }
+      }
+	  Physics
       {
         acceleration : { 0, 0 }
         velocity : { 0, 0 }
@@ -94,18 +107,6 @@ LevelEditor
         mass : 1
         gravity : { 0, 0 }
       }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 50, 50 }
-      }
-	  ColliderPoint
-	  {
-		CollisionGroup : default
-		CollisionFlags : all
-		offset : { 0, -50 }
-	  }
       DLPHN::PlayerAnimation
       { } 
       DLPHN::PlayerController
@@ -196,6 +197,72 @@ LevelEditor
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : LadderSprite
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+	Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -111.5, -365.5 }
+        rotation : 0
+        scale : { 130, 210 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BrokenLadder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+	Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -304.5, -230.5 }
+        rotation : 0
+        scale : { 130, 170 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BrokenLadder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+	Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -176, -105 }
+        rotation : 0
+        scale : { 130, 210 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BrokenLadder
       }
       ColliderRectangle
       {

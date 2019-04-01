@@ -156,7 +156,7 @@ namespace DLPHN
 			Vector2D displacementVector = intersection - currentPosition;
 
 			Vector2D velocity = physics->GetVelocity();
-			if (displacementVector.y > 0 && velocity.y < 0)
+			if (velocity.y < 0)
 			{
 				velocity.y = 0;
 				// Solve the simple problem first and stop the player from falling vertically
