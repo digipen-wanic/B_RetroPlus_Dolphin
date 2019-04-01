@@ -157,6 +157,7 @@ namespace DLPHN
 				}
 				else
 				{
+					barrelCycleThrown = false;
 					barrelThrows = 0;
 					current = DK_AIState::IDLE;
 				}
