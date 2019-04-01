@@ -53,13 +53,32 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 	case ColliderType::ColliderTypePoint:
 	{
 		// Find the offset if the collider is a point
-		const ColliderPoint& point = dynamic_cast<const ColliderPoint&>(other);
+		const ColliderPoint* point = nullptr;
 		// Find the offset if the collider is a circle
-		const ColliderCircle* circle = dynamic_cast<const ColliderCircle*>(&other);
-		Vector2D offset = Vector2D();
-		if (&point)
+		const ColliderCircle* circle = nullptr;
+		
+		try
 		{
-			offset = point.GetOffset();
+			point = dynamic_cast<const ColliderPoint*>(&other);
+		}
+		catch (const std::bad_cast& cast)
+		{
+			point = nullptr;
+		}
+
+		try
+		{
+			circle = dynamic_cast<const ColliderCircle*>(&other);
+		}
+		catch (const std::bad_cast& cast)
+		{
+			circle = nullptr;
+		}
+
+		Vector2D offset = Vector2D();
+		if (point)
+		{
+			offset = point->GetOffset();
 		}
 
 		othersLine = LineSegment(otherPhysics->GetOldTranslation() + offset, other.GetOwner()->GetComponent<Transform>()->GetTranslation() + offset);
