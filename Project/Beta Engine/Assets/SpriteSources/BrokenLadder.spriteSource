@@ -1,0 +1,8 @@
+BrokenLadder
+{
+	textureName : DLPHN_allLadders.png
+	textureRows : 4
+	textureColumns : 3
+	frameCount : 11
+	frameStart : 5
+}

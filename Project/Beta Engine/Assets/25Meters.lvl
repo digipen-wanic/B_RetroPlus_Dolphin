@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 13
+  numGameObjects : 14
   {
     TileMap
     {
@@ -25,7 +25,7 @@ LevelEditor
         tilemapLoc : Default
       }
     }
-	PlayerHammer
+    PlayerHammer
     {
       numComponents : 2
       Transform
@@ -34,7 +34,6 @@ LevelEditor
         rotation : 0
         scale : { 200, 200 }
       }
-
       ColliderCircle
       {
         CollisionGroup : default
@@ -58,16 +57,16 @@ LevelEditor
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : BeamDiscrete1
       }
-	  ColliderLine
-	  {
-		CollisionGroup : default
+      ColliderLine
+      {
+        CollisionGroup : default
         CollisionFlags : all
-		LineTypeRelitive : 0
-		Reflection : 0
-		NumberOfLines : 2
-		Line : {{ -480 , 0 }, { 4 , 0 }}
-		Line : {{ 480 , 25 }, { 4 , 0 }}
-	  }
+        LineTypeRelitive : 0
+        Reflection : 0
+        NumberOfLines : 2
+        Line : { { -480, 0 }, { 4, 0 } }
+        Line : { { 480, 25 }, { 4, 0 } }
+      }
     }
     Player
     {
@@ -87,19 +86,19 @@ LevelEditor
       Animation
       {
       }
-	  ColliderPoint
-	  {
-		CollisionGroup : default
-		CollisionFlags : all
-		offset : { 0, -35 }
-	  }
+      ColliderPoint
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        offset : { 0, -35 }
+      }
       ColliderRectangle
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 35 , 35 }
+        extents : { 35, 35 }
       }
-	  Physics
+      Physics
       {
         acceleration : { 0, 0 }
         velocity : { 0, 0 }
@@ -205,7 +204,7 @@ LevelEditor
         extents : { 10, 30 }
       }
     }
-	Ladder
+    Ladder
     {
       numComponents : 3
       Transform
@@ -216,7 +215,7 @@ LevelEditor
       }
       Sprite
       {
-        frameIndex : 0
+        frameIndex : 5
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : BrokenLadder
       }
@@ -227,7 +226,7 @@ LevelEditor
         extents : { 10, 30 }
       }
     }
-	Ladder
+    Ladder
     {
       numComponents : 3
       Transform
@@ -238,7 +237,7 @@ LevelEditor
       }
       Sprite
       {
-        frameIndex : 0
+        frameIndex : 5
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : BrokenLadder
       }
@@ -249,7 +248,7 @@ LevelEditor
         extents : { 10, 30 }
       }
     }
-	Ladder
+    Ladder
     {
       numComponents : 3
       Transform
@@ -292,6 +291,27 @@ LevelEditor
         CollisionFlags : all
         extents : { 10, 30 }
       }
+    }
+    Damsel
+    {
+      numComponents : 4
+      Transform
+      {
+        translation : { -165, 358 }
+        rotation : 0
+        scale : { 140, 140 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Damsel
+      }
+      Animation
+      {
+      }
+      DLPHN::Damsel
+      { } 
     }
     BGReference
     {

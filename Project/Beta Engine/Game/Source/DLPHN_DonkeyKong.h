@@ -1,9 +1,15 @@
 #pragma once
-//============================================================
-// Author: David Wong Cascante
-// File Name: DLPHN_DonkeyKong.h
-// Date Created: March 27 2019
-//============================================================
+//------------------------------------------------------------------------------
+//
+// File Name:	DLPHN_DonkeyKong.cpp
+// Author(s):	David Wong Cascanate (david.wongcascante)
+// Project:		Donkey Kong
+// Course:		WANIC VGP2 2018-2019
+//
+// Copyright © 2018 DigiPen (USA) Corporation.
+//
+//------------------------------------------------------------------------------
+
 
 // Includes
 #include <Component.h>

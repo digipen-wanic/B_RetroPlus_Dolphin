@@ -29,6 +29,7 @@
 #include "DLPHN_DonkeyKong.h"
 #include "DLPHN_PlayerController.h"
 #include "DLPHN_PlayerAnimation.h"
+#include "DLPHN_Damsel.h"
 
 // Initial game state
 #include "Level1.h"
@@ -65,6 +66,7 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::DonkeyKong>();
 	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::PlayerController>();
 	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::PlayerAnimation>();
+	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::Damsel>();
 
 	// Add Sound Manager
 	Engine::GetInstance().AddModule(new SoundManager());

@@ -26,6 +26,9 @@
     <ClCompile Include="Source\DLPHN_PlayerAnimation.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DLPHN_Damsel.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ColorChange.h">
@@ -50,6 +53,9 @@
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\DLPHN_PlayerAnimation.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DLPHN_Damsel.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>
