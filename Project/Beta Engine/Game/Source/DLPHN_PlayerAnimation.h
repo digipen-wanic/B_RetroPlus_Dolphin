@@ -76,7 +76,7 @@ namespace DLPHN
 		//------------------------------------------------------------------------------
 
 		// Choose the correct state based on velocity.
-		void ChooseNextState();
+		void ChooseNextState(float dt);
 
 		// Change states and start the appropriate animation.
 		void ChangeCurrentState();

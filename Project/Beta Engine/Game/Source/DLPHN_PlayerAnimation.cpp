@@ -73,7 +73,7 @@ namespace DLPHN
 	{
 		UNREFERENCED_PARAMETER(dt);
 
-		ChooseNextState();
+		ChooseNextState(dt);
 		ChangeCurrentState();
 		FlipSprite();
 	}
@@ -99,12 +99,20 @@ namespace DLPHN
 	//------------------------------------------------------------------------------
 
 	// Choose the correct state based on velocity.
-	void PlayerAnimation::ChooseNextState()
+	void PlayerAnimation::ChooseNextState(float dt)
 	{
 		// jump if in air and not on ladder
 		if (physics->GetVelocity().y != 0.0f)
 		{
-			nextState = StateJump;
+			static float timer = 0.0f;
+			timer += dt;
+
+			// Ensure player is actually in the air
+			if (timer > 0.2f)
+			{
+				timer = 0.0f;
+				nextState = StateJump;
+			}
 		}
 
 		// walk if moving horizontally

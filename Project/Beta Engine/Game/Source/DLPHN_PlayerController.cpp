@@ -161,10 +161,13 @@ namespace DLPHN
 			if (displacementVector.y > 0 && velocity.y < 0)
 			{
 				velocity.y = 0;
+				
 				// Solve the simple problem first and stop the player from falling vertically
-				transform->SetTranslation(currentPosition + displacementVector - point->GetOffset());
+				float yNudge = displacementVector.y * 2 - point->GetOffset().y;
+				transform->SetTranslation(Vector2D(currentPosition.x, currentPosition.y + yNudge));
 				physics->SetVelocity(velocity);
 			}
+
 			playerController->onGround = true;
 		}
 
