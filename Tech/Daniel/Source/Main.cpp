@@ -27,8 +27,8 @@
 #include "TestLevel.h"
 
 // Custom components
-#include "PlayerController.h"
-#include "PlayerAnimation.h"
+#include "DLPHN_PlayerController.h"
+#include "DLPHN_PlayerAnimation.h"
 
 //------------------------------------------------------------------------------
 
@@ -61,10 +61,10 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 
 	// Register custom components with object factory
 	{
-		using namespace Behaviors;
+		using namespace DLPHN;
 
-		GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerController>();
-		GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerAnimation>();
+		GameObjectFactory::GetInstance().RegisterComponent<DLPHN::PlayerController>();
+		GameObjectFactory::GetInstance().RegisterComponent<DLPHN::PlayerAnimation>();
 	}
 
 	// Game engine goes!

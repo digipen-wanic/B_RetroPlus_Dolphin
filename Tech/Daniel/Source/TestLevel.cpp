@@ -48,7 +48,7 @@ namespace Levels
 		: Level("TestLevel"),
 		meshPlayer(nullptr), texturePlayer(nullptr), spriteSourcePlayer(nullptr),
 		dataMap(nullptr), textureMap(nullptr), spriteSourceMap(nullptr), meshMap(nullptr),
-		columnsPlayer(5), rowsPlayer(6),
+		columnsPlayer(5), rowsPlayer(5),
 		columnsMap(4), rowsMap(3)
 	{
 	}
@@ -77,7 +77,7 @@ namespace Levels
 		genericQuadMesh = CreateQuadMesh(Vector2D(1.0f, 1.0f), Vector2D(0.5f, 0.5f));
 
 		// create resources for meshPlayer
-		texturePlayer = Texture::CreateTextureFromFile("Player.png");
+		texturePlayer = Texture::CreateTextureFromFile("DLPHN_mario.png");
 		spriteSourcePlayer = new SpriteSource(columnsPlayer, rowsPlayer, texturePlayer);
 		meshPlayer = CreateQuadMesh(Vector2D(1.0f / columnsPlayer, 1.0f / rowsPlayer), Vector2D(0.5f, 0.5f));
 

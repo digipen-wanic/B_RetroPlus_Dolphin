@@ -127,7 +127,7 @@ void Sprite::SetFrame(unsigned int frameIndex_)
 // Returns the index of the current frame being displayed.
 unsigned Sprite::GetFrame() const
 {
-	return spriteSource->GetFrameCount();
+	return frameIndex;
 }
 
 // Set the sprite's mesh.

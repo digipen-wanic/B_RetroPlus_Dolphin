@@ -48,11 +48,11 @@ public:
 
 	// Play a simple animation sequence (0 .. frameCount).
 	// Params:
+	//	 frameDuration = The amount of time to wait between frames (in seconds).
 	//   frameStart = The starting frame for the sequence.
 	//	 frameCount = The number of frames in the sequence.
-	//	 frameDuration = The amount of time to wait between frames (in seconds).
 	//	 isLooping = True if the animation loops, false otherwise.
-	void Play(unsigned frameStart, unsigned frameCount, float frameDuration, bool isLooping);
+	void Play(float frameDuration_, unsigned frameStart_, unsigned frameCount_, bool isLooping_);
 
 	// Update the animation.
 	// Params:

@@ -5,7 +5,7 @@ Player
   {
     translation : { 150, -1150 }
     rotation : 0
-    scale : { 200, 200 }
+    scale : { 262.5, 262.5 }
   }
   Sprite
   {
@@ -15,7 +15,7 @@ Player
   Animation
   {
   }
-  Behaviors::PlayerAnimation
+  DLPHN::PlayerAnimation
   {
   }
   Physics
@@ -25,7 +25,7 @@ Player
     angularVelocity : 0
     mass : 1
   }
-  Behaviors::PlayerController
+  DLPHN::PlayerController
   {
     PlayerWalkSpeed : 200
     PlayerJumpSpeed : 400

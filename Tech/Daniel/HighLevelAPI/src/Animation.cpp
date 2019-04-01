@@ -49,11 +49,11 @@ void Animation::Initialize()
 
 // Play a simple animation sequence (0 .. frameCount).
 // Params:
+//	 frameDuration = The amount of time to wait between frames (in seconds).
 //   frameStart = The starting frame for the sequence.
 //	 frameCount = The number of frames in the sequence.
-//	 frameDuration = The amount of time to wait between frames (in seconds).
 //	 isLooping = True if the animation loops, false otherwise.
-void Animation::Play(unsigned frameStart_, unsigned frameCount_, float frameDuration_, bool isLooping_)
+void Animation::Play(float frameDuration_, unsigned frameStart_, unsigned frameCount_, bool isLooping_)
 {
 	// set initial values
 	frameStart    = frameStart_;
