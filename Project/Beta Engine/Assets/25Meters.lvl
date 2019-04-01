@@ -1,13 +1,13 @@
 LevelEditor
 {
-  numGameObjects : 14
+  numGameObjects : 18
   {
     TileMap
     {
       numComponents : 3
       Transform
       {
-        translation : { -300, 400 }
+        translation : { -350, 400 }
         rotation : 0
         scale : { 50, 50 }
       }
@@ -187,9 +187,9 @@ LevelEditor
       numComponents : 3
       Transform
       {
-        translation : { 304.5, -355.5 }
+        translation : { 304.5, -370.5 }
         rotation : 0
-        scale : { 130, 190 }
+        scale : { 130, 150 }
       }
       Sprite
       {
@@ -211,7 +211,7 @@ LevelEditor
       {
         translation : { -111.5, -365.5 }
         rotation : 0
-        scale : { 130, 210 }
+        scale : { 130, 150 }
       }
       Sprite
       {
@@ -231,13 +231,13 @@ LevelEditor
       numComponents : 3
       Transform
       {
-        translation : { -304.5, -230.5 }
+        translation : { -304.5, -235.5 }
         rotation : 0
-        scale : { 130, 170 }
+        scale : { 130, 150 }
       }
       Sprite
       {
-        frameIndex : 5
+        frameIndex : 1
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : BrokenLadder
       }
@@ -255,7 +255,51 @@ LevelEditor
       {
         translation : { -176, -105 }
         rotation : 0
-        scale : { 130, 210 }
+        scale : { 130, 150 }
+      }
+      Sprite
+      {
+        frameIndex : 4
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BrokenLadder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 16, -105 }
+        rotation : 0
+        scale : { 130, 150 }
+      }
+      Sprite
+      {
+        frameIndex : 3
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BrokenLadder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 30 }
+      }
+    }
+    Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 304, -105 }
+        rotation : 0
+        scale : { 130, 125 }
       }
       Sprite
       {
@@ -275,13 +319,57 @@ LevelEditor
       numComponents : 3
       Transform
       {
-        translation : { -47.75, -235.5 }
+        translation : { 240, 80 }
         rotation : 0
-        scale : { 130, 188 }
+        scale : { 128, 150 }
       }
       Sprite
       {
-        frameIndex : 0
+        frameIndex : 9
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BrokenLadder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 10 }
+      }
+    }
+    Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 240, -17 }
+        rotation : 0
+        scale : { 128, 150 }
+      }
+      Sprite
+      {
+        frameIndex : 8
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BrokenLadder
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 10, 10 }
+      }
+    }
+    Ladder
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -47.75, -235.5 }
+        rotation : 0
+        scale : { 130, 152 }
+      }
+      Sprite
+      {
+        frameIndex : 2
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : LadderSprite
       }
