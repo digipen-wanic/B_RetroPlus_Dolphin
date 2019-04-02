@@ -90,7 +90,9 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 			if (circle)
 			{
 				// Find the radius of the collider
-				offset = circle->GetRadius() * myLine.normal;
+				offset = -circle->GetRadius() * myLine.normal;
+				// and change the offset
+				othersLine = LineSegment(otherPhysics->GetOldTranslation() + offset, other.GetOwner()->GetComponent<Transform>()->GetTranslation() + offset);
 			}
 			Vector2D intersection = Vector2D(0, 0);
 			float t = 0;
