@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 18
+  numGameObjects : 17
   {
     TileMap
     {
@@ -39,7 +39,7 @@ LevelEditor
         CollisionGroup : default
         CollisionFlags : all
         radius : 20
-        offset : { 100, 0 }
+        offset : { 75, 0 }
       }
     }
     BeamDiscrete1
@@ -358,33 +358,48 @@ LevelEditor
         extents : { 10, 30 }
       }
     }
-    Barrel
+    Player
     {
-      numComponents : 5
+      numComponents : 8
       Transform
       {
-        translation : { 200.5, -300.5 }
+        translation : { -249.5, -349.5 }
         rotation : 0
-        scale : { 80, 80 }
+        scale : { 190, 190 }
       }
-      Animation
+      ColliderRectangle
       {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 30, 40 }
+      }
+      ColliderPoint
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        offset : { 0, -35 }
       }
       Sprite
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Barrel
+        spriteSourceName : Player
       }
-      ColliderCircle
+      Animation
       {
-        CollisionGroup : default
-        CollisionFlags : all
-        radius : 30
-        offset : { 0, 10 }
       }
-      DLPHN::Barrel
-      { speed : 170 } 
+      Physics
+      {
+        acceleration : { 0, 0 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, 0 }
+      }
+      DLPHN::PlayerAnimation
+      { } 
+      DLPHN::PlayerController
+      { PlayerWalkSpeed : 150 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
     }
   }
 }

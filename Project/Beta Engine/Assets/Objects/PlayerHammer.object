@@ -13,7 +13,7 @@ PlayerHammer
 	{
 		CollisionGroup : default
 		CollisionFlags : all
-		radius : 30
-		offset : { 100, 0 }
+		radius : 20
+		offset : { 75, 0 }
 	}
 }

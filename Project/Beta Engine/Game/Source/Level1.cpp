@@ -70,7 +70,7 @@ void Levels::Level1::Load()
 	soundManager->AddBank("Master Bank.strings.bank");
 	soundManager->AddBank("Master Bank.bank");
 
-	SetFileLocation("Assets/25Meters.lvl");
+	SetFileLocation("Assets/demo.lvl");
 }
 
 void Levels::Level1::Initialize()

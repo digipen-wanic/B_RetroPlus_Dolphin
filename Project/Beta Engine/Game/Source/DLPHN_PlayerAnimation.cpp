@@ -259,7 +259,7 @@ namespace DLPHN
 
 			// Dead (halo frame)
 			case StateDead:
-				animation->Play(1, deadStart, 1, false);
+				animation->Play(1, deadStart, deadStart, false);
 				break;
 			}
 		}

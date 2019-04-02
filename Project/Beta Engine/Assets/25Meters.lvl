@@ -38,7 +38,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        radius : 30
+        radius : 20
         offset : { 100, 0 }
       }
     }

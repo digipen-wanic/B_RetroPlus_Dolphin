@@ -27,6 +27,7 @@ class Transform;
 class Physics;
 class Sprite;
 struct MapCollision;
+class SoundManager;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -155,6 +156,7 @@ namespace DLPHN
 		Sprite* sprite;
 		float circleOffset;
 		GameObject* playerHammer;
+		SoundManager* soundManager;
 
 		// Jumping
 		bool onGround;
@@ -170,6 +172,9 @@ namespace DLPHN
 		// Death
 		unsigned deathStatus;
 		float deathDuration;
+
+		// Win
+		bool playerHasWon;
 	};
 }
 

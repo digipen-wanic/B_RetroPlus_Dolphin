@@ -19,9 +19,11 @@
 #include <ColliderCircle.h>
 #include <ColliderPoint.h>
 #include <ColliderRectangle.h>
+#include <Engine.h>
 #include <Input.h>
 #include <Parser.h>
 #include <Physics.h>
+#include <SoundManager.h>
 #include <Space.h>
 #include <Sprite.h>
 #include <Transform.h>
@@ -47,7 +49,8 @@ namespace DLPHN
 		onGround(false),
 		touchingLadder(false), onLadder(false),
 		hammerStatus(0), hammerCooldown(10.0f),
-		deathStatus(0), deathDuration(4.0f)
+		deathStatus(0), deathDuration(4.0f),
+		playerHasWon(false)
 	{
 	}
 
@@ -77,11 +80,19 @@ namespace DLPHN
 		// set map collision handler
 		GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(&PlayerMapCollisionHandler);
 
-		// set player collision handler
-		ColliderPoint* playerCollider = GetOwner()->GetComponent<ColliderPoint>();
-		playerCollider->SetCollisionHandler(&PlayerCollisionHandler);
+		// set player collision handlers
+		ColliderPoint* pointCollider = GetOwner()->GetComponent<ColliderPoint>();
+		pointCollider->SetCollisionHandler(&PlayerCollisionHandler);
+
+		ColliderRectangle* rectangleCollider = GetOwner()->GetComponent<ColliderRectangle>();
+		rectangleCollider->SetCollisionHandler(&PlayerCollisionHandler);
+
 		ColliderCircle* hammerCollider = playerHammer->GetComponent<ColliderCircle>();
 		hammerCollider->SetCollisionHandler(&HammerCollisionHandler);
+
+		// Set up for sound effects
+		soundManager = Engine::GetInstance().GetModule<SoundManager>();
+		soundManager->AddEffect("DLPHN_sound_win.wav");
 	}
 
 	// Fixed update function for this component.
@@ -89,7 +100,7 @@ namespace DLPHN
 	//   dt = The change in time since the last step.
 	void PlayerController::Update(float dt)
 	{
-		// Keep playerHammer with player
+		// Keep playerHammer collider with player
 		playerHammer->GetComponent<Transform>()->SetTranslation(transform->GetTranslation());
 
 		// Death sequence
@@ -119,6 +130,27 @@ namespace DLPHN
 			if (!onLadder)
 			{
 				physics->AddForce(gravity);
+			}
+			
+			// Check for win
+			if (playerHasWon)
+			{
+				// Countdown to play win effect
+				static float timer = 4.0f;
+
+				// Only play sound once
+				if (timer == 4.0f)
+				{
+					soundManager->PlaySound("DLPHN_sound_win.wav");
+				}
+
+				timer -= dt;
+
+				// Quit game after a few seconds
+				if (timer <= 0.0f)
+				{
+					Engine::GetInstance().Stop();
+				}
 			}
 		}
 	}
@@ -171,6 +203,11 @@ namespace DLPHN
 			playerController->onGround = true;
 		}
 
+		if (other.GetName() == "WinZone")
+		{
+			playerController->playerHasWon = true;
+		}
+
 		// Make sure player doesn't have hammer
 		if (!playerController->hammerStatus)
 		{
@@ -195,7 +232,7 @@ namespace DLPHN
 					if (playerTranslationX < otherTranslationX + otherExtentsX && playerTranslationX > otherTranslationX - otherExtentsX)
 					{
 						// Correct player's translation to ladder
-						// PlayerController->transform->SetTranslation(Vector2D(otherTranslationX, PlayerController->transform->GetTranslation().y));
+						// playerController->transform->SetTranslation(Vector2D(otherTranslationX, playerController->transform->GetTranslation().y));
 
 						// player is now touchingLadder
 						playerController->touchingLadder = true;
@@ -429,10 +466,9 @@ namespace DLPHN
 		if (timer >= deathDuration - 2.0f)
 			deathStatus = 2;
 
-		// Restart level and finish stuff up
+		// Restart level
 		if (timer >= deathDuration)
 		{
-			// Restart and do other stuff here
 			timer = 0.0f;
 			GetOwner()->GetSpace()->RestartLevel();
 		}

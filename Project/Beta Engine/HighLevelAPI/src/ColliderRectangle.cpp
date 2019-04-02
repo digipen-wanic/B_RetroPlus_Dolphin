@@ -59,26 +59,27 @@ void ColliderRectangle::SetExtents(const Vector2D & _extents)
 
 bool ColliderRectangle::IsCollidingWith(const Collider & other, Vector2D* intersection) const
 {
-	//if the other collider is a point then do things
+	// if the other collider is a point then do things
 	if (other.GetType() == ColliderType::ColliderTypePoint) {
+		const ColliderPoint& point = static_cast<const ColliderPoint&>(other);
 		Transform* pointTransform = other.GetOwner()->GetComponent<Transform>();
-		return PointRectangleIntersection(pointTransform->GetTranslation(), BoundingRectangle(transform->GetTranslation(), GetExtents()));
+		return PointRectangleIntersection(pointTransform->GetTranslation() + point.GetOffset(), BoundingRectangle(transform->GetTranslation(), GetExtents()));
 	}
 
-	//if the other collider is a rectangle then test if they collided
+	// if the other collider is a rectangle then test if they collided
 	if (other.GetType() == ColliderType::ColliderTypeRectangle) {
 		const ColliderRectangle& rect = static_cast<const ColliderRectangle&>(other);
 		Transform* rectTransform = other.GetOwner()->GetComponent<Transform>();
 		return RectangleRectangleIntersection(BoundingRectangle(rectTransform->GetTranslation(), rect.GetExtents()), BoundingRectangle(transform->GetTranslation(), GetExtents()));
 	}
 
-	//if the other collider is circle then check if they collided
+	// if the other collider is circle then check if they collided
 	if (other.GetType() == ColliderType::ColliderTypeCircle) {
 		const ColliderCircle& circ = static_cast<const ColliderCircle&>(other);
-		Transform* circTransform = other.GetOwner()->GetComponent<Transform>();
-		return RectangleCircleIntersection(BoundingRectangle(transform->GetTranslation(), GetExtents()), Circle(circTransform->GetTranslation(), circ.GetRadius()));
+		Circle otherCircle(other.GetOwner()->GetComponent<Transform>()->GetTranslation() + circ.GetOffset(), circ.GetRadius());
+		return RectangleCircleIntersection(BoundingRectangle(transform->GetTranslation(), extents), otherCircle);
 	}
 
-	//other wise they didn't collide
-	return false;
+	// default collision
+	return other.IsCollidingWith(*this);
 }

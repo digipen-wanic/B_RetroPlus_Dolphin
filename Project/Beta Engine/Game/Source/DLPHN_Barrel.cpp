@@ -64,7 +64,7 @@ namespace DLPHN
 		animation->Play(0.2f, 0, rollLength, true);
 
 		// set player collision handler
-		GetOwner()->GetComponent<ColliderCircle>()->SetCollisionHandler(&BarrelCollisionHandler);
+		GetOwner()->GetComponent<Collider>()->SetCollisionHandler(&BarrelCollisionHandler);
 	}
 
 	// Updates the component
@@ -97,7 +97,7 @@ namespace DLPHN
 	{
 		Barrel* barrel = object.GetComponent<Barrel>();
 
-		if (other.GetName() == "Hammer")
+		if (other.GetName() == "PlayerHammer")
 		{
 			barrel->SmashBarrel();
 		}

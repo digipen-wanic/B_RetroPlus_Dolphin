@@ -71,21 +71,10 @@ bool RectangleRectangleIntersection(const BoundingRectangle & rect1, const Bound
 
 bool RectangleCircleIntersection(const BoundingRectangle & rect, const Circle & circle)
 {
-	Vector2D point = circle.center;
-
-	if (point.x > rect.right) {
-		point.x = rect.right;
-	} else if (point.x < rect.left) {
-		point.x = rect.left;
-	}
-
-	if (point.y > rect.top) {
-		point.y = rect.top;
-	} else if (point.y < rect.bottom) {
-		point.y = rect.bottom;
-	}
-
-	return PointCircleIntersection(point, circle);
+	Vector2D closest = Vector2D(max(rect.left, min(rect.right, circle.center.x)), max(rect.bottom, min(rect.top, circle.center.y)));
+	if (closest.DistanceSquared(circle.center) <= circle.radius * circle.radius)
+		return true;
+	return false;
 }
 
 bool MovingPointLineIntersection(const LineSegment & staticLine, const LineSegment & movingPoint, Vector2D & intersection, float & t)
