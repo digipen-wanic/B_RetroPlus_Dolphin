@@ -59,7 +59,7 @@ namespace DLPHN
 		animation = GetOwner()->GetComponent<Animation>();
 		physics = GetOwner()->GetComponent<Physics>();
 		transform = GetOwner()->GetComponent<Transform>();
-		PlayerController = GetOwner()->GetComponent<DLPHN::PlayerController>();
+		playerController = GetOwner()->GetComponent<DLPHN::PlayerController>();
 
 		// initialize with starting values
 		animation->Play(1, idleStart, 1, false);
@@ -102,7 +102,7 @@ namespace DLPHN
 	void PlayerAnimation::ChooseNextState(float dt)
 	{
 		// jump if in air and not on ladder
-		if (physics->GetVelocity().y != 0.0f)
+		if (physics->GetVelocity().y != 0.0f && !playerController->getOnLadder())
 		{
 			static float timer = 0.0f;
 			timer += dt;
@@ -127,13 +127,13 @@ namespace DLPHN
 		}
 
 		// Landing from jumping
-		if (PlayerController->getOnGround() && currentState == StateJump)
+		if (playerController->getOnGround() && currentState == StateJump)
 		{
 			nextState = StateLand;
 		}
 
 		// Check for ladder movement
-		if (PlayerController->getOnLadder())
+		if (playerController->getOnLadder())
 		{
 			// Make sure player is moving to animate
 			if (physics->GetVelocity().y != 0.0f)
@@ -148,7 +148,7 @@ namespace DLPHN
 		}
 		
 		// Hammer animation
-		switch (PlayerController->getHammerStatus())
+		switch (playerController->getHammerStatus())
 		{
 			// Has hammer
 		case 1:
@@ -167,13 +167,13 @@ namespace DLPHN
 		}
 
 		// Currently dying (spinning animation)
-		if (PlayerController->getDeathStatus() == 1)
+		if (playerController->getDeathStatus() == 1)
 		{
 			nextState = StateDying;
 		}
 
 		// Dead (halo frame)
-		else if (PlayerController->getDeathStatus() == 2)
+		else if (playerController->getDeathStatus() == 2)
 		{
 			nextState = StateDead;
 		}
@@ -192,10 +192,7 @@ namespace DLPHN
 			case StateIdle:
 				if (prevState == StateWalk)
 				{
-					// Dear Daniel,
 					// Turns out that Jumpman doesn't have an idle animation, he just stops whatever animation he had while walking.
-					// Sincerely,
-					// David Wong
 					animation->Stop();
 				}
 				else
@@ -212,12 +209,12 @@ namespace DLPHN
 
 			// Play jumping animation
 			case StateJump:
-				animation->Play(1, jumpStart, 1, false);
+				animation->Play(1, jumpStart, jumpStart, false);
 				break;
 
 			// Play landing animation
 			case StateLand:
-				animation->Play(1, landStart, 1, false);
+				animation->Play(1, landStart, landStart, false);
 				break;
 
 			// Climbing ladder
@@ -227,7 +224,7 @@ namespace DLPHN
 
 			// Stopping on ladder
 			case StateClimbStop:
-				animation->Play(1, climbStart, 1, false);
+				animation->Stop();
 				break;
 
 			// Done climbing to top of ladder
@@ -244,12 +241,12 @@ namespace DLPHN
 				
 			// Hit a barrel on the top
 			case StateHitBarrelTop:
-				animation->Play(1, hammerTopStart, 1, false);
+				animation->Play(1, hammerTopStart, hammerTopStart, false);
 				break;
 
 			// Hit a barrel on the side
 			case StateHitBarrelSide:
-				animation->Play(1, hammerSideStart, 1, false);
+				animation->Play(1, hammerSideStart, hammerSideStart, false);
 				break;
 
 			// Dying (rotating animation)

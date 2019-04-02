@@ -142,7 +142,7 @@ namespace DLPHN
 		Animation* animation;
 		Physics* physics;
 		Transform* transform;
-		PlayerController* PlayerController;
+		PlayerController* playerController;
 
 		// Flip
 		Vector2D originalScale;
