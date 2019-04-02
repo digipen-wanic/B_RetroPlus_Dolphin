@@ -117,6 +117,11 @@ namespace DLPHN
 				{
 					barrel->moveDirection = segArray[i].direction;
 					barrel->grounded = true;
+					//Swap left/right direction
+					if (barrel->barrelState == barrel->Left)
+						barrel->barrelState = barrel->Right;
+					if (barrel->barrelState == barrel->Right)
+						barrel->barrelState = barrel->Left;
 					continue;
 				}
 			}
@@ -132,7 +137,11 @@ namespace DLPHN
 	{
 		if (grounded)
 		{
-			Vector2D dir = Vector2D(moveDirection.x * speed, 0);
+			Vector2D dir;
+			if (barrelState == Left)
+				dir = Vector2D(moveDirection.x * -speed, 0);
+			if (barrelState == Right)
+				dir = Vector2D(moveDirection.x * speed, 0);
 			physics->SetVelocity(dir);
 		}
 		else

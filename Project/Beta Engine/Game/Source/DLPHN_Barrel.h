@@ -73,6 +73,12 @@ namespace DLPHN
 			//   other  = The object the barrel is colliding with.
 			friend void BarrelCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
+			enum MoveState
+			{
+				Left,
+				Right
+			};
+
 	private:
 
 		//============================================================
@@ -106,6 +112,7 @@ namespace DLPHN
 		Vector2D moveDirection;
 		bool grounded = false;
 		bool prevGrounded = true;
+		MoveState barrelState = Right;
 	};
 }
 
