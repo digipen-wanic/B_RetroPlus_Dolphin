@@ -64,7 +64,7 @@ LevelEditor
         LineTypeRelitive : 0
         Reflection : 0
         NumberOfLines : 2
-        Line : { { -480, 0 }, { 4, 0 } }
+        Line : { { 4, 0 }, { -480, 0 } }
         Line : { { 480, 25 }, { 4, 0 } }
       }
     }

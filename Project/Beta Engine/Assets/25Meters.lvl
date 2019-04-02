@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 28
+  numGameObjects : 30
   {
     TileMap
     {
@@ -94,20 +94,20 @@ LevelEditor
         Line : { { 80, 20 }, { -415, 20 } }
       }
     }
-	BeamDiscrete2
+	BeamDiscrete2_1
     {
       numComponents : 3
       Transform
       {
-        translation : { -10, -170.5 }
+        translation : { -41, -292 }
         rotation : 0
-        scale : { 850, 70 }
+        scale : { -850, 80 }
       }
       Sprite
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : BeamDiscrete1
+        spriteSourceName : MiddleBeam
       }
       ColliderLine
       {
@@ -115,9 +115,33 @@ LevelEditor
         CollisionFlags : all
         LineTypeRelitive : 0
         Reflection : 0
-        NumberOfLines : 2
-        Line : { { 480, 5 }, { 4, 5 } }
-        Line : { { 4, 5 }, { -480, 25 } }
+        NumberOfLines : 1
+        Line : { { 430, -5 }, { -430, 40 } }
+      }
+    }
+	BeamDiscrete2
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 41, -161 }
+        rotation : 0
+        scale : { 850, 80 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : MiddleBeam
+      }
+      ColliderLine
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        LineTypeRelitive : 0
+        Reflection : 0
+        NumberOfLines : 1
+        Line : { { 430, 40 }, { -430, 2 } }
       }
     }
 	BeamDiscrete4
@@ -125,15 +149,15 @@ LevelEditor
       numComponents : 3
       Transform
       {
-        translation : { 0, -30.5 }
+        translation : { -35, -31.5 }
         rotation : 0
-        scale : { -960, 69 }
+        scale : { -840, 80 }
       }
       Sprite
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : BeamDiscrete1
+        spriteSourceName : MiddleBeam
       }
       ColliderLine
       {
@@ -141,9 +165,33 @@ LevelEditor
         CollisionFlags : all
         LineTypeRelitive : 0
         Reflection : 0
-        NumberOfLines : 2
-        Line : { { 480, 0 }, { 4, 0 } }
-        Line : { { 4, 0 }, { -480, 30 } }
+        NumberOfLines : 1
+        Line : { { 430, -5 }, { -420, 40 } }
+      }
+    }
+	BeamDiscrete5
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { 24 , 100.5 }
+        rotation : 0
+        scale : { 850, 80 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : MiddleBeam
+      }
+      ColliderLine
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        LineTypeRelitive : 0
+        Reflection : 0
+        NumberOfLines : 1
+        Line : { { 420, 40 }, { -420, 0 } }
       }
     }
     Player
@@ -645,7 +693,7 @@ LevelEditor
       Sprite
       {
         frameIndex : 0
-        color : { 0.9 , 1 , 1 , 0.3 }
+        color : { 0.9 , 1 , 1 , 0 }
         spriteSourceName : BGReference
       }
     }
