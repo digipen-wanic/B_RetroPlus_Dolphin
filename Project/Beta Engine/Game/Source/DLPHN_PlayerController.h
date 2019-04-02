@@ -39,19 +39,19 @@ namespace DLPHN
 	// Prototypes:
 	//------------------------------------------------------------------------------
 
-	// Map collision handler for Player objects.
+	// Map collision handler for player and ground
 	// Params:
-	//   object = The Player object.
-	//   collision = Which sides the Player collided on.
-	void PlayerMapCollisionHandler(GameObject& object,
-		const MapCollision& collision);
+	//   object = The Player.
+	//   other  = The object the Player is colliding with.
+	//   intersection = The intersection between both objects, but only works with line collisions
+	void PointCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 	// Collision handler for Player.
 	// Params:
 	//   object = The Player.
 	//   other  = The object the Player is colliding with.
 	//   intersection = The intersection between both objects, but only works with line collisions
-	void PlayerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
+	void RectangleCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 	// Collision handler for hammer.
 	// Params:
@@ -83,18 +83,19 @@ namespace DLPHN
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
-		// Map collision handler for Player objects.
+		// Map collision handler for player and ground
 		// Params:
-		//   object = The Player object.
-		//   collision = Which sides the Player collided on.
-		friend void PlayerMapCollisionHandler(GameObject& object, const MapCollision& collision);
+		//   object = The Player.
+		//   other  = The object the Player is colliding with.
+		//   intersection = The intersection between both objects, but only works with line collisions
+		friend void PointCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 		// Collision handler for Player.
 		// Params:
 		//   object = The Player.
 		//   other  = The object the Player is colliding with.
 		//   intersection = The intersection between both objects, but only works with line collisions
-		friend void PlayerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
+		friend void RectangleCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 		// Collision handler for hammer.
 		// Params:
@@ -164,6 +165,7 @@ namespace DLPHN
 		// Climbing
 		bool touchingLadder;
 		bool onLadder;
+		float ladderTimer;
 
 		// Hammer
 		unsigned hammerStatus;

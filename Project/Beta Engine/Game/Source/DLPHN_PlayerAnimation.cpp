@@ -204,7 +204,7 @@ namespace DLPHN
 
 			// Play walking animation
 			case StateWalk:
-				animation->Play(0.1f, walkStart, walkEnd, true);
+				animation->Play(0.04f, walkStart, walkEnd, true);
 				break;
 
 			// Play jumping animation
@@ -236,7 +236,7 @@ namespace DLPHN
 
 			// Hammer idle/walk
 			case StateHasHammer:
-				animation->Play(0.1f, hammerStart, hammerEnd, true);
+				animation->Play(0.08f, hammerStart, hammerEnd, true);
 				break;
 				
 			// Hit a barrel on the top

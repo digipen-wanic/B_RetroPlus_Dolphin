@@ -47,7 +47,7 @@ namespace DLPHN
 		PlayerClimbSpeed(100.0f),
 		gravity(0.0f, -300.0f),
 		onGround(false),
-		touchingLadder(false), onLadder(false),
+		touchingLadder(false), onLadder(false), ladderTimer(0.0f),
 		hammerStatus(0), hammerCooldown(10.0f),
 		deathStatus(0), deathDuration(4.0f),
 		playerHasWon(false)
@@ -77,15 +77,12 @@ namespace DLPHN
 		circleOffset = playerHammer->GetComponent<ColliderCircle>()->GetOffset().x;
 		playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
 
-		// set map collision handler
-		GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(&PlayerMapCollisionHandler);
-
 		// set player collision handlers
 		ColliderPoint* pointCollider = GetOwner()->GetComponent<ColliderPoint>();
-		pointCollider->SetCollisionHandler(&PlayerCollisionHandler);
+		pointCollider->SetCollisionHandler(&PointCollisionHandler);
 
 		ColliderRectangle* rectangleCollider = GetOwner()->GetComponent<ColliderRectangle>();
-		rectangleCollider->SetCollisionHandler(&PlayerCollisionHandler);
+		rectangleCollider->SetCollisionHandler(&RectangleCollisionHandler);
 
 		ColliderCircle* hammerCollider = playerHammer->GetComponent<ColliderCircle>();
 		hammerCollider->SetCollisionHandler(&HammerCollisionHandler);
@@ -102,6 +99,9 @@ namespace DLPHN
 	{
 		// Keep playerHammer collider with player
 		playerHammer->GetComponent<Transform>()->SetTranslation(transform->GetTranslation());
+		
+		// Increment ladderTimer (used in RectangleCollisionHandler)
+		ladderTimer += dt;
 
 		// Death sequence
 		if (deathStatus)
@@ -131,7 +131,7 @@ namespace DLPHN
 			{
 				physics->AddForce(gravity);
 			}
-			
+
 			// Check for win
 			if (playerHasWon)
 			{
@@ -155,24 +155,12 @@ namespace DLPHN
 		}
 	}
 
-	// Map collision handler for Player objects.
-	// Params:
-	//   object = The Player object.
-	//   collision = Which sides the Player collided on.
-	void PlayerMapCollisionHandler(GameObject& object, const MapCollision& collision)
-	{
-		// if there is a bottom collision, set onGround to true
-		if (collision.bottom)
-		{
-			object.GetComponent<PlayerController>()->onGround = true;
-		}
-	}
-
-	// Collision handler for Player.
+	// Map collision handler for player and ground
 	// Params:
 	//   object = The Player.
 	//   other  = The object the Player is colliding with.
-	void PlayerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection)
+	//   intersection = The intersection between both objects, but only works with line collisions
+	void PointCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection)
 	{
 		UNREFERENCED_PARAMETER(object);
 
@@ -193,7 +181,7 @@ namespace DLPHN
 			if (displacementVector.y > 0 && velocity.y < 0)
 			{
 				velocity.y = 0;
-				
+
 				// Solve the simple problem first and stop the player from falling vertically
 				float yNudge = displacementVector.y * 2 - point->GetOffset().y;
 				transform->SetTranslation(Vector2D(currentPosition.x, currentPosition.y + yNudge));
@@ -202,6 +190,19 @@ namespace DLPHN
 
 			playerController->onGround = true;
 		}
+	}
+
+	// Collision handler for Player.
+	// Params:
+	//   object = The Player.
+	//   other  = The object the Player is colliding with.
+	//   intersection = The intersection between both objects, but only works with line collisions
+	void RectangleCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection)
+	{
+		UNREFERENCED_PARAMETER(object);
+		UNREFERENCED_PARAMETER(intersection);
+
+		PlayerController* playerController = object.GetComponent<PlayerController>();
 
 		if (other.GetName() == "WinZone")
 		{
@@ -218,8 +219,12 @@ namespace DLPHN
 				playerController->hammerStatus = 1;
 			}
 
+			// Ladder handling
 			if (other.GetName() == "Ladder")
 			{
+				// Reset ladderTimer
+				playerController->ladderTimer = 0.0f;
+
 				// Can't get on ladder if jumping or have hammer
 				if (playerController->onGround)
 				{
@@ -238,6 +243,13 @@ namespace DLPHN
 						playerController->touchingLadder = true;
 					}
 				}
+			}
+
+			// If the player has not collided with a ladder in more
+			// than a fraction of a second, treat it like a collision-ended event
+			if (playerController->ladderTimer > 0.3f)
+			{
+				playerController->onLadder = false;
 			}
 		}
 
