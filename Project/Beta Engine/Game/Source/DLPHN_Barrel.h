@@ -104,6 +104,8 @@ namespace DLPHN
 		// Misc.
 		float speed;
 		Vector2D moveDirection;
+		bool grounded = false;
+		bool prevGrounded = true;
 	};
 }
 

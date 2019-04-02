@@ -58,11 +58,6 @@ namespace DLPHN
 		transform = GetOwner()->GetComponent<Transform>();
 		originalScale = transform->GetScale();
 
-		// Set gravity of barrel
-		physics->SetGravity(Vector2D(0, -speed));
-
-		// Start animation
-		animation->Play(0.2f, 0, rollLength, true);
 
 		// set player collision handler
 		GetOwner()->GetComponent<Collider>()->SetCollisionHandler(&BarrelCollisionHandler);
@@ -72,6 +67,7 @@ namespace DLPHN
 	void Barrel::Update(float dt)
 	{
 		Roll();
+		Animate();
 	}
 
 	// Write object data to file
@@ -117,9 +113,11 @@ namespace DLPHN
 			for (int i = 0; i < segArray.size(); i++)
 			{
 				if (PointIsBetweenLines(intersection,
-					segArray[i].start, segArray[i].end, segArray[i].normal))
+					segArray[i].start, segArray[i].end, segArray[i].direction))
 				{
 					barrel->moveDirection = segArray[i].direction;
+					barrel->grounded = true;
+					continue;
 				}
 			}
 		}
@@ -132,9 +130,15 @@ namespace DLPHN
 	// Moves barrel in direction
 	void Barrel::Roll()
 	{
-		//FInd the slope of the line
-		Vector2D dir = Vector2D(moveDirection.x * speed, physics->GetGravity().y);
-		physics->SetVelocity(dir);
+		if (grounded)
+		{
+			Vector2D dir = Vector2D(moveDirection.x * speed, 0);
+			physics->SetVelocity(dir);
+		}
+		else
+		{
+			physics->SetVelocity(Vector2D(0, -speed));
+		}
 	}
 
 	// Handles basic animation
@@ -148,6 +152,20 @@ namespace DLPHN
 		else
 		{
 			transform->SetScale(originalScale);
+		}
+
+		if (grounded != prevGrounded)
+		{
+			if (grounded)
+			{
+				// Start animation
+				animation->Play(0.2f, 0, rollLength, true);
+			}
+			else
+			{
+				animation->Play(0.2f, 4, 5, true);
+			}
+			prevGrounded = grounded;
 		}
 	}
 
