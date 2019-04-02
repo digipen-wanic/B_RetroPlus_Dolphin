@@ -89,6 +89,9 @@ public:
 	//   includeScale = Weither or not to include scale in the calculations
 	LineSegment GetLineWithTransform(unsigned index) const;
 
+	//Rturns the list of line segments
+	std::vector<LineSegment> GetLineSegments();
+
 private:
 
 	//------------------------------------------------------------------------------

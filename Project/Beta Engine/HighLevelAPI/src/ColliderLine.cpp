@@ -165,3 +165,8 @@ LineSegment ColliderLine::GetLineWithTransform(unsigned index) const
 
 	return LineSegment(startPos, endPos);
 }
+
+std::vector<LineSegment> ColliderLine::GetLineSegments()
+{
+	return lineSegments;
+}

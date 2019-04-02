@@ -1,86 +1,27 @@
 ﻿  Microsoft (R) Direct3D Shader Compiler 10.1
   Copyright (C) 2013 Microsoft. All rights reserved.
   
-  compilation header save succeeded; see C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_LineRectVS.h
+  compilation header save succeeded; see C:\Users\jayden.y\Downloads\B_RetroPlus_Dolphin.git\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_LineRectVS.h
   Microsoft (R) Direct3D Shader Compiler 10.1
   Copyright (C) 2013 Microsoft. All rights reserved.
   
-  compilation header save succeeded; see C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_LineRectCstColorVS.h
+  compilation header save succeeded; see C:\Users\jayden.y\Downloads\B_RetroPlus_Dolphin.git\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_LineRectCstColorVS.h
   Microsoft (R) Direct3D Shader Compiler 10.1
   Copyright (C) 2013 Microsoft. All rights reserved.
   
-  compilation header save succeeded; see C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_LineRectPS.h
+  compilation header save succeeded; see C:\Users\jayden.y\Downloads\B_RetroPlus_Dolphin.git\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_LineRectPS.h
   Microsoft (R) Direct3D Shader Compiler 10.1
   Copyright (C) 2013 Microsoft. All rights reserved.
   
-  compilation header save succeeded; see C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_TextVS.h
+  compilation header save succeeded; see C:\Users\jayden.y\Downloads\B_RetroPlus_Dolphin.git\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_TextVS.h
   Microsoft (R) Direct3D Shader Compiler 10.1
   Copyright (C) 2013 Microsoft. All rights reserved.
   
-  compilation header save succeeded; see C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_TextCstColorVS.h
+  compilation header save succeeded; see C:\Users\jayden.y\Downloads\B_RetroPlus_Dolphin.git\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_TextCstColorVS.h
   Microsoft (R) Direct3D Shader Compiler 10.1
   Copyright (C) 2013 Microsoft. All rights reserved.
   
-  compilation header save succeeded; see C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_TextPS.h
-  TwPrecomp.cpp
-  LoadOGL.cpp
-  LoadOGLCore.cpp
-  TwBar.cpp
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(1803): warning C4456: declaration of 'str' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(1658): note: see declaration of 'str'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(5068): warning C4456: declaration of 'LevelSpace' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(4870): note: see declaration of 'LevelSpace'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6674): warning C4456: declaration of 'Atom' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6654): note: see declaration of 'Atom'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6702): warning C4456: declaration of 'Atom' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6654): note: see declaration of 'Atom'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6730): warning C4456: declaration of 'Atom' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twbar.cpp(6654): note: see declaration of 'Atom'
-  TwColors.cpp
-  TwDirect3D10.cpp
+  compilation header save succeeded; see C:\Users\jayden.y\Downloads\B_RetroPlus_Dolphin.git\trunk\Project\Beta Engine\AntTweakBar\src\debug64\TwDirect3D11_TextPS.h
   TwDirect3D11.cpp
-  TwDirect3D9.cpp
-  TwFonts.cpp
-  TwMgr.cpp
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6152): warning C4456: declaration of 'Var' hides previous local declaration
-  c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6133): note: see declaration of 'Var'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6223): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6224): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6225): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6226): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6227): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6228): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6229): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6230): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6231): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6232): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6233): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6234): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6235): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6237): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6250): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6256): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\twmgr.cpp(6265): warning C4302: 'type cast': truncation from 'LPSTR' to 'WORD'
-  TwOpenGL.cpp
-  Generating Code...
-  TwEventGLFW.c
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(26): warning C4100: 'mode': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(26): warning C4100: 'win': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(45): warning C4100: 'modes': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(45): warning C4100: 'scanCode': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(45): warning C4100: 'win': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(188): warning C4100: 'win': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(200): warning C4100: 'win': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(204): warning C4100: 'axisX': unreferenced formal parameter
-c:\users\fract_000\documents\team dolphin\trunk\project\beta engine\anttweakbar\src\tweventglfw.c(204): warning C4100: 'win': unreferenced formal parameter
-  TwEventGLUT.c
-  TwEventSDL.c
-  TwEventSDL12.c
-  TwEventSDL13.c
-  TwEventWin.c
-  Generating Code...
-  TwEventSFML.cpp
-  TwOpenGLCore.cpp
-  Generating Code...
-     Creating library ../lib/debug\AntTweakBar64.lib and object ../lib/debug\AntTweakBar64.exp
-  AntTweakBar.vcxproj -> C:\Users\fract_000\Documents\Team Dolphin\trunk\Project\Beta Engine\AntTweakBar\src\../lib/debug\AntTweakBar64.dll
+  AntTweakBar.vcxproj -> C:\Users\jayden.y\Downloads\B_RetroPlus_Dolphin.git\trunk\Project\Beta Engine\AntTweakBar\src\../lib/debug\AntTweakBar64.dll
+  AntTweakBar.vcxproj -> ../lib/debug\AntTweakBar64.pdb (Full PDB)
