@@ -234,7 +234,7 @@ void GameObjectManager::CheckCollisions()
 {
 	for (size_t i = 0; i < gameObjectActiveList.size(); i++)
 	{
-		GameObject* go1 = gameObjectActiveList[i];
+		/*GameObject* go1 = gameObjectActiveList[i];
 		if (!go1->IsDestroyed()) {
 			/*Collider* collider1 = go1->GetComponent<Collider>();
 			if (collider1 != nullptr) {
@@ -277,6 +277,41 @@ void GameObjectManager::CheckCollisions()
 					}
 				}
 			}
+		}*/
+
+		// Check collisions for the first object
+		GameObject* first = gameObjectActiveList[i];
+		if (first->IsDestroyed())
+			continue;
+
+		// Get the colliders of the first object
+		std::vector<Collider*> firstColliders = first->GetAllComponents<Collider>();
+		// If it is empty we won't even bother
+		if (firstColliders.size() < 0)
+			continue;
+
+		// Check collisions for the second object
+		for (size_t j = i; j < gameObjectActiveList.size(); ++j)
+		{
+			GameObject* second = gameObjectActiveList[j];
+			// Don't even bother if the second object does not exist
+			if (second->IsDestroyed())
+				continue;
+			// Get the list of colliders for the second object
+			std::vector<Collider*> secondColliders = second->GetAllComponents<Collider>();
+			// Don't even bother with checking colliders if the second object doesn't have any
+			if (secondColliders.size() < 0)
+				continue;
+
+			// Cycle and check collisions between colliders
+			for (auto firstBegin = firstColliders.begin(); firstBegin < firstColliders.end(); ++firstBegin)
+			{
+				for (auto secondBegin = secondColliders.begin(); secondBegin < secondColliders.end(); ++secondBegin)
+				{
+					(*firstBegin)->CheckCollision(*(*secondBegin));
+				}
+			}
 		}
+
 	}
 }
