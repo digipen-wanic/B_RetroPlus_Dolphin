@@ -236,7 +236,7 @@ void GameObjectManager::CheckCollisions()
 	{
 		GameObject* go1 = gameObjectActiveList[i];
 		if (!go1->IsDestroyed()) {
-			Collider* collider1 = go1->GetComponent<Collider>();
+			/*Collider* collider1 = go1->GetComponent<Collider>();
 			if (collider1 != nullptr) {
 				for (size_t x = 0; x < gameObjectActiveList.size(); x++)
 				{
@@ -248,7 +248,34 @@ void GameObjectManager::CheckCollisions()
 						}
 					}
 				}
-				
+			}*/
+			// Skip the collisoin steps if the first object is destroyed
+			if (go1->IsDestroyed())
+				continue;
+			// Get the first set of colliders...
+			std::vector<Collider*> colliderSet1 = go1->GetAllComponents<Collider>();
+			// .. and check them against the second set of colliders if it is not empty
+			if (colliderSet1.size() > 0)
+			{
+				// Get the second set of colliders...
+				for (size_t x = i; x < gameObjectActiveList.size(); ++x)
+				{
+					GameObject* go2 = gameObjectActiveList[x];
+					// Skip the collision code if the second object is destroyed
+					if (go2->IsDestroyed())
+						continue;
+
+					std::vector<Collider*> colliderSet2 = go2->GetAllComponents<Collider>();
+					// And now check every collider against each other
+					for (size_t go1ColliderIndex = 0; go1ColliderIndex < colliderSet1.size(); ++go1ColliderIndex)
+					{
+						for (size_t go2ColliderIndex = 0; go2ColliderIndex < colliderSet2.size(); ++go2ColliderIndex)
+						{
+							// Check collision between the two objects
+							colliderSet1[go1ColliderIndex]->CheckCollision(*colliderSet2[go2ColliderIndex]);
+						}
+					}
+				}
 			}
 		}
 	}

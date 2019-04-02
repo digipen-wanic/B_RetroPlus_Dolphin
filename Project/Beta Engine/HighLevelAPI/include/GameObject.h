@@ -131,6 +131,45 @@ public:
 		return nullptr;
 	}
 
+	// Params:
+	//	name: The name of the components we are trying to get
+	// Returns: All of the components with a given name
+	std::vector<Component*> GetAllComponents(const std::string& name) const;
+
+	// Returns: All of the components with a given name
+	template <class T>
+	std::vector<T*> GetAllComponents() const
+	{
+		std::vector<T*> foundComponents;
+		const std::string nameMatch = typeid(T).name();
+		for (auto begin = components.begin(); begin < components.end(); ++begin)
+		{
+			// Find by component name first
+			const std::string testedName = typeid(*begin).name();
+			if (nameMatch == testedName)
+			{
+				foundComponents.push_back(static_cast<T*>(*begin));
+				continue;
+			}
+
+			// Then attempt to find by dynamic_cast
+			try
+			{
+				T* castedComponent = dynamic_cast<T*>(*begin);
+				if (castedComponent != nullptr)
+				{
+					foundComponents.push_back(castedComponent);
+				}
+			}
+			catch (const std::bad_cast& other)
+			{
+				std::cout << "Attempted to cast " << testedName << " into " << nameMatch << " inside GetAllComponents" << std::endl;
+			}
+		}
+
+		return foundComponents;
+	}
+
 	// Retrieves the component with the given type if it exists.
 	// Template params:
 	//  ComponentType = The type of component to retrieve.

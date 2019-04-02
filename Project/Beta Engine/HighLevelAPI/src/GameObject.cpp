@@ -14,6 +14,7 @@
 #include "Component.h"
 #include "Space.h"
 #include <Parser.h>
+#include <vector>
 #include <GameObjectFactory.h>
 
 GameObject::GameObject(const std::string & name) : BetaObject(name)
@@ -250,6 +251,23 @@ Component * GameObject::GetComponent(const std::string & _name)
 	}
 	//std::cout << "No component with the name " + _name + " was found!" << std::endl;
 	return nullptr;
+}
+
+std::vector<Component*> GameObject::GetAllComponents(const std::string& name) const
+{
+	std::vector<Component*> foundComponents;
+	for (auto begin = components.begin(); begin < components.end(); ++begin)
+	{
+		// Find by component name first
+		const std::string testedName = typeid(*begin).name();
+		if (name == testedName)
+		{
+			foundComponents.push_back(*begin);
+			continue;
+		}
+	}
+
+	return components;
 }
 
 void GameObject::Destroy()
