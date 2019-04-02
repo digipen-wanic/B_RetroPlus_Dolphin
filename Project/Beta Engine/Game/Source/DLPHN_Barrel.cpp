@@ -13,6 +13,8 @@
 
 #include <Animation.h>
 #include <ColliderCircle.h>
+#include <ColliderLine.h>
+#include <Intersection2D.h>
 #include <GameObject.h>
 #include <Physics.h>
 #include <Parser.h>
@@ -31,7 +33,7 @@ namespace DLPHN
 		: Component("Barrel"),
 		  physics(nullptr), animation(nullptr), transform(nullptr),
 		  rollLength(3),
-		  speed(10.0f)
+		  speed(170.0f)
 	{
 	}
 
@@ -57,8 +59,7 @@ namespace DLPHN
 		originalScale = transform->GetScale();
 
 		// Set gravity of barrel
-		// physics->SetGravity(Vector2D(0, -1));
-		physics->SetVelocity(Vector2D(0, -speed));
+		physics->SetGravity(Vector2D(0, -speed));
 
 		// Start animation
 		animation->Play(0.2f, 0, rollLength, true);
@@ -101,6 +102,27 @@ namespace DLPHN
 		{
 			barrel->SmashBarrel();
 		}
+
+		if (other.GetName() == "OilBarrel")
+		{
+
+		}
+		
+		if (other.GetComponent<ColliderLine>() != nullptr)
+		{
+			std::vector<LineSegment> segArray = other.
+				GetComponent<ColliderLine>()->GetLineSegments();
+			//Check which line is being collided with from
+			//the list of lines in the collider using the intersection point
+			for (int i = 0; i < segArray.size(); i++)
+			{
+				if (PointIsBetweenLines(intersection,
+					segArray[i].start, segArray[i].end, segArray[i].normal))
+				{
+					barrel->moveDirection = segArray[i].direction;
+				}
+			}
+		}
 	}
 
 	//============================================================
@@ -110,7 +132,9 @@ namespace DLPHN
 	// Moves barrel in direction
 	void Barrel::Roll()
 	{
-
+		//FInd the slope of the line
+		Vector2D dir = Vector2D(moveDirection.x * speed, physics->GetGravity().y);
+		physics->SetVelocity(dir);
 	}
 
 	// Handles basic animation
