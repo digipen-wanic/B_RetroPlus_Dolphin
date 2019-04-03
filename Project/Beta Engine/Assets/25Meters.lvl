@@ -194,49 +194,6 @@ LevelEditor
         Line : { { 420, 40 }, { -420, 0 } }
       }
     }
-    Player
-    {
-      numComponents : 8
-      Transform
-      {
-        translation : { -288.5, -366.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Player
-      }
-      Animation
-      {
-      }
-      ColliderPoint
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        offset : { 0, -35 }
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 35, 35 }
-      }
-      Physics
-      {
-        acceleration : { 0, 0 }
-        velocity : { 0, 0 }
-        angularVelocity : 0
-        mass : 1
-        gravity : { 0, 0 }
-      }
-      DLPHN::PlayerAnimation
-      { } 
-      DLPHN::PlayerController
-      { PlayerWalkSpeed : 150 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
-    }
     DonkeyKong
     {
       numComponents : 5
@@ -327,7 +284,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 30 }
+        extents : { 10, 60 }
       }
     }
     Ladder
@@ -696,6 +653,49 @@ LevelEditor
         color : { 0.9 , 1 , 1 , 0 }
         spriteSourceName : BGReference
       }
+    }
+	Player
+    {
+      numComponents : 8
+      Transform
+      {
+        translation : { -288.5, -366.5 }
+        rotation : 0
+        scale : { 190, 190 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Player
+      }
+      Animation
+      {
+      }
+      ColliderPoint
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        offset : { 0, -35 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 35, 35 }
+      }
+      Physics
+      {
+        acceleration : { 0, 0 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, 0 }
+      }
+      DLPHN::PlayerAnimation
+      { } 
+      DLPHN::PlayerController
+      { PlayerWalkSpeed : 150 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
     }
   }
 }

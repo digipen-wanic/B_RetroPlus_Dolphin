@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 17
+  numGameObjects : 8
   {
     TileMap
     {
@@ -138,226 +138,6 @@ LevelEditor
         extents : { 30, 50 }
       }
     }
-    Ladder
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, -399.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_1
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, -299.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_2
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, -199.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_3
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, -99.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_4
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, 0.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_5
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, 100.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_6
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, 200.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_7
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, 300.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_8
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, 400.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
-    Ladder_9
-    {
-      numComponents : 3
-      Transform
-      {
-        translation : { -49.5, 500.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : LadderSprite
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 10, 30 }
-      }
-    }
     Player
     {
       numComponents : 8
@@ -400,6 +180,22 @@ LevelEditor
       { } 
       DLPHN::PlayerController
       { PlayerWalkSpeed : 150 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
+    }
+    WinZone
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 250.5, -299.5 }
+        rotation : 0
+        scale : { 1, 1 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 200, 100 }
+      }
     }
   }
 }

@@ -102,18 +102,10 @@ public:
 	T * GetComponent()
 	{
 		//std::string Type = std::string(typeid(T).name());
-		const char* Type = typeid(T).name();
+		//const char* Type = typeid(T).name();
 
 		for (size_t i = 0; i < components.size(); i++)
 		{
-			//std::string compType(typeid(*components[i]).name());
-			const char* compType = typeid(*components[i]).name();
-			
-			if (Type == compType)
-			{
-				return static_cast<T*>(components[i]);
-			}
-
 			//attempt dynamic cast
 			try
 			{

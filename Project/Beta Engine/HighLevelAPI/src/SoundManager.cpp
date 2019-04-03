@@ -182,6 +182,14 @@ float SoundManager::GetEffectsVolume() const
 	return effectsVolume;
 }
 
+// Get a pointer to the music channel.
+// Return:
+//	 The music channel
+FMOD::Channel* SoundManager::GetMusicChannel()
+{
+	return musicChannel;
+}
+
 //------------------------------------------------------------------------------
 // Private Functions:
 //------------------------------------------------------------------------------

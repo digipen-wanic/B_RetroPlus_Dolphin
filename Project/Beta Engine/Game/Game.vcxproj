@@ -69,6 +69,7 @@
       </AdditionalOptions>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <SupportJustMyCode>false</SupportJustMyCode>
     </ClCompile>
     <Link>
       <AdditionalDependencies>BetaHigh_x64_D.lib;BetaLow_x64_D.lib;%(AdditionalDependencies)</AdditionalDependencies>

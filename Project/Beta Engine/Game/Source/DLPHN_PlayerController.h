@@ -130,7 +130,7 @@ namespace DLPHN
 		//------------------------------------------------------------------------------
 
 		// Moves horizontally based on input
-		void MoveHorizontal() const;
+		void MoveHorizontal();
 
 		// Moves vertically based on input
 		void MoveVertical();
@@ -158,6 +158,9 @@ namespace DLPHN
 		float circleOffset;
 		GameObject* playerHammer;
 		SoundManager* soundManager;
+
+		// Walking
+		float walkSoundTimer;
 
 		// Jumping
 		bool onGround;

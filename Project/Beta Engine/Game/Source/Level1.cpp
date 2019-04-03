@@ -77,7 +77,7 @@ void Levels::Level1::Load()
 void Levels::Level1::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
-	musicChannel =  soundManager->PlaySound("DLPHN_music_theme.wav");
+	musicChannel = soundManager->PlaySound("DLPHN_music_theme.wav");
 	LoadLevel();
 }
 
@@ -92,7 +92,6 @@ void Levels::Level1::Shutdown()
 
 	//SaveLevel();
 	musicChannel->stop();
-	musicChannel = nullptr;
 }
 
 void Levels::Level1::Unload()

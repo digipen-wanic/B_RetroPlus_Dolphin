@@ -98,6 +98,11 @@ public:
 	//	 volume = Current value for the music volume.
 	float GetMusicVolume() const;
 
+	// Get a pointer to the music channel.
+	// Return:
+	//	 The music channel
+	FMOD::Channel* GetMusicChannel();
+
 	// Get the volume of the sound effects channel group.
 	// Return:
 	//	 volume = Current value for the FX volume.

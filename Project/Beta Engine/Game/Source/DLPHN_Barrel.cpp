@@ -16,8 +16,10 @@
 #include <ColliderLine.h>
 #include <Intersection2D.h>
 #include <GameObject.h>
+#include "DLPHN_PlayerController.h"
 #include <Physics.h>
 #include <Parser.h>
+#include <Space.h>
 #include <Transform.h>
 
 //============================================================
@@ -107,7 +109,7 @@ namespace DLPHN
 		{
 			barrel->SmashBarrel();
 		}
-
+		
 		if (other.GetName() == "OilBarrel")
 		{
 

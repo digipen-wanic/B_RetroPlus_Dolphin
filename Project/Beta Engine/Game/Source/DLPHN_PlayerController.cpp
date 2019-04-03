@@ -17,10 +17,12 @@
 #include "DLPHN_PlayerController.h"
 
 #include <ColliderCircle.h>
+#include <ColliderLine.h>
 #include <ColliderPoint.h>
 #include <ColliderRectangle.h>
 #include <Engine.h>
 #include <Input.h>
+#include <Level.h>
 #include <Parser.h>
 #include <Physics.h>
 #include <SoundManager.h>
@@ -46,6 +48,7 @@ namespace DLPHN
 		PlayerJumpSpeed(1500.0f),
 		PlayerClimbSpeed(100.0f),
 		gravity(0.0f, -300.0f),
+		walkSoundTimer(0.0f),
 		onGround(false),
 		touchingLadder(false), onLadder(false), ladderTimer(0.0f),
 		hammerStatus(0), hammerCooldown(10.0f),
@@ -90,6 +93,11 @@ namespace DLPHN
 		// Set up for sound effects
 		soundManager = Engine::GetInstance().GetModule<SoundManager>();
 		soundManager->AddEffect("DLPHN_sound_win.wav");
+		soundManager->AddEffect("DLPHN_sound_death.wav");
+		soundManager->AddEffect("DLPHN_sound_jump.wav");
+		soundManager->AddEffect("DLPHN_music_hammer.wav");
+		soundManager->AddEffect("DLPHN_sound_hammerBoop.wav");
+		soundManager->AddEffect("DLPHN_sound_movestandin.wav");
 	}
 
 	// Fixed update function for this component.
@@ -100,8 +108,9 @@ namespace DLPHN
 		// Keep playerHammer collider with player
 		playerHammer->GetComponent<Transform>()->SetTranslation(transform->GetTranslation());
 		
-		// Increment ladderTimer (used in RectangleCollisionHandler)
+		// Increment timers
 		ladderTimer += dt;
+		walkSoundTimer += dt;
 
 		// Death sequence
 		if (deathStatus)
@@ -110,7 +119,7 @@ namespace DLPHN
 		}
 
 		// Not dying
-		else
+		else if (!playerHasWon)
 		{
 			// Horizontal walking
 			MoveHorizontal();
@@ -131,26 +140,29 @@ namespace DLPHN
 			{
 				physics->AddForce(gravity);
 			}
+		}
 
-			// Check for win
-			if (playerHasWon)
+		// Check for win
+		if (playerHasWon)
+		{
+			// Countdown to play win effect
+			static float timer = 4.0f;
+
+			// Stop player from moving
+			physics->SetVelocity(Vector2D(0.0f, 0.0f));
+
+			// Only play sound once
+			if (timer == 4.0f)
 			{
-				// Countdown to play win effect
-				static float timer = 4.0f;
+				soundManager->PlaySound("DLPHN_sound_win.wav");
+			}
 
-				// Only play sound once
-				if (timer == 4.0f)
-				{
-					soundManager->PlaySound("DLPHN_sound_win.wav");
-				}
+			timer -= dt;
 
-				timer -= dt;
-
-				// Quit game after a few seconds
-				if (timer <= 0.0f)
-				{
-					Engine::GetInstance().Stop();
-				}
+			// Quit game after a few seconds
+			if (timer <= 0.0f)
+			{
+				Engine::GetInstance().Stop();
 			}
 		}
 	}
@@ -167,7 +179,7 @@ namespace DLPHN
 		PlayerController* playerController = object.GetComponent<PlayerController>();
 
 		// Check whether the player touched a beam or not
-		if (other.GetName() == "BeamDiscrete1")
+		if (other.GetComponent<ColliderLine>() != nullptr)
 		{
 			// Janky Resolution Code
 			// Find the displacement vector from our point's position and the intersection's position
@@ -249,12 +261,14 @@ namespace DLPHN
 			// than a fraction of a second, treat it like a collision-ended event
 			if (playerController->ladderTimer > 0.3f)
 			{
+				// Reset ladder
+				playerController->touchingLadder = false;
 				playerController->onLadder = false;
 			}
 		}
 
 		// Hazard objects
-		if (other.GetName() == "Barrel" || other.GetName() == "FireDude")
+		if (!playerController->playerHasWon && other.GetName() == "Barrel" || other.GetName() == "FireDude")
 		{
 			// Set status to dying if not already
 			if (!playerController->deathStatus)
@@ -271,13 +285,17 @@ namespace DLPHN
 	void HammerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection)
 	{
 		UNREFERENCED_PARAMETER(object);
+		UNREFERENCED_PARAMETER(intersection);
+		
+		PlayerController* playerController = object.GetSpace()->GetObjectManager().GetObjectByName("Player")->GetComponent<PlayerController>();
 
 		// Hazard objects
-		if (other.GetName() == "Barrel" || other.GetName() == "FireDude")
+		if (!playerController->getDeathStatus() && other.GetName() == "Barrel" || other.GetName() == "FireDude")
 		{
-			// TODO:
-			// Play destroy barrel animation
-			other.Destroy();
+			// TODO: Stop time
+			
+			// Play destruction effect
+			playerController->soundManager->PlaySound("DLPHN_sound_hammerBoop.wav");
 		}
 	}
 
@@ -332,7 +350,7 @@ namespace DLPHN
 	//------------------------------------------------------------------------------
 
 	// Moves horizontally based on input
-	void PlayerController::MoveHorizontal() const
+	void PlayerController::MoveHorizontal()
 	{
 		Input& input = Input::GetInstance();
 
@@ -344,6 +362,12 @@ namespace DLPHN
 			{
 				physics->SetVelocity(Vector2D(PlayerWalkSpeed, physics->GetVelocity().y));
 				//transform->SetTranslation(Vector2D(transform->GetTranslation().x + PlayerWalkSpeed, transform->GetTranslation().y));
+
+				if (walkSoundTimer > 0.15f)
+				{
+					walkSoundTimer = 0.0f;
+					soundManager->PlaySound("DLPHN_sound_movestandin.wav");
+				}
 			}
 
 			// Move left with left arrow
@@ -351,6 +375,12 @@ namespace DLPHN
 			{
 				physics->SetVelocity(Vector2D(-PlayerWalkSpeed, physics->GetVelocity().y));
 				//transform->SetTranslation(Vector2D(transform->GetTranslation().x - PlayerWalkSpeed, transform->GetTranslation().y));
+
+				if (walkSoundTimer > 0.15f)
+				{
+					walkSoundTimer = 0.0f;
+					soundManager->PlaySound("DLPHN_sound_movestandin.wav");
+				}
 			}
 
 			// Idle
@@ -406,6 +436,9 @@ namespace DLPHN
 
 			// Set jumping velocity
 			physics->SetVelocity(Vector2D(physics->GetVelocity().x, PlayerJumpSpeed));
+
+			// Play jump sound
+			soundManager->PlaySound("DLPHN_sound_jump.wav");
 		}
 
 		// Set onGround to false if player is moving vertically
@@ -427,7 +460,23 @@ namespace DLPHN
 	{
 		// Hammer timer
 		static float timer = 0.0f;
+		static float soundTimer = 0.0f;
 		timer += dt;
+		soundTimer += dt;
+
+		// Stop normal music channel once
+		//if (timer == 0.0f + dt)
+		//{
+		//	soundManager->GetMusicChannel()->stop();
+		//}
+
+		// Play hammer music on loop
+		if (soundTimer >= 2.725f || timer == 0.0f + dt)
+		{
+			soundTimer = 0.0f;
+
+			soundManager->PlaySound("DLPHN_music_hammer.wav");
+		}
 
 		// Determine what frame is being displayed
 		// (13, 15: side) (14, 16: top)
@@ -458,6 +507,10 @@ namespace DLPHN
 			// Hide collidercircle in player
 			playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
 
+			// Play normal music
+			soundManager->GetMusicChannel()->stop();
+			soundManager->PlaySound("DLPHN_music_theme.wav");
+
 			// Reset variables
 			timer = 0.0f;
 			hammerStatus = 0;
@@ -470,6 +523,12 @@ namespace DLPHN
 		// Death timer
 		static float timer = 0.0f;
 		timer += dt;
+
+		// Play death sound once
+		if (timer == 0.0f + dt)
+		{
+			soundManager->PlaySound("DLPHN_sound_death.wav");
+		}
 
 		// Stop player from moving
 		physics->SetVelocity(Vector2D(0.0f, 0.0f));

@@ -1,0 +1,17 @@
+WinZone
+{
+  numComponents : 2
+  Transform
+  {
+    translation : { 275, 400 }
+    rotation : 0
+    scale : { 1, 1 }
+  }
+
+  ColliderRectangle
+  {
+    CollisionGroup : default
+    CollisionFlags : all
+    extents : { 200, 100 }
+  }
+}
