@@ -25,7 +25,7 @@ class Sprite;
 //------------------------------------------------------------------------------
 namespace DLPHN
 {
-	class Damsel : public Component, public Serializable
+	class Damsel : public Component
 	{
 	private:
 		//------------------------------------------------------------------------------

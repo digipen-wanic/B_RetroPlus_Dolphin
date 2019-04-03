@@ -32,7 +32,7 @@ namespace DLPHN
 	};
 
 	// Controls Donkey Kong's behavior
-	class DonkeyKong : public Component, public Serializable
+	class DonkeyKong : public Component
 	{
 	private:
 		// The current AI state for Donkey Kong

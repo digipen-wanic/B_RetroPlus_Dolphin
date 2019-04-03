@@ -78,12 +78,12 @@ namespace DLPHN
 
 	void Damsel::Serialize(Parser& parser) const
 	{
-
+		UNREFERENCED_PARAMETER(parser);
 	}
 
 	void Damsel::Deserialize(Parser& parser)
 	{
-
+		UNREFERENCED_PARAMETER(parser);
 	}
 
 	void Damsel::Shutdown()
