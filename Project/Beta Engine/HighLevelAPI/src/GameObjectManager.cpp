@@ -30,14 +30,16 @@ GameObjectManager::~GameObjectManager()
 void GameObjectManager::Update(float dt)
 {
 	// Change the global time
-	GlobalTime& globalTime = GlobalTime::GetInstance();
-	globalTime.realDt = dt;
-	globalTime.scaledDt = dt * globalTime.timeScale;
-	globalTime.timeSinceStart += dt;
+	//GlobalTime& globalTime = GlobalTime::GetInstance();
+	//globalTime.realDt = dt;
+	//globalTime.scaledDt = dt * globalTime.timeScale;
+	//globalTime.timeSinceStart += dt;
 
 	if (!static_cast<Space*>(GetParent())->IsPaused()) {
-		VariableUpdate(globalTime.scaledDt);
-		FixedUpdate(globalTime.scaledDt);
+		//VariableUpdate(globalTime.scaledDt);
+		//FixedUpdate(globalTime.scaledDt);
+		VariableUpdate(dt);
+		Update(dt);
 	}
 	DestroyObjects();
 	Draw();
@@ -148,9 +150,9 @@ std::vector<GameObject*> GameObjectManager::GetGameObjectActiveList()
 	return gameObjectActiveList;
 }
 
-std::string GameObjectManager::GenerateUniqueGameObjectName(const std::string & name)
+std::string GameObjectManager::GenerateUniqueGameObjectName(const std::string & name_)
 {
-	std::string outputName = name;
+	std::string outputName = name_;
 
 	unsigned numberToAppend = 0;
 
@@ -162,7 +164,7 @@ std::string GameObjectManager::GenerateUniqueGameObjectName(const std::string & 
 
 		std::string currentName = GOName.substr(0, pos);
 
-		if (currentName == name)
+		if (currentName == name_)
 		{
 			if (pos != std::string::npos) {
 				std::string currentNumberString = GOName.substr(pos+1);

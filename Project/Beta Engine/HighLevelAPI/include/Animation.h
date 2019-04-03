@@ -59,7 +59,7 @@ public:
 	//	start: The starting frame of the animation
 	//	end: The ending frame of the animation
 	//	looping: Whether the animation loops
-	void Play(float frameDuration, float start, float end, bool looping);
+	void Play(float frameDuration, unsigned start, unsigned end, bool looping);
 
 	// Stops the animation from playing
 	void Stop();

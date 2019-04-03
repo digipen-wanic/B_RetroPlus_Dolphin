@@ -76,6 +76,8 @@ Vector2D ColliderCircle::GetOffset() const
 
 bool ColliderCircle::IsCollidingWith(const Collider & other, Vector2D* intersection) const
 {
+	UNREFERENCED_PARAMETER(intersection);
+
 	Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();
 
 	//if the other collider is a point they just didn't collide (they missed just barely)

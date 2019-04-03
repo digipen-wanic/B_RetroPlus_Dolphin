@@ -163,6 +163,7 @@ public:
 			}
 			catch (const std::bad_cast& other)
 			{
+				UNREFERENCED_PARAMETER(other);
 				std::cout << "Attempted to cast " << testedName << " into " << nameMatch << " inside GetAllComponents" << std::endl;
 			}
 		}

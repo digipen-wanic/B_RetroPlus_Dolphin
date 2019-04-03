@@ -63,6 +63,7 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 		}
 		catch (const std::bad_cast& cast)
 		{
+			UNREFERENCED_PARAMETER(cast);
 			point = nullptr;
 		}
 
@@ -72,6 +73,7 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 		}
 		catch (const std::bad_cast& cast)
 		{
+			UNREFERENCED_PARAMETER(cast);
 			circle = nullptr;
 		}
 
@@ -83,7 +85,7 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 
 		othersLine = LineSegment(otherPhysics->GetOldTranslation() + offset, other.GetOwner()->GetComponent<Transform>()->GetTranslation() + offset);
 		Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();
-		Physics* otherPhysics = other.GetOwner()->GetComponent<Physics>();
+		otherPhysics = other.GetOwner()->GetComponent<Physics>();
 		for (unsigned i = 0; i < lineSegments.size(); i++)
 		{
 			LineSegment myLine = LineSegment(GetLineWithTransform(i).start, GetLineWithTransform(i).end);

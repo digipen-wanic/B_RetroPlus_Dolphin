@@ -84,7 +84,7 @@ void Animation::Play(float frameDurationInput, bool isLoopingInput, bool playInR
 	isDone = false;
 }
 
-void Animation::Play(float duration, float start, float end, bool loop)
+void Animation::Play(float duration, unsigned start, unsigned end, bool loop)
 {
 	isRunning = true;
 	isDone = false;
