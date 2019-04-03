@@ -38,6 +38,7 @@
 #include <SpaceManager.h>
 #include <Graphics.h>
 #include <Parser.h>
+#include <GlobalTime.h>
 
 Levels::Level1::Level1() : Level("LevelEditor")
 {
@@ -76,7 +77,7 @@ void Levels::Level1::Load()
 void Levels::Level1::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
-	soundManager->PlaySound("DLPHN_music_theme.wav");
+	musicChannel =  soundManager->PlaySound("DLPHN_music_theme.wav");
 	LoadLevel();
 }
 
@@ -90,7 +91,6 @@ void Levels::Level1::Shutdown()
 	std::cout << GetName() << "::Shutdown" << std::endl;
 
 	//SaveLevel();
-
 	musicChannel->stop();
 	musicChannel = nullptr;
 }

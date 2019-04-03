@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------------
 
 #include "stdafx.h"
+#include "GlobalTime.h"
 #include "GameObjectManager.h"
 #include "Space.h"
 #include "GameObject.h"
@@ -28,9 +29,15 @@ GameObjectManager::~GameObjectManager()
 
 void GameObjectManager::Update(float dt)
 {
+	// Change the global time
+	GlobalTime& globalTime = GlobalTime::GetInstance();
+	globalTime.realDt = dt;
+	globalTime.scaledDt = dt * globalTime.timeScale;
+	globalTime.timeSinceStart += dt;
+
 	if (!static_cast<Space*>(GetParent())->IsPaused()) {
-		VariableUpdate(dt);
-		FixedUpdate(dt);
+		VariableUpdate(globalTime.scaledDt);
+		FixedUpdate(globalTime.scaledDt);
 	}
 	DestroyObjects();
 	Draw();
