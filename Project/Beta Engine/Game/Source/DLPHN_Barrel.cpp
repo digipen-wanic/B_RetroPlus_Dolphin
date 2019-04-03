@@ -58,6 +58,8 @@ namespace DLPHN
 		transform = GetOwner()->GetComponent<Transform>();
 		originalScale = transform->GetScale();
 
+		//Set gravity
+		physics->SetGravity(Vector2D(0, -speed));
 
 		// set player collision handler
 		GetOwner()->GetComponent<Collider>()->SetCollisionHandler(&BarrelCollisionHandler);
@@ -68,6 +70,13 @@ namespace DLPHN
 	{
 		Roll();
 		Animate();
+
+		notTouchingTimer += dt;
+		if (notTouchingTimer > notTouchingDelay)
+		{
+			grounded = false;
+			//std::cout << "Update " << grounded << std::endl;
+		}
 	}
 
 	// Write object data to file
@@ -116,16 +125,38 @@ namespace DLPHN
 					segArray[i].start, segArray[i].end, segArray[i].direction))
 				{
 					barrel->moveDirection = segArray[i].direction;
-					barrel->grounded = true;
+					if (segArray[i].direction.x < 0)
+						barrel->moveDirection = segArray[i].direction * -1;
 					//Swap left/right direction
 					if (barrel->barrelState == barrel->Left)
 						barrel->barrelState = barrel->Right;
-					if (barrel->barrelState == barrel->Right)
+					else if (barrel->barrelState == barrel->Right)
 						barrel->barrelState = barrel->Left;
 					continue;
 				}
 			}
+			barrel->grounded = true;
+			std::cout << barrel->grounded << std::endl;
+			barrel->notTouchingTimer = 0;
+
+			Transform* transform = object.GetComponent<Transform>();
+			Physics* physics = object.GetComponent<Physics>();
+			ColliderCircle* point = object.GetComponent<ColliderCircle>();
+			Vector2D currentPosition = transform->GetTranslation() + point->GetOffset();
+			Vector2D displacementVector = intersection - currentPosition;
+
+			Vector2D velocity = physics->GetVelocity();
+			if (displacementVector.y > 0 && velocity.y < 0)
+			{
+				velocity.y = 0;
+
+				// Solve the simple problem first and stop the player from falling vertically
+				float yNudge = displacementVector.y * 2 - point->GetOffset().y;
+				transform->SetTranslation(Vector2D(currentPosition.x, currentPosition.y + yNudge));
+				physics->SetVelocity(velocity);
+			}
 		}
+
 	}
 
 	//============================================================
@@ -139,14 +170,14 @@ namespace DLPHN
 		{
 			Vector2D dir;
 			if (barrelState == Left)
-				dir = Vector2D(moveDirection.x * -speed, 0);
+				dir = moveDirection * -speed;
 			if (barrelState == Right)
-				dir = Vector2D(moveDirection.x * speed, 0);
+				dir = moveDirection * speed;
 			physics->SetVelocity(dir);
 		}
 		else
 		{
-			physics->SetVelocity(Vector2D(0, -speed));
+			physics->SetVelocity(Vector2D(0, 0));
 		}
 	}
 
