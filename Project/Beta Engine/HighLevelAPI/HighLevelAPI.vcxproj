@@ -100,6 +100,7 @@
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\GameObjectFactory.h" />
     <ClInclude Include="include\GameObjectManager.h" />
+    <ClInclude Include="include\GlobalTime.h" />
     <ClInclude Include="include\Intersection2D.h" />
     <ClInclude Include="include\Level.h" />
     <ClInclude Include="include\Matrix2DStudent.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="src\CallbackInputManager.cpp" />
     <ClCompile Include="src\ColliderLine.cpp" />
     <ClCompile Include="src\FileOpenHelper.cpp" />
+    <ClCompile Include="src\GlobalTime.cpp" />
     <ClCompile Include="src\SpaceManager.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Collider.cpp" />
