@@ -30,16 +30,14 @@ GameObjectManager::~GameObjectManager()
 void GameObjectManager::Update(float dt)
 {
 	// Change the global time
-	//GlobalTime& globalTime = GlobalTime::GetInstance();
-	//globalTime.realDt = dt;
-	//globalTime.scaledDt = dt * globalTime.timeScale;
-	//globalTime.timeSinceStart += dt;
+	GlobalTime& globalTime = GlobalTime::GetInstance();
+	globalTime.realDt = dt;
+	globalTime.scaledDt = dt * globalTime.timeScale;
+	globalTime.timeSinceStart += dt;
 
 	if (!static_cast<Space*>(GetParent())->IsPaused()) {
-		//VariableUpdate(globalTime.scaledDt);
-		//FixedUpdate(globalTime.scaledDt);
-		VariableUpdate(dt);
-		Update(dt);
+		VariableUpdate(globalTime.scaledDt);
+		FixedUpdate(globalTime.scaledDt);
 	}
 	DestroyObjects();
 	Draw();
