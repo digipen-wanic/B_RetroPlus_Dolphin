@@ -114,11 +114,11 @@ namespace DLPHN
 		bool isDestroyed;
 
 		Vector2D moveDirection;
-		bool grounded = false;
-		bool prevGrounded = true;
-		MoveState barrelState = Right;
-		float notTouchingDelay = 0.3f;
-		float notTouchingTimer = 0;
+		bool grounded;
+		bool prevGrounded;
+		MoveState barrelState;
+		float notTouchingDelay;
+		float notTouchingTimer;
 	};
 }
 

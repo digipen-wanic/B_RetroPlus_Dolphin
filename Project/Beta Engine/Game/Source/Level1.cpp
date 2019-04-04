@@ -95,11 +95,12 @@ void Levels::Level1::Shutdown()
 
 	//SaveLevel();
 	musicChannel->stop();
+	soundManager->Shutdown();
 }
 
 void Levels::Level1::Unload()
 {
 	std::cout << GetName() << "::Unload" << std::endl;
 
-	soundManager->Shutdown();
+	
 }
