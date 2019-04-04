@@ -35,6 +35,8 @@ namespace DLPHN
 	class DonkeyKong : public Component
 	{
 	private:
+		// Whether the AI is disabled or not
+		const bool aiDisabled;
 		// The current AI state for Donkey Kong
 		DK_AIState current;
 		// The previous state for DK

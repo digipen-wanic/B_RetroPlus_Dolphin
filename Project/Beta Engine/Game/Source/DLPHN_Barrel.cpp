@@ -35,7 +35,8 @@ namespace DLPHN
 		: Component("Barrel"),
 		  physics(nullptr), animation(nullptr), transform(nullptr),
 		  rollLength(3),
-		  speed(170.0f)
+		  speed(170.0f),
+		  barrelState(Right)
 	{
 	}
 
@@ -138,7 +139,6 @@ namespace DLPHN
 				}
 			}
 			barrel->grounded = true;
-			std::cout << barrel->grounded << std::endl;
 			barrel->notTouchingTimer = 0;
 
 			Transform* transform = object.GetComponent<Transform>();
@@ -154,6 +154,7 @@ namespace DLPHN
 
 				// Solve the simple problem first and stop the player from falling vertically
 				float yNudge = displacementVector.y * 2 - point->GetOffset().y;
+				//float yNudge = -displacementVector.y * 0.5;// -point->GetOffset().y;
 				transform->SetTranslation(Vector2D(currentPosition.x, currentPosition.y + yNudge));
 				physics->SetVelocity(velocity);
 			}
@@ -179,7 +180,7 @@ namespace DLPHN
 		}
 		else
 		{
-			physics->SetVelocity(Vector2D(0, 0));
+			physics->SetVelocity(Vector2D(0, -speed));
 		}
 	}
 

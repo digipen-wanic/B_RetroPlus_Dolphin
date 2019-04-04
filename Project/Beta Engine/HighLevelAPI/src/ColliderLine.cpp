@@ -50,12 +50,37 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 	switch (other.GetType())
 	{
 	case ColliderType::ColliderTypeCircle:
+	{
+		Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();
+		ColliderCircle* circle = other.GetOwner()->GetComponent<ColliderCircle>();
+		for (unsigned i = 0; i < lineSegments.size(); i++)
+		{
+			LineSegment myLine = LineSegment(GetLineWithTransform(i).start, GetLineWithTransform(i).end);
+			Vector2D intersection = Vector2D(0, 0);
+
+			bool intersected = CircleLineIntersection(myLine, otherTransform->GetTranslation() + circle->GetOffset(), circle->GetRadius(), intersection);
+
+			//check if we intersected this frame
+			if (intersected) {
+				if (intersectionPtr)
+				{
+					*intersectionPtr = intersection;
+				}
+				if (reflection) {
+					MovingPointLineReflection(*otherTransform, *otherPhysics, myLine, othersLine, intersection);
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+		break;
 	case ColliderType::ColliderTypePoint:
 	{
 		// Find the offset if the collider is a point
 		const ColliderPoint* point = nullptr;
 		// Find the offset if the collider is a circle
-		const ColliderCircle* circle = nullptr;
+		//const ColliderCircle* circle = nullptr;
 		
 		try
 		{
@@ -67,7 +92,7 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 			point = nullptr;
 		}
 
-		try
+		/*try
 		{
 			circle = dynamic_cast<const ColliderCircle*>(&other);
 		}
@@ -75,7 +100,7 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 		{
 			UNREFERENCED_PARAMETER(cast);
 			circle = nullptr;
-		}
+		}*/
 
 		Vector2D offset = Vector2D();
 		if (point)
@@ -89,13 +114,13 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 		for (unsigned i = 0; i < lineSegments.size(); i++)
 		{
 			LineSegment myLine = LineSegment(GetLineWithTransform(i).start, GetLineWithTransform(i).end);
-			if (circle)
+			/*if (circle)
 			{
 				// Find the radius of the collider
-				offset = -circle->GetRadius() * myLine.normal;
+				offset = -0.8f * circle->GetRadius() * myLine.normal;
 				// and change the offset
 				othersLine = LineSegment(otherPhysics->GetOldTranslation() + offset, other.GetOwner()->GetComponent<Transform>()->GetTranslation() + offset);
-			}
+			}*/
 			Vector2D intersection = Vector2D(0, 0);
 			float t = 0;
 
@@ -113,8 +138,8 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 				return true;
 			}
 		}
+		break;
 	}
-
 	default:
 		return false;
 	}

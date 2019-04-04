@@ -42,7 +42,8 @@ namespace DLPHN
 		: Component("DonkeyKong"), current(DK_AIState::GRAB_BARREL), prev(DK_AIState::IDLE),
 		idleCount(0), maxIdleCount(2), maxBarrelThrows(2), barrelThrows(0),
 		barrelArchetype(nullptr), animation(nullptr), throwTimer(0.0f), throwDuration(0.8f),
-		idleTimer(0), idleDuration(0.4f), barrelCycleThrown(false), throwTimerOffset(0.4f)
+		idleTimer(0), idleDuration(0.4f), barrelCycleThrown(false), throwTimerOffset(0.4f),
+		aiDisabled(false)
 	{
 	}
 
@@ -75,6 +76,8 @@ namespace DLPHN
 
 	void DonkeyKong::Update(float dt)
 	{
+		if (aiDisabled)
+			return;
 		// Update DK's AI
 		switch (current)
 		{
@@ -143,12 +146,13 @@ namespace DLPHN
 				{
 					sprite->SetFrame(4);
 				}
+
+				ThrowBarrel(sprite->GetFrame() == 3 ? Vector2D(0, -20) : Vector2D(80, -40));
 			}
 			prev = current;
 			if (throwTimer > throwDuration)
 			{
 				throwTimer = 0;
-				barrelCycleThrown = true;
 				++barrelThrows;
 				// Decide whether to throw another barrel
 				if (RandomRange(barrelThrows, maxBarrelThrows) != 2)
@@ -165,11 +169,6 @@ namespace DLPHN
 			else
 			{
 				throwTimer += dt;
-				if (!barrelCycleThrown && throwTimer > (throwDuration - throwTimerOffset))
-				{
-					ThrowBarrel(sprite->GetFrame() == 3 ? Vector2D(0, -40) : Vector2D(80, -40));
-					barrelCycleThrown = true;
-				}
 			}
 			break;
 		}

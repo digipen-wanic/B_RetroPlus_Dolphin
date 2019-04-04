@@ -119,4 +119,12 @@ bool PointIsBetweenLines(const Vector2D& point, const Vector2D& firstLine, const
 //   True if intersection, false otherwise.
 bool MovingCircleLineIntersection(const LineSegment& staticLine, const LineSegment& movingPoint, const float radius, Vector2D& intersection, float& t);
 
+// Checks whether a circle and a line are intersecting
+// Params:
+//	line: The line segment we are testing
+//	circlePosition: The position of the circle
+//	radius: The radius of the circle
+//	intersection: Where the projection of the circle's center is on the line
+bool CircleLineIntersection(const LineSegment& staticLine, const Vector2D& position, float radius, Vector2D& intersection);
+
 //------------------------------------------------------------------------------
