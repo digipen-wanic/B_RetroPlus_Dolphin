@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 43
+  numGameObjects : 44
   {
     TileMap
     {
@@ -872,22 +872,7 @@ LevelEditor
         spriteSourceName : SingleBeam
       }
     }
-    BGReference
-    {
-      numComponents : 2
-      Transform
-      {
-        translation : { 0, 0 }
-        rotation : 0
-        scale : { 1024, 976 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 0.0 }
-        spriteSourceName : BGReference
-      }
-    }
+    
     Player
     {
       numComponents : 8
@@ -957,6 +942,40 @@ LevelEditor
       }
       DLPHN::OilBarrel
       { animationSpeed : 0.2 } 
+    }
+	StaticBarrel
+	{
+		numComponents : 2
+		
+		Transform
+		{
+			translation : { -443 , 350 }
+			rotation : 0
+			scale : { 64 , 64 }
+		}
+		
+		Sprite
+		{
+			frameIndex : 0
+			color : { 1, 1, 1, 1 }
+			spriteSourceName : StaticBarrel
+		}
+	}
+	BGReference
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 0, 0 }
+        rotation : 0
+        scale : { 1024, 976 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : BGReference
+      }
     }
   }
 }

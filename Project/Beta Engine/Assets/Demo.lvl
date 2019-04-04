@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 8
+  numGameObjects : 9
   {
     TileMap
     {
@@ -170,6 +170,38 @@ LevelEditor
         extents : { 200, 100 }
       }
     }
+	DonkeyKong
+	{
+		numComponents : 5
+		Transform
+		{
+			translation : { 0, 0 }
+			rotation : 0
+			scale : { 250, 250 }
+		}
+	   
+		Sprite
+		{
+			frameIndex : 0
+			color : { 1, 1, 1, 1 }
+			spriteSourceName : DonkeyKong
+		}
+		
+		Animation
+		{
+		}
+		
+		ColliderRectangle
+		{
+			CollisionGroup : default
+			CollisionFlags : all
+			extents : { 175, 175 }
+		}
+		
+		DLPHN::DonkeyKong
+		{
+		}
+	}
     Flame
     {
       numComponents : 7

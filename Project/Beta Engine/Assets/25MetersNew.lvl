@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 43
+  numGameObjects : 47	
   {
     BG
     {
@@ -210,6 +210,78 @@ LevelEditor
         Line : { { 420, 40 }, { -420, 0 } }
       }
     }
+	StaticBarrel
+	{
+		numComponents : 2
+		
+		Transform
+		{
+			translation : { -430 , 280 }
+			rotation : 0
+			scale : { 64 , 64 }
+		}
+		
+		Sprite
+		{
+			frameIndex : 0
+			color : { 1, 1, 1, 1 }
+			spriteSourceName : StaticBarrel
+		}
+	}
+	StaticBarrel_2
+	{
+		numComponents : 2
+		
+		Transform
+		{
+			translation : { -390 , 280 }
+			rotation : 0
+			scale : { 64 , 64 }
+		}
+		
+		Sprite
+		{
+			frameIndex : 0
+			color : { 1, 1, 1, 1 }
+			spriteSourceName : StaticBarrel
+		}
+	}
+	StaticBarrel_3
+	{
+		numComponents : 2
+		
+		Transform
+		{
+			translation : { -430 , 344 }
+			rotation : 0
+			scale : { 64 , 64 }
+		}
+		
+		Sprite
+		{
+			frameIndex : 0
+			color : { 1, 1, 1, 1 }
+			spriteSourceName : StaticBarrel
+		}
+	}
+	StaticBarrel_4
+	{
+		numComponents : 2
+		
+		Transform
+		{
+			translation : { -390 , 344 }
+			rotation : 0
+			scale : { 64 , 64 }
+		}
+		
+		Sprite
+		{
+			frameIndex : 0
+			color : { 1, 1, 1, 1 }
+			spriteSourceName : StaticBarrel
+		}
+	}
     DonkeyKong
     {
       numComponents : 5

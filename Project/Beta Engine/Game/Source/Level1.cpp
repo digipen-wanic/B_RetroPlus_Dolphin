@@ -72,6 +72,7 @@ void Levels::Level1::Load()
 	soundManager->AddBank("Master Bank.bank");
 
 	SetFileLocation("Assets/25metersnew.lvl");
+	//SetFileLocation("Assets/25metersplus.lvl");
 	//SetFileLocation("Assets/demo.lvl");
 	GlobalTime& globalTime = GlobalTime::GetInstance();
 	globalTime.SetTimeScale(1.0f);
