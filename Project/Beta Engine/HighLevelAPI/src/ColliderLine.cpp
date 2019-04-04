@@ -138,11 +138,13 @@ bool ColliderLine::IsCollidingWith(const Collider & other, Vector2D* intersectio
 				return true;
 			}
 		}
-		break;
+		return false;
 	}
 	default:
 		return false;
 	}
+
+	return false;
 }
 
 void ColliderLine::Serialize(Parser & parser) const

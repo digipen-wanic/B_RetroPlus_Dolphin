@@ -121,7 +121,7 @@ namespace DLPHN
 			std::vector<LineSegment> segArray = other.
 				GetComponent<ColliderLine>()->GetLineSegments();
 			//Check which line is being collided with from
-			//the list of lines in the collider using the intersection point
+			//the list of lines in the collider using the intersection 
 			for (int i = 0; i < segArray.size(); i++)
 			{
 				if (PointIsBetweenLines(intersection,
@@ -131,9 +131,9 @@ namespace DLPHN
 					if (segArray[i].direction.x < 0)
 						barrel->moveDirection = segArray[i].direction * -1;
 					//Swap left/right direction
-					if (barrel->barrelState == barrel->Left)
+					if (!barrel->grounded && barrel->barrelState == barrel->Left)
 						barrel->barrelState = barrel->Right;
-					else if (barrel->barrelState == barrel->Right)
+					else if (!barrel->grounded && barrel->barrelState == barrel->Right)
 						barrel->barrelState = barrel->Left;
 					continue;
 				}
@@ -153,7 +153,8 @@ namespace DLPHN
 				velocity.y = 0;
 
 				// Solve the simple problem first and stop the player from falling vertically
-				float yNudge = displacementVector.y * 2 - point->GetOffset().y;
+				float yNudge = displacementVector.y * 0.90f - point->GetOffset().y;
+				//float yNudge = 10.0f;
 				//float yNudge = -displacementVector.y * 0.5;// -point->GetOffset().y;
 				transform->SetTranslation(Vector2D(currentPosition.x, currentPosition.y + yNudge));
 				physics->SetVelocity(velocity);

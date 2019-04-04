@@ -209,16 +209,18 @@ bool MovingCircleLineIntersection(const LineSegment & staticLine, const LineSegm
 
 bool CircleLineIntersection(const LineSegment& staticLine, const Vector2D& position, float radius, Vector2D& intersection)
 {
+	// Translate the position of the object
+	Vector2D translatedPosition = position - staticLine.start;
 	// Project the circle's center onto the line
-	float t = staticLine.direction.DotProduct(position);
+	float t = staticLine.direction.DotProduct(translatedPosition);
 	// Check if t is between one and zero
-	if (t < 0 || t > 1)
-		return false;
+	/*if (t < 0 || t > 1)
+		return false;*/
 
 	Vector2D projection = staticLine.start + staticLine.direction * t;
 
 	// Then we need to check the distance the projected point and the center of the radius
-	Vector2D projectionToCenter = projection - position;
+	Vector2D projectionToCenter = (projection) - position;
 	if (projectionToCenter.MagnitudeSquared() > radius * radius)
 	{
 		// The distance between the point and the circle is greater than the radius
