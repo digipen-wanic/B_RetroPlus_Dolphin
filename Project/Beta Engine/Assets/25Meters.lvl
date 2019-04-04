@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 42
+  numGameObjects : 43
   {
     TileMap
     {
@@ -792,7 +792,7 @@ LevelEditor
         extents : { 10, 10 }
       }
     }
-	SingleBeam
+    SingleBeam
     {
       numComponents : 2
       Transform
@@ -808,7 +808,7 @@ LevelEditor
         spriteSourceName : SingleBeam
       }
     }
-	SingleBeam
+    SingleBeam
     {
       numComponents : 2
       Transform
@@ -824,7 +824,7 @@ LevelEditor
         spriteSourceName : SingleBeam
       }
     }
-	SingleBeam
+    SingleBeam
     {
       numComponents : 2
       Transform
@@ -840,7 +840,7 @@ LevelEditor
         spriteSourceName : SingleBeam
       }
     }
-	SingleBeam
+    SingleBeam
     {
       numComponents : 2
       Transform
@@ -856,7 +856,7 @@ LevelEditor
         spriteSourceName : SingleBeam
       }
     }
-	SingleBeam
+    SingleBeam
     {
       numComponents : 2
       Transform
@@ -930,6 +930,33 @@ LevelEditor
       { } 
       DLPHN::PlayerController
       { PlayerWalkSpeed : 150 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
+    }
+    OilBarrel
+    {
+      numComponents : 5
+      Transform
+      {
+        translation : { -351.5, -367.5 }
+        rotation : 0
+        scale : { 100, 100 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 40, 50 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : OilBarrel
+      }
+      Animation
+      {
+      }
+      DLPHN::OilBarrel
+      { animationSpeed : 0.2 } 
     }
   }
 }

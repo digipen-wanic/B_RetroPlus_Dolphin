@@ -67,13 +67,15 @@ namespace DLPHN
 	void OilBarrel::Update(float dt)
 	{
 		UNREFERENCED_PARAMETER(dt);
+		static bool startFlame = true;
 
 		// Play animation if flaming
-		if (flaming)
+		if (flaming && startFlame)
 		{
+			startFlame = false;
 			animation->Play(animationSpeed, 1, 2, true);
 		}
-	}
+	} 
 
 	// Collision handler for oil barrel
 	// Params:
