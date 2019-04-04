@@ -38,6 +38,9 @@
     <ClCompile Include="Source\DLPHN_OilBarrel.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DLPHN_PlayerScore.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ColorChange.h">
@@ -74,6 +77,9 @@
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\DLPHN_OilBarrel.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DLPHN_PlayerScore.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>

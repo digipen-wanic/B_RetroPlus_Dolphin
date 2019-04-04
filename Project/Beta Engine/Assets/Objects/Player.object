@@ -53,4 +53,13 @@ Player
 		PlayerJumpSpeed : 500
 		gravity : { 0, -1600 }
 	}
-}
+	
+	DLPHN::PlayerScore
+	{
+		scoreBonus : 5000
+		scoreBonusSubtractAmount : 100
+        barrelJumpScore : 100
+        barrelHammerScore : 300
+        flameHammerScore : 700
+        highScore : 0
+	}
