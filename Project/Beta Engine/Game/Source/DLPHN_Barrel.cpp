@@ -113,7 +113,7 @@ namespace DLPHN
 		
 		if (other.GetName() == "OilBarrel")
 		{
-
+			barrel->SmashBarrel();
 		}
 		
 		if (other.GetComponent<ColliderLine>() != nullptr)

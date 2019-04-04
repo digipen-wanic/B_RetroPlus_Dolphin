@@ -29,6 +29,8 @@
 #include "DLPHN_DonkeyKong.h"
 #include "DLPHN_PlayerController.h"
 #include "DLPHN_PlayerAnimation.h"
+#include "DLPHN_FlameController.h"
+#include "DLPHN_OilBarrel.h"
 #include "DLPHN_Damsel.h"
 #include "DLPHN_Barrel.h"
 
@@ -63,12 +65,18 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	spaceManager->AddSpace(*space);
 
 	Engine::GetInstance().AddModule(spaceManager);
+	{
+		using namespace DLPHN;
+		GameObjectFactory& GOF = GameObjectFactory::GetInstance();
 
-	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::DonkeyKong>();
-	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::PlayerController>();
-	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::PlayerAnimation>();
-	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::Damsel>();
-	GameObjectFactory::GetInstance().RegisterComponent<DLPHN::Barrel>();
+		GOF.RegisterComponent<DonkeyKong>();
+		GOF.RegisterComponent<PlayerController>();
+		GOF.RegisterComponent<PlayerAnimation>();
+		GOF.RegisterComponent<Damsel>();
+		GOF.RegisterComponent<Barrel>();
+		GOF.RegisterComponent<FlameController>();
+		GOF.RegisterComponent<OilBarrel>();
+	}
 
 	// Add Sound Manager
 	Engine::GetInstance().AddModule(new SoundManager());

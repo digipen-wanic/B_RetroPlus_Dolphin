@@ -1,0 +1,8 @@
+BGPlus
+{
+	textureName : BGPlus.png
+	textureRows : 1
+	textureColumns : 1
+	frameCount : 0
+	frameStart : 0
+}

@@ -62,6 +62,9 @@ namespace Levels
 		// Unload textures, sprite sources, meshes
 		void Unload();
 
+		// Current music channel
+		FMOD::Channel* musicChannel;
+		
 	private:
 		//------------------------------------------------------------------------------
 		// Private Functions:
@@ -76,7 +79,6 @@ namespace Levels
 
 		// Sound manager
 		SoundManager* soundManager;
-		FMOD::Channel* musicChannel;
 	};
 }
 

@@ -1,0 +1,8 @@
+HammerPlus
+{
+	textureName : DLPHN_hammerPlus.png
+	textureRows : 1
+	textureColumns : 1
+	frameCount : 0
+	frameStart : 0
+}

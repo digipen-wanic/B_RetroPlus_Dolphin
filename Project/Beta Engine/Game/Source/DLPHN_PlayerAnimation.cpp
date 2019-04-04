@@ -102,13 +102,13 @@ namespace DLPHN
 	void PlayerAnimation::ChooseNextState(float dt)
 	{
 		// jump if in air and not on ladder
-		if (physics->GetVelocity().y != 0.0f && !playerController->getOnLadder())
+		if (!playerController->getOnGround() && !playerController->getOnLadder())
 		{
 			static float timer = 0.0f;
 			timer += dt;
 
 			// Ensure player is actually in the air
-			if (timer > 0.2f)
+			if (timer > 0.1f)
 			{
 				timer = 0.0f;
 				nextState = StateJump;

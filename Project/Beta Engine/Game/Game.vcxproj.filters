@@ -32,6 +32,12 @@
     <ClCompile Include="Source\DLPHN_Barrel.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DLPHN_FlameController.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DLPHN_OilBarrel.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ColorChange.h">
@@ -62,6 +68,12 @@
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\DLPHN_Barrel.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DLPHN_FlameController.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DLPHN_OilBarrel.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>

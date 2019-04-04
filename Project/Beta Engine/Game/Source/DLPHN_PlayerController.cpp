@@ -16,6 +16,9 @@
 #include "stdafx.h"
 #include "DLPHN_PlayerController.h"
 
+#include "Level1.h"
+#include "DLPHN_OilBarrel.h"
+
 #include <ColliderCircle.h>
 #include <ColliderLine.h>
 #include <ColliderPoint.h>
@@ -95,9 +98,9 @@ namespace DLPHN
 		soundManager->AddEffect("DLPHN_sound_win.wav");
 		soundManager->AddEffect("DLPHN_sound_death.wav");
 		soundManager->AddEffect("DLPHN_sound_jump.wav");
-		soundManager->AddEffect("DLPHN_music_hammer.wav");
 		soundManager->AddEffect("DLPHN_sound_hammerBoop.wav");
 		soundManager->AddEffect("DLPHN_sound_movestandin.wav");
+		soundManager->AddEffect("DLPHN_music_hammer.wav");
 	}
 
 	// Fixed update function for this component.
@@ -268,12 +271,25 @@ namespace DLPHN
 		}
 
 		// Hazard objects
-		if (!playerController->playerHasWon && other.GetName() == "Barrel" || other.GetName() == "FireDude")
+		if (!playerController->playerHasWon)
 		{
-			// Set status to dying if not already
-			if (!playerController->deathStatus)
+			if (other.GetName() == "Barrel" || other.GetName() == "Flame" || other.GetName() == "DonkeyKong")
 			{
-				playerController->deathStatus = 1;
+				// Set status to dying if not already
+				if (!playerController->deathStatus)
+				{
+					playerController->deathStatus = 1;
+				}
+			}
+
+			// Oil barrel kills player only if flaming
+			if (other.GetName() == "OilBarrel" && other.GetComponent<OilBarrel>()->isFlaming())
+			{
+				// Set status to dying if not already
+				if (!playerController->deathStatus)
+				{
+					playerController->deathStatus = 1;
+				}
 			}
 		}
 	}
@@ -290,7 +306,7 @@ namespace DLPHN
 		PlayerController* playerController = object.GetSpace()->GetObjectManager().GetObjectByName("Player")->GetComponent<PlayerController>();
 
 		// Hazard objects
-		if (!playerController->getDeathStatus() && other.GetName() == "Barrel" || other.GetName() == "FireDude")
+		if (!playerController->getDeathStatus() && other.GetName() == "Barrel" || other.GetName() == "Flame")
 		{
 			// TODO: Stop time
 			
@@ -461,23 +477,22 @@ namespace DLPHN
 		// Hammer timer
 		static float timer = 0.0f;
 		static float soundTimer = 0.0f;
+
+		// Get music channel from level
+		FMOD::Channel* music = static_cast<Levels::Level1*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+
 		timer += dt;
 		soundTimer += dt;
 
 		// Stop normal music channel once
-		//if (timer == 0.0f + dt)
-		//{
-		//	soundManager->GetMusicChannel()->stop();
-		//}
-
-		// Play hammer music on loop
-		if (soundTimer >= 2.725f || timer == 0.0f + dt)
+		if (soundTimer >= 2.725f || timer == dt)
 		{
 			soundTimer = 0.0f;
 
+			music->stop();
 			soundManager->PlaySound("DLPHN_music_hammer.wav");
 		}
-
+		
 		// Determine what frame is being displayed
 		// (13, 15: side) (14, 16: top)
 		switch (sprite->GetFrame())
@@ -508,8 +523,7 @@ namespace DLPHN
 			playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
 
 			// Play normal music
-			soundManager->GetMusicChannel()->stop();
-			soundManager->PlaySound("DLPHN_music_theme.wav");
+			music = soundManager->PlaySound("DLPHN_music_theme.wav");
 
 			// Reset variables
 			timer = 0.0f;
@@ -524,8 +538,11 @@ namespace DLPHN
 		static float timer = 0.0f;
 		timer += dt;
 
+		// Stop music
+		static_cast<Levels::Level1*>(GetOwner()->GetSpace()->GetLevel())->musicChannel->stop();
+
 		// Play death sound once
-		if (timer == 0.0f + dt)
+		if (timer == dt)
 		{
 			soundManager->PlaySound("DLPHN_sound_death.wav");
 		}

@@ -1,0 +1,34 @@
+OilBarrel
+{
+	numComponents : 5
+	
+	Transform
+	{
+		translation : { 150, -1150 }
+		rotation : 0
+		scale : { 120, 120 }
+	}
+	
+	ColliderRectangle
+	{
+		CollisionGroup : default
+		CollisionFlags : all
+		extents : { 40, 50 }
+	}
+	
+	Sprite
+	{
+		frameIndex : 0
+		color : { 1, 1, 1, 1 }
+		spriteSourceName : OilBarrel
+	}
+	
+	Animation
+	{
+	}
+	
+	DLPHN::OilBarrel
+	{
+		animationSpeed : 0.2
+	}
+}

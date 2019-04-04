@@ -1,0 +1,8 @@
+DonkeyKongPlus
+{
+	textureName : DLPHN_dkPlus.png
+	textureRows : 3
+	textureColumns : 3
+	frameCount : 9
+	frameStart : 0
+}

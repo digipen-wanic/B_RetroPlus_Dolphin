@@ -1,0 +1,8 @@
+OilBarrel
+{
+	textureName : DLPHN_oilBarrel.png
+	textureRows : 2
+	textureColumns : 2
+	frameCount : 3
+	frameStart : 0
+}
