@@ -91,7 +91,7 @@ namespace DLPHN
 	{
 		// Slightly "bob" up and down
 		static float timer = 0.0f;
-		static bool dir = true;
+		static bool dir = 1;
 		timer += dt;
 		if (timer > 0.75f)
 		{
@@ -117,10 +117,22 @@ namespace DLPHN
 			directionTimer = 0.0f;
 
 			// 50% chance
-			if (RandomRange(0, 1))
+			if (!RandomRange(0, 3))
 			{
 				physics->SetVelocity(-physics->GetVelocity());
 			}
+		}
+
+		// Switch direction if on edge
+		if (transform->GetTranslation().x < -350.0f)
+		{
+			transform->SetTranslation(Vector2D(transform->GetTranslation().x + 1.0f, transform->GetTranslation().y));
+			physics->SetVelocity(-physics->GetVelocity());
+		}
+		if (transform->GetTranslation().x > 350.0f)
+		{
+			transform->SetTranslation(Vector2D(transform->GetTranslation().x - 1.0f, transform->GetTranslation().y));
+			physics->SetVelocity(-physics->GetVelocity());
 		}
 
 		// Ladder movement

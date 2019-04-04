@@ -23,7 +23,6 @@
 //------------------------------------------------------------------------------
 
 class Transform;
-class Physics;
 class Animation;
 
 //------------------------------------------------------------------------------
@@ -96,6 +95,7 @@ namespace DLPHN
 
 		// Components
 		Animation* animation;
+		Transform* transform;
 
 		// Flame
 		GameObject* flameArchetype;

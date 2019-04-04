@@ -240,7 +240,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 17, 35 }
+        extents : { 17, 20 }
       }
     }
     Hammer
@@ -262,7 +262,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 17, 35 }
+        extents : { 17, 20 }
       }
     }
     Ladder
@@ -929,7 +929,7 @@ LevelEditor
       DLPHN::PlayerAnimation
       { } 
       DLPHN::PlayerController
-      { PlayerWalkSpeed : 150 PlayerJumpSpeed : 400 gravity : { 0, -800 } } 
+      { PlayerWalkSpeed : 150 PlayerJumpSpeed : 500 gravity : { 0, -1600 } } 
     }
     OilBarrel
     {

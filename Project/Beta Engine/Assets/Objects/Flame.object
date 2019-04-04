@@ -6,14 +6,14 @@ Flame
 	{
 		translation : { 150, -1150 }
 		rotation : 0
-		scale : { 100, 100 }
+		scale : { 150, 150 }
 	}
 	
 	ColliderCircle
 	{
 		CollisionGroup : default
 		CollisionFlags : all
-		radius : 30
+		radius : 40
 		offset : { 0, 0 }
 	}
 	

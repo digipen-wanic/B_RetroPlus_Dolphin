@@ -21,6 +21,7 @@
 class Physics;
 class Animation;
 class Transform;
+class Sprite;
 
 //============================================================
 
@@ -102,6 +103,7 @@ namespace DLPHN
 		Physics* physics;
 		Animation* animation;
 		Transform* transform;
+		Sprite* sprite;
 
 		// Animation
 		unsigned rollLength;
@@ -109,6 +111,8 @@ namespace DLPHN
 
 		// Misc.
 		float speed;
+		bool isDestroyed;
+
 		Vector2D moveDirection;
 		bool grounded = false;
 		bool prevGrounded = true;

@@ -14,12 +14,14 @@
 #include <Animation.h>
 #include <ColliderCircle.h>
 #include <ColliderLine.h>
+#include <GlobalTime.h>
 #include <Intersection2D.h>
 #include <GameObject.h>
 #include "DLPHN_PlayerController.h"
 #include <Physics.h>
 #include <Parser.h>
 #include <Space.h>
+#include <Sprite.h>
 #include <Transform.h>
 
 //============================================================
@@ -33,9 +35,10 @@ namespace DLPHN
 	// Default Constructor
 	Barrel::Barrel()
 		: Component("Barrel"),
-		  physics(nullptr), animation(nullptr), transform(nullptr),
+		  physics(nullptr), animation(nullptr), transform(nullptr), sprite(nullptr),
 		  rollLength(3),
 		  speed(170.0f),
+		  isDestroyed(false),
 		  barrelState(Right)
 	{
 	}
@@ -59,6 +62,8 @@ namespace DLPHN
 		physics = GetOwner()->GetComponent<Physics>();
 		animation = GetOwner()->GetComponent<Animation>();
 		transform = GetOwner()->GetComponent<Transform>();
+		sprite = GetOwner()->GetComponent<Sprite>();
+
 		originalScale = transform->GetScale();
 
 		//Set gravity
@@ -71,14 +76,23 @@ namespace DLPHN
 	// Updates the component
 	void Barrel::Update(float dt)
 	{
-		Roll();
-		Animate();
-
-		notTouchingTimer += dt;
-		if (notTouchingTimer > notTouchingDelay)
+		// Check for destruction sequence
+		//if (isDestroyed)
+		//{
+		//	//GlobalTime::GetInstance().SetTimeScale(0.0f);
+		//	SmashBarrel();
+		//}
+		//else
 		{
-			grounded = false;
-			//std::cout << "Update " << grounded << std::endl;
+			Roll();
+			Animate();
+
+			notTouchingTimer += dt;
+			if (notTouchingTimer > notTouchingDelay)
+			{
+				grounded = false;
+				//std::cout << "Update " << grounded << std::endl;
+			}
 		}
 	}
 
@@ -106,14 +120,10 @@ namespace DLPHN
 	{
 		Barrel* barrel = object.GetComponent<Barrel>();
 
+		// Play destruction animation
 		if (other.GetName() == "PlayerHammer")
 		{
-			barrel->SmashBarrel();
-		}
-		
-		if (other.GetName() == "OilBarrel")
-		{
-			barrel->SmashBarrel();
+			barrel->isDestroyed = true;
 		}
 		
 		if (other.GetComponent<ColliderLine>() != nullptr)
@@ -218,6 +228,10 @@ namespace DLPHN
 	{
 		// Destroy this object
 		GetOwner()->Destroy();
+
+		// Play destroy animation
+		
+		//sprite->SetColor();
 	}
 }
 

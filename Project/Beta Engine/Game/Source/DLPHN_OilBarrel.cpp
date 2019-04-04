@@ -21,6 +21,7 @@
 #include <GameObjectFactory.h>
 #include <parser.h>
 #include <Space.h>
+#include <Transform.h>
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -55,6 +56,7 @@ namespace DLPHN
 	{
 		// Fetch components
 		animation = GetOwner()->GetComponent<Animation>();
+		transform = GetOwner()->GetComponent<Transform>();
 		flameArchetype = GameObjectFactory::GetInstance().CreateObject("Flame");
 
 		// Set collision handler
@@ -91,6 +93,8 @@ namespace DLPHN
 		// Spawn flame and ignite barrel if not already on fire
 		if (other.GetName() == "Barrel")
 		{
+			// Destroy the barrel
+			other.Destroy();
 			oilBarrel->SpawnFlame();
 			oilBarrel->flaming = true;
 		}
@@ -121,8 +125,18 @@ namespace DLPHN
 	// Spawns a flame
 	void OilBarrel::SpawnFlame()
 	{
-		GameObject* flame = new GameObject(*flameArchetype);
-		GetOwner()->GetSpace()->GetObjectManager().AddObject(*flame);
+		// Only spawn up to two flames at a time
+		if (GetOwner()->GetSpace()->GetObjectManager().GetObjectCount("Flame") < 2)
+		{
+			GameObject* flame = new GameObject(*flameArchetype);
+
+			// Set position
+			Vector2D newPos(transform->GetTranslation().x + 10.0f, transform->GetTranslation().y);
+			flame->GetComponent<Transform>()->SetTranslation(newPos);
+
+			// Add to object manager
+			GetOwner()->GetSpace()->GetObjectManager().AddObject(*flame);
+		}
 	}
 }
 

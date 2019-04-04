@@ -50,7 +50,7 @@ Player
 	DLPHN::PlayerController
 	{
 		PlayerWalkSpeed : 150
-		PlayerJumpSpeed : 400
-		gravity : { 0, -800 }
+		PlayerJumpSpeed : 500
+		gravity : { 0, -1600 }
 	}
 }

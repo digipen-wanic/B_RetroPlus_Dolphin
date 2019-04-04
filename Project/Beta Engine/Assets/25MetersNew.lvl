@@ -2,7 +2,7 @@ LevelEditor
 {
   numGameObjects : 43
   {
-    BGPlus
+    BG
     {
       numComponents : 2
       Transform
@@ -15,7 +15,7 @@ LevelEditor
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : BGPlus
+        spriteSourceName : BG
       }
     }
 	TileMap
@@ -223,7 +223,7 @@ LevelEditor
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : DonkeyKongPlus
+        spriteSourceName : DonkeyKong
       }
       Animation
       {
@@ -250,7 +250,7 @@ LevelEditor
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : HammerPlus
+        spriteSourceName : Hammer
       }
       ColliderRectangle
       {
@@ -272,7 +272,7 @@ LevelEditor
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : HammerPlus
+        spriteSourceName : Hammer
       }
       ColliderRectangle
       {
@@ -624,7 +624,7 @@ LevelEditor
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : DamselPlus
+        spriteSourceName : Damsel
       }
       Animation
       {
@@ -950,7 +950,7 @@ LevelEditor
       {
         frameIndex : 0
         color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : OilBarrelPlus
+        spriteSourceName : OilBarrel
       }
       Animation
       {
