@@ -214,8 +214,6 @@ bool CircleLineIntersection(const LineSegment& staticLine, const Vector2D& posit
 	// Project the circle's center onto the line
 	float t = staticLine.direction.DotProduct(translatedPosition);
 	// Check if t is between one and zero
-	/*if (t < 0 || t > 1)
-		return false;*/
 
 	Vector2D projection = staticLine.start + staticLine.direction * t;
 
@@ -226,6 +224,9 @@ bool CircleLineIntersection(const LineSegment& staticLine, const Vector2D& posit
 		// The distance between the point and the circle is greater than the radius
 		return false;
 	}
+
+	if (!PointIsBetweenLines(projection, staticLine.start, staticLine.end, staticLine.direction))
+		return false;
 
 	// We know they are colliding
 	intersection = projection;

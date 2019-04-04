@@ -147,7 +147,7 @@ namespace DLPHN
 					sprite->SetFrame(4);
 				}
 
-				ThrowBarrel(sprite->GetFrame() == 3 ? Vector2D(0, -20) : Vector2D(80, -40));
+				ThrowBarrel(sprite->GetFrame() == 3 ? Vector2D(0, -20) : Vector2D(130, -40));
 			}
 			prev = current;
 			if (throwTimer > throwDuration)
