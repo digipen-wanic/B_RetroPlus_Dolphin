@@ -63,7 +63,7 @@ namespace Levels
 		void Unload();
 
 		// Current music channel
-		FMOD::Channel* musicChannel;
+		static FMOD::Channel* musicChannelPlus;
 		
 	private:
 		//------------------------------------------------------------------------------

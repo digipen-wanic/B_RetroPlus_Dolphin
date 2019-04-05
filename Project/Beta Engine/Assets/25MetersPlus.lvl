@@ -364,7 +364,7 @@ PlusDK
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 70 }
+        extents : { 10, 95 }
       }
     }
     Ladder
@@ -408,7 +408,7 @@ PlusDK
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 70 }
+        extents : { 10, 95 }
       }
     }
     Ladder

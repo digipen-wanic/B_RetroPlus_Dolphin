@@ -135,7 +135,7 @@ namespace DLPHN
 			soundManager->AddEffect("DLPHN_sound_winPlus.wav");
 			soundManager->AddEffect("DLPHN_sound_deathPlus.wav");
 			soundManager->AddEffect("DLPHN_sound_jumpPlus.wav");
-			soundManager->AddEffect("DLPHN_sound_hammerBoopPlus.wav");
+			soundManager->AddEffect("DLPHN_sound_hammerboopPlus.wav");
 			soundManager->AddEffect("DLPHN_sound_move1Plus.wav");
 			soundManager->AddEffect("DLPHN_sound_move2Plus.wav");
 			soundManager->AddEffect("DLPHN_sound_move3Plus.wav");
@@ -353,7 +353,8 @@ namespace DLPHN
 		}
 
 		// Hazard objects
-		if (playerController->getHammerStatus() && !playerController->getDeathStatus() && (other.GetName() == "Barrel" || other.GetName() == "Flame"))
+		if (playerController->getHammerStatus() && !playerController->getDeathStatus() &&
+			(other.GetName() == "Barrel" || other.GetName() == "Flame"|| other.GetName() == "BarrelPlus" || other.GetName() == "FlamePlus"))
 		{
 			// TODO: Stop time
 			
@@ -367,7 +368,7 @@ namespace DLPHN
 			}
 			else
 			{
-				playerController->soundManager->PlaySound("DLPHN_sound_hammerBoopPlus.wav");
+				playerController->soundManager->PlaySound("DLPHN_sound_hammerboopPlus.wav");
 			}
 		}
 	}
@@ -627,7 +628,15 @@ namespace DLPHN
 		static float soundTimer = 0.0f;
 
 		// Get music channel from level
-		static FMOD::Channel* music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+		static FMOD::Channel* music;
+		if (isAlphaLevel)
+		{
+			music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+		}
+		else
+		{
+			music = static_cast<Levels::PlusDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannelPlus;
+		}
 
 		timer += dt;
 		soundTimer += dt;
@@ -651,27 +660,53 @@ namespace DLPHN
 		
 		// Determine what frame is being displayed
 		// (13, 15: side) (14, 16: top)
-		switch (sprite->GetFrame())
+		if (isAlphaLevel)
 		{
-		case 13:
-		case 15:
-			// Side
-			// Determine what direction player is facing
-			if (transform->GetScale().x < 0)
+			switch (sprite->GetFrame())
 			{
-				playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(-circleOffset, 0.0f));
-			}
-			else
-			{
-				playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(circleOffset, 0.0f));
-			}
-			break;
+			case 13:
+			case 15:
+				// Side
+				// Determine what direction player is facing
+				if (transform->GetScale().x < 0)
+				{
+					playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(-circleOffset, 0.0f));
+				}
+				else
+				{
+					playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(circleOffset, 0.0f));
+				}
+				break;
 
-		case 14:
-		case 16:
-			// Top
-			playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, circleOffset));
-			break;
+			case 14:
+			case 16:
+				// Top
+				playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, circleOffset));
+				break;
+			}
+		}
+		else
+		{
+			switch (sprite->GetFrame())
+			{
+				case 5:
+					// Side
+					// Determine what direction player is facing
+					if (transform->GetScale().x < 0)
+					{
+						playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(-circleOffset, 0.0f));
+					}
+					else
+					{
+						playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(circleOffset, 0.0f));
+					}
+					break;
+
+				case 3:
+					// Top
+					playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, circleOffset));
+					break;
+			}
 		}
 
 		// Only run hammer for hammerCooldown seconds
@@ -705,7 +740,16 @@ namespace DLPHN
 		static float timer = 0.0f;
 		timer += dt;
 
-		static FMOD::Channel* music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+		// Get music channel from level
+		static FMOD::Channel* music;
+		if (isAlphaLevel)
+		{
+			music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+		}
+		else
+		{
+			music = static_cast<Levels::PlusDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannelPlus;
+		}
 
 		if (timer == dt)
 		{
@@ -776,7 +820,16 @@ namespace DLPHN
 		// Stop player from moving
 		physics->SetVelocity(Vector2D(0.0f, 0.0f));
 
-		static FMOD::Channel* music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+		// Get music channel from level
+		static FMOD::Channel* music;
+		if (isAlphaLevel)
+		{
+			music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+		}
+		else
+		{
+			music = static_cast<Levels::PlusDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannelPlus;
+		}
 
 		if (timer == dt)
 		{

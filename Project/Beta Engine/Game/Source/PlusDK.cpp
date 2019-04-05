@@ -40,12 +40,13 @@
 #include <Parser.h>
 #include <GlobalTime.h>
 
+FMOD::Channel* Levels::PlusDK::musicChannelPlus = nullptr;
+
 Levels::PlusDK::PlusDK()
 	: Level("PlusDK")
 {
 	// Sound manager
 	soundManager = nullptr;
-	musicChannel = nullptr;
 }
 
 void Levels::PlusDK::Load()
@@ -93,7 +94,7 @@ void Levels::PlusDK::Initialize()
 	soundManager->AddEffect("teleport.wav");
 
 	std::cout << GetName() << "::Initialize" << std::endl;
-	musicChannel = soundManager->PlaySound("DLPHN_music_themePlus.wav");
+	musicChannelPlus = soundManager->PlaySound("DLPHN_music_themePlus.wav");
 	LoadLevel();
 }
 
@@ -107,7 +108,7 @@ void Levels::PlusDK::Shutdown()
 	std::cout << GetName() << "::Shutdown" << std::endl;
 
 	//SaveLevel();
-	musicChannel->stop();
+	musicChannelPlus->stop();
 	soundManager->Shutdown();
 }
 
