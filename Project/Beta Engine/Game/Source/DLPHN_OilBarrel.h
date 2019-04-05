@@ -104,6 +104,7 @@ namespace DLPHN
 		float animationTimer;
 		float animationSpeed;
 
+		bool startFlame;
 		bool flaming;
 	};
 }

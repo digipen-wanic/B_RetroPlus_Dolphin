@@ -167,6 +167,12 @@ namespace DLPHN
 			deathStatus = 1;
 		}
 
+		// If at any point the player falls off the screen, the player dies
+		if (transform->GetTranslation().y < -1000 && !deathStatus)
+		{
+			deathStatus = 1;
+		}
+
 		// Death sequence
 		if (deathStatus)
 		{

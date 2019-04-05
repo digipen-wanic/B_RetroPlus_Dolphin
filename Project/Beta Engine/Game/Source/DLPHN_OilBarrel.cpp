@@ -41,7 +41,7 @@ namespace DLPHN
 		animation(nullptr),
 		flameArchetype(nullptr),
 		animationTimer(0.0f), animationSpeed(0.2f),
-		flaming(false)
+		startFlame(true), flaming(false)
 	{
 	}
 
@@ -80,7 +80,6 @@ namespace DLPHN
 	void OilBarrel::Update(float dt)
 	{
 		UNREFERENCED_PARAMETER(dt);
-		static bool startFlame = true;
 
 		// Play animation if flaming
 		if (flaming && startFlame)
