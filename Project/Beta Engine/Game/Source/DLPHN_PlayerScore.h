@@ -29,6 +29,8 @@ class SpriteText;
 
 namespace DLPHN
 {
+	class PlayerController;
+
 	class PlayerScore : public Component
 	{
 	public:
@@ -43,6 +45,9 @@ namespace DLPHN
 		// Returns:
 		//   A pointer to a dynamically allocated clone of the component.
 		Component* Clone() const override;
+
+		// Initialize this component (happens at object creation).
+		void Initialize() override;
 
 		// Fixed update function for this component.
 		// Params:
@@ -63,41 +68,44 @@ namespace DLPHN
 		unsigned getCurrentScore() const;
 
 		// Gets the current score bonus
-		unsigned getScoreBonus() const;
+		unsigned getBonusScore() const;
 
 		// Adds to the current score
 		void addCurrentScore(unsigned points);
 
-		// Sets display spritetext for current score
-		void setCurrentScoreDisplay(SpriteText* display);
+		// Adds when jumping over barrel
+		void addScoreBarrelJump();
 
-		// Sets display spritetext for score bonus
-		void setScoreBonusDisplay(SpriteText* display);
+		// Adds when hammering barrel
+		void addScoreBarrelHammer();
 
-		// Sets display spritetext for high score
-		void setHighScoreDisplay(SpriteText* display);
+		// Adds when hammering flame
+		void addScoreFlameHammer();
 
 	private:
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
+		// Components
+		PlayerController* playerController;
+
 		// Current scoring
 		unsigned currentScore;
-		unsigned scoreBonus;
+		unsigned bonusScore;
 
 		// High score
-		unsigned highScore;
+		static unsigned highScore;
 
 		// Score modifiers
-		unsigned scoreBonusSubtractAmount;
+		unsigned bonusScoreSubtractAmount;
 		unsigned barrelJumpScore;
 		unsigned barrelHammerScore;
 		unsigned flameHammerScore;
 
 		// Score display
 		SpriteText* currentScoreDisplay;
-		SpriteText* scoreBonusDisplay;
+		SpriteText* bonusScoreDisplay;
 		SpriteText* highScoreDisplay;
 	};
 }

@@ -1,0 +1,8 @@
+FlamePlus
+{
+	textureName : DLPHN_fyurPlus.png
+	textureRows : 1
+	textureColumns : 2
+	frameCount : 2
+	frameStart : 0
+}

@@ -26,9 +26,9 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-typedef class Animation Animation;
-typedef class Physics Physics;
-typedef class Transform Transform;
+class Animation;
+class Physics;
+class Transform;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -36,7 +36,6 @@ typedef class Transform Transform;
 
 namespace DLPHN
 {
-
 	class PlayerAnimation : public Component
 	{
 	public:

@@ -17,6 +17,8 @@
 #include "DLPHN_PlayerAnimation.h"
 
 #include <Space.h>
+#include <Sprite.h>
+#include <SpriteSource.h>
 #include <Transform.h>
 #include <Physics.h>
 #include <Animation.h>
@@ -60,6 +62,21 @@ namespace DLPHN
 		physics = GetOwner()->GetComponent<Physics>();
 		transform = GetOwner()->GetComponent<Transform>();
 		playerController = GetOwner()->GetComponent<DLPHN::PlayerController>();
+
+		// Correct values if using plus animation (if needed)
+		if (GetOwner()->GetComponent<Sprite>()->GetSpriteSource()->GetName() == "PlayerPlus")
+		{
+			walkEnd = 1;
+			jumpStart = 2;
+			landStart = 2;
+			climbStart = 6;
+			climbEnd = 7;
+			hammerStart = 3;
+			hammerEnd = 5;
+			dyingStart = 8;
+			dyingEnd = 8;
+			deadStart = 8;
+		}
 
 		// initialize with starting values
 		animation->Play(1, idleStart, 1, false);

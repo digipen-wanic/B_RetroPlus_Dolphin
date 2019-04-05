@@ -35,6 +35,14 @@ class SoundManager;
 
 namespace DLPHN
 {
+	class PlayerScore;
+
+	namespace
+	{
+		// Whether the current level is the alpha version
+		bool isAlphaLevel = true;
+	}
+
 	//------------------------------------------------------------------------------
 	// Prototypes:
 	//------------------------------------------------------------------------------
@@ -60,6 +68,13 @@ namespace DLPHN
 	//   other  = The object the Player is colliding with.
 	//   intersection = The intersection between both objects, but only works with line collisions
 	void HammerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
+
+	// Collision handler to detect jumping over barrels
+	// Params:
+	//   object = The player.
+	//   other  = The object the player is colliding with.
+	//   intersection = The intersection between both objects, but only works with line collisions
+	void JumpDetectionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 	class PlayerController : public Component
 	{
@@ -101,9 +116,16 @@ namespace DLPHN
 		// Collision handler for hammer.
 		// Params:
 		//   object = The hammer.
-		//   other  = The object the Player is colliding with.
+		//   other  = The object the hammer is colliding with.
 		//   intersection = The intersection between both objects, but only works with line collisions
 		friend void HammerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
+
+		// Collision handler to detect jumping over barrels
+		// Params:
+		//   object = The player.
+		//   other  = The object the player is colliding with.
+		//   intersection = The intersection between both objects, but only works with line collisions
+		friend void JumpDetectionHandler(GameObject& object, GameObject& other, const Vector2D& intersection);
 
 		// Saves object data to a file.
 		virtual void Serialize(Parser& parser) const override;
@@ -125,6 +147,9 @@ namespace DLPHN
 		// (0 = Alive, 1 = Dying, 2 = Dead)
 		unsigned getDeathStatus() const;
 
+		// Returns player's win status
+		unsigned getWinStatus() const;
+
 	private:
 		//------------------------------------------------------------------------------
 		// Private Functions:
@@ -142,6 +167,9 @@ namespace DLPHN
 		// Death animation, level reset, etc.
 		void DeathSequence(const float dt);
 
+		// Handles once player wins level
+		void WinSequence(const float dt);
+
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
@@ -156,15 +184,19 @@ namespace DLPHN
 		Transform* transform;
 		Physics* physics;
 		Sprite* sprite;
-		float circleOffset;
 		GameObject* playerHammer;
 		SoundManager* soundManager;
+		PlayerScore* playerScore;
+
+		// Misc.
+		float circleOffset;
 
 		// Walking
 		float walkSoundTimer;
 
 		// Jumping
 		bool onGround;
+		float jumpTimer;
 
 		// Climbing
 		bool touchingLadder;
@@ -176,11 +208,12 @@ namespace DLPHN
 		float hammerCooldown;
 
 		// Death
+		static unsigned lives;
 		unsigned deathStatus;
 		float deathDuration;
 
 		// Win
-		bool playerHasWon;
+		bool winStatus;
 	};
 }
 

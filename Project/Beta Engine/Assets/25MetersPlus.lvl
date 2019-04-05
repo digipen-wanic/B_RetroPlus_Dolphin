@@ -1,6 +1,6 @@
-LevelEditor
+PlusDK
 {
-  numGameObjects : 43
+  numGameObjects : 55
   {
     BGPlus
     {
@@ -210,6 +210,70 @@ LevelEditor
         Line : { { 420, 40 }, { -420, 0 } }
       }
     }
+	StaticBarrel
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { -420, 280 }
+        rotation : 0
+        scale : { 64, 64 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : StaticBarrelPlus
+      }
+    }
+    StaticBarrel_2
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { -370, 280 }
+        rotation : 0
+        scale : { 64, 64 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : StaticBarrelPlus
+      }
+    }
+    StaticBarrel_3
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { -420, 344 }
+        rotation : 0
+        scale : { 64, 64 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : StaticBarrelPlus
+      }
+    }
+    StaticBarrel_4
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { -370, 344 }
+        rotation : 0
+        scale : { 64, 64 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : StaticBarrelPlus
+      }
+    }
     DonkeyKong
     {
       numComponents : 5
@@ -256,7 +320,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 17, 20 }
+        extents : { 25, 25 }
       }
     }
     Hammer
@@ -278,7 +342,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 17, 20 }
+        extents : { 25, 25 }
       }
     }
     Ladder
@@ -300,7 +364,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 60 }
+        extents : { 10, 70 }
       }
     }
     Ladder
@@ -344,7 +408,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 60 }
+        extents : { 10, 70 }
       }
     }
     Ladder
@@ -366,7 +430,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 60 }
+        extents : { 10, 90 }
       }
     }
     Ladder
@@ -388,7 +452,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 60 }
+        extents : { 10, 83 }
       }
     }
     Ladder
@@ -410,7 +474,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 60 }
+        extents : { 10, 70 }
       }
     }
     Ladder
@@ -476,7 +540,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 60 }
+        extents : { 10, 85 }
       }
     }
     Ladder
@@ -498,7 +562,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 60 }
+        extents : { 10, 80 }
       }
     }
     Ladder
@@ -520,7 +584,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 60 }
+        extents : { 10, 73 }
       }
     }
     Ladder
@@ -586,7 +650,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 10 }
+        extents : { 10, 80 }
       }
     }
     Ladder
@@ -608,7 +672,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 10, 10 }
+        extents : { 10, 70 }
       }
     }
     Damsel
@@ -888,50 +952,7 @@ LevelEditor
         spriteSourceName : EmptySpritesource
       }
     }
-    Player
-    {
-      numComponents : 8
-      Transform
-      {
-        translation : { -288.5, -366.5 }
-        rotation : 0
-        scale : { 190, 190 }
-      }
-      Sprite
-      {
-        frameIndex : 0
-        color : { 1 , 1 , 1 , 1 }
-        spriteSourceName : Player
-      }
-      Animation
-      {
-      }
-      ColliderPoint
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        offset : { 0, -35 }
-      }
-      ColliderRectangle
-      {
-        CollisionGroup : default
-        CollisionFlags : all
-        extents : { 35, 35 }
-      }
-      Physics
-      {
-        acceleration : { 0, 0 }
-        velocity : { 0, 0 }
-        angularVelocity : 0
-        mass : 1
-        gravity : { 0, 0 }
-      }
-      DLPHN::PlayerAnimation
-      { } 
-      DLPHN::PlayerController
-      { PlayerWalkSpeed : 150 PlayerJumpSpeed : 500 gravity : { 0, -1600 } } 
-    }
-	OilBarrel
+    OilBarrelPlus
     {
       numComponents : 5
       Transform
@@ -958,5 +979,224 @@ LevelEditor
       DLPHN::OilBarrel
       { animationSpeed : 0.2 } 
     }
+    CurrentScoreText
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { -370.5, 400.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteText
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : SpriteText
+        text : cs
+        horizontalAlignment : 0
+        verticalAlignment : 0
+      }
+    }
+    HighScoreText
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 15, 400.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteText
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : SpriteText
+        text : hs
+        horizontalAlignment : 0
+        verticalAlignment : 0
+      }
+    }
+    DescriptionText
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 275.5, 360.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteText
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : SpriteText
+        text : M BONUS L
+        horizontalAlignment : 0
+        verticalAlignment : 0
+      }
+    }
+    LivesText
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 200.5, 320.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteText
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : SpriteText
+        text : lives
+        horizontalAlignment : 0
+        verticalAlignment : 0
+      }
+    }
+    BonusText
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 300.5, 320.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteText
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : SpriteText
+        text : 00000
+        horizontalAlignment : 0
+        verticalAlignment : 0
+      }
+    }
+    LevelText
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 439.5, 320.5 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteText
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : SpriteText
+        text : 1
+        horizontalAlignment : 0
+        verticalAlignment : 0
+      }
+    }
+    GameOverBox
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 0.5, -49.5 }
+        rotation : 0
+        scale : { 480, 80 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 0 }
+        spriteSourceName : GameOver
+      }
+    }
+    WinZone
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { 0, 400 }
+        rotation : 0
+        scale : { 1, 1 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 100, 50 }
+      }
+    }
+	PlayerPlus
+	{
+	  numComponents : 10
+	  
+	  Transform
+	  {
+	  	translation : { -288.5, -366.5 }
+	  	rotation : 0
+	  	scale : { 190, 190 }
+	  }
+	  
+	  ColliderRectangle
+	  {
+	  	CollisionGroup : default
+	  	CollisionFlags : all
+	  	extents : { 8, 10 }
+	  }
+	  
+	  ColliderPoint
+	  {
+	  	CollisionGroup : default
+	  	CollisionFlags : all
+	  	offset : { 0, -35 }
+	  }
+	  
+	  ColliderCircle
+	  {
+	  	CollisionGroup : default
+	  	CollisionFlags : all
+	  	radius : 30
+	  	offset : { 0, -50 }
+	  }
+	  
+	  Sprite
+	  {
+	  	frameIndex : 0
+	  	color : { 1, 1, 1, 1 }
+	  	spriteSourceName : PlayerPlus
+	  }
+	  
+	  Animation
+	  {
+	  }
+	  
+	  DLPHN::PlayerAnimation
+	  {
+	  }
+	  
+	  Physics
+	  {
+	  	acceleration : { 0, 0 }
+	  	velocity : { 0, 0 }
+	  	angularVelocity : 0
+	  	mass : 1
+	  	gravity : { 0, 0 }
+	  }
+	  
+	  DLPHN::PlayerController
+	  {
+	  	PlayerWalkSpeed : 150
+	  	PlayerJumpSpeed : 500
+	  	gravity : { 0, -1600 }
+	  }
+	  
+	  DLPHN::PlayerScore
+	  {
+	  	bonusScore : 5000
+	  	bonusScoreSubtractAmount : 100
+	  	barrelJumpScore : 100
+	  	barrelHammerScore : 300
+	  	flameHammerScore : 700
+	  }
+	}
   }
 }

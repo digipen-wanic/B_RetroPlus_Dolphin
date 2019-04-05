@@ -58,7 +58,7 @@ public:
 
 	void SetFileLocation(std::string fileLocation);
 
-	std::string GetFileLocation();
+	std::string GetFileLocation() const;
 
 private:
 

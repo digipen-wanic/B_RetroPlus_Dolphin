@@ -117,8 +117,8 @@ namespace DLPHN
 		bool grounded = false;
 		bool prevGrounded = true;
 		MoveState barrelState = Right;
-		float notTouchingDelay = 0.1f;
-		float notTouchingTimer = 0;
+		float notTouchingDelay;
+		float notTouchingTimer;
 	};
 }
 

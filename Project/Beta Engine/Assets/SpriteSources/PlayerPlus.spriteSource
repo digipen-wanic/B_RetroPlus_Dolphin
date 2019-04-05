@@ -1,0 +1,8 @@
+PlayerPlus
+{
+	textureName : DLPHN_playerPlus.png
+	textureRows : 3
+	textureColumns : 3
+	frameCount : 0
+	frameStart : 0
+}

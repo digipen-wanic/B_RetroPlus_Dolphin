@@ -12,6 +12,6 @@ WinZone
   {
     CollisionGroup : default
     CollisionFlags : all
-    extents : { 200, 100 }
+    extents : { 100, 50 }
   }
 }

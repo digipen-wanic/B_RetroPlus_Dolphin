@@ -1,6 +1,6 @@
 Player
 {
-	numComponents : 8
+	numComponents : 10
 	
 	Transform
 	{
@@ -13,7 +13,7 @@ Player
 	{
 		CollisionGroup : default
 		CollisionFlags : all
-		extents : { 30, 40 }
+		extents : { 8, 10 }
 	}
 	
 	ColliderPoint
@@ -21,6 +21,14 @@ Player
 		CollisionGroup : default
         CollisionFlags : all
         offset : { 0, -35 }
+	}
+	
+	ColliderCircle
+	{
+		CollisionGroup : default
+		CollisionFlags : all
+		radius : 30
+		offset : { 0, -50 }
 	}
 	
 	Sprite
@@ -56,10 +64,10 @@ Player
 	
 	DLPHN::PlayerScore
 	{
-		scoreBonus : 5000
-		scoreBonusSubtractAmount : 100
+		bonusScore : 5000
+		bonusScoreSubtractAmount : 100
         barrelJumpScore : 100
         barrelHammerScore : 300
         flameHammerScore : 700
-        highScore : 0
 	}
+}

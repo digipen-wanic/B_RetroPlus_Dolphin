@@ -4,7 +4,7 @@ Damsel
 	
 	Transform
 	{
-		translation : { 0 , 0}
+		translation : { 0, 0 }
 		rotation : 0
 		scale : { 250, 250 }
 	}

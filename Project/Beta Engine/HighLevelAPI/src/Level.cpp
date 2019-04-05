@@ -164,7 +164,7 @@ void Level::SetFileLocation(std::string _fileLocation)
 	fileLocation = _fileLocation;
 }
 
-std::string Level::GetFileLocation()
+std::string Level::GetFileLocation() const
 {
 	return fileLocation;
 }

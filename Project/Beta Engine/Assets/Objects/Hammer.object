@@ -20,6 +20,6 @@ Hammer
 	{
 		CollisionGroup : default
 		CollisionFlags : all
-		extents : { 30, 50 }
+		extents : { 25, 25 }
 	}
 }

@@ -16,8 +16,11 @@
 #include "stdafx.h"
 #include "DLPHN_PlayerController.h"
 
-#include "Level1.h"
+#include "AlphaDK.h"
+#include "PlusDK.h"
 #include "DLPHN_OilBarrel.h"
+#include "DLPHN_PlayerAnimation.h"
+#include "DLPHN_PlayerScore.h"
 
 #include <ColliderCircle.h>
 #include <ColliderLine.h>
@@ -28,9 +31,12 @@
 #include <Level.h>
 #include <Parser.h>
 #include <Physics.h>
+#include <Random.h>
 #include <SoundManager.h>
 #include <Space.h>
 #include <Sprite.h>
+#include <SpriteSource.h>
+#include <SpriteText.h>
 #include <Transform.h>
 
 
@@ -40,6 +46,12 @@
 
 namespace DLPHN
 {
+	//------------------------------------------------------------------------------
+	// Static Variable Initialization:
+	//------------------------------------------------------------------------------
+
+	unsigned PlayerController::lives = 3;
+
 	//------------------------------------------------------------------------------
 	// Public Functions:
 	//------------------------------------------------------------------------------
@@ -56,7 +68,7 @@ namespace DLPHN
 		touchingLadder(false), onLadder(false), ladderTimer(0.0f),
 		hammerStatus(0), hammerCooldown(10.0f),
 		deathStatus(0), deathDuration(4.0f),
-		playerHasWon(false)
+		winStatus(false)
 	{
 	}
 
@@ -71,10 +83,17 @@ namespace DLPHN
 	// Initialize this component (happens at object creation).
 	void PlayerController::Initialize()
 	{
+		// Determine whether level is in alpha or beta
+		if (GetOwner()->GetComponent<Sprite>()->GetSpriteSource()->GetName() == "PlayerPlus")
+		{
+			isAlphaLevel = false;
+		}
+
 		// get object components
 		transform = GetOwner()->GetComponent<Transform>();
 		physics = GetOwner()->GetComponent<Physics>();
 		sprite = GetOwner()->GetComponent<Sprite>();
+		playerScore = GetOwner()->GetComponent<PlayerScore>();
 
 		// Get collider for player hammer
 		playerHammer = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("PlayerHammer");
@@ -93,14 +112,36 @@ namespace DLPHN
 		ColliderCircle* hammerCollider = playerHammer->GetComponent<ColliderCircle>();
 		hammerCollider->SetCollisionHandler(&HammerCollisionHandler);
 
+		ColliderCircle* jumpDetectionCollider = GetOwner()->GetComponent<ColliderCircle>();
+		jumpDetectionCollider->SetCollisionHandler(&JumpDetectionHandler);
+
 		// Set up for sound effects
 		soundManager = Engine::GetInstance().GetModule<SoundManager>();
-		soundManager->AddEffect("DLPHN_sound_win.wav");
-		soundManager->AddEffect("DLPHN_sound_death.wav");
-		soundManager->AddEffect("DLPHN_sound_jump.wav");
-		soundManager->AddEffect("DLPHN_sound_hammerBoop.wav");
-		soundManager->AddEffect("DLPHN_sound_movestandin.wav");
-		soundManager->AddEffect("DLPHN_music_hammer.wav");
+
+		// Normal effects
+		if (isAlphaLevel)
+		{
+			soundManager->AddEffect("DLPHN_sound_win.wav");
+			soundManager->AddEffect("DLPHN_sound_death.wav");
+			soundManager->AddEffect("DLPHN_sound_jump.wav");
+			soundManager->AddEffect("DLPHN_sound_hammerBoop.wav");
+			soundManager->AddEffect("DLPHN_sound_movestandin.wav");
+			soundManager->AddEffect("DLPHN_sound_jumpSuccess.wav");
+			soundManager->AddEffect("DLPHN_music_hammer.wav");
+		}
+		// Plus effects
+		else
+		{
+			soundManager->AddEffect("DLPHN_sound_winPlus.wav");
+			soundManager->AddEffect("DLPHN_sound_deathPlus.wav");
+			soundManager->AddEffect("DLPHN_sound_jumpPlus.wav");
+			soundManager->AddEffect("DLPHN_sound_hammerBoopPlus.wav");
+			soundManager->AddEffect("DLPHN_sound_move1Plus.wav");
+			soundManager->AddEffect("DLPHN_sound_move2Plus.wav");
+			soundManager->AddEffect("DLPHN_sound_move3Plus.wav");
+			soundManager->AddEffect("DLPHN_sound_jumpSuccessPlus.wav");
+			soundManager->AddEffect("DLPHN_music_hammerPlus.wav");
+		}
 	}
 
 	// Fixed update function for this component.
@@ -114,15 +155,25 @@ namespace DLPHN
 		// Increment timers
 		ladderTimer += dt;
 		walkSoundTimer += dt;
+		jumpTimer += dt;
+
+		// Update life-counter
+		SpriteText* lifeCounter = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("LivesText")->GetComponent<SpriteText>();
+		lifeCounter->SetText(std::to_string(lives));
+
+		// If bonus score runs out (aka time is up), player dies
+		if (!playerScore->getBonusScore() && !deathStatus)
+		{
+			deathStatus = 1;
+		}
 
 		// Death sequence
 		if (deathStatus)
 		{
 			DeathSequence(dt);
 		}
-
 		// Not dying
-		else if (!playerHasWon)
+		else if (!winStatus)
 		{
 			// Horizontal walking
 			MoveHorizontal();
@@ -146,27 +197,9 @@ namespace DLPHN
 		}
 
 		// Check for win
-		if (playerHasWon)
+		if (winStatus && !onLadder)
 		{
-			// Countdown to play win effect
-			static float timer = 4.0f;
-
-			// Stop player from moving
-			physics->SetVelocity(Vector2D(0.0f, 0.0f));
-
-			// Only play sound once
-			if (timer == 4.0f)
-			{
-				soundManager->PlaySound("DLPHN_sound_win.wav");
-			}
-
-			timer -= dt;
-
-			// Quit game after a few seconds
-			if (timer <= 0.0f)
-			{
-				Engine::GetInstance().Stop();
-			}
+			WinSequence(dt);
 		}
 	}
 
@@ -221,7 +254,7 @@ namespace DLPHN
 
 		if (other.GetName() == "WinZone")
 		{
-			playerController->playerHasWon = true;
+			playerController->winStatus = true;
 		}
 
 		// Make sure player doesn't have hammer
@@ -271,9 +304,9 @@ namespace DLPHN
 		}
 
 		// Hazard objects
-		if (!playerController->playerHasWon)
+		if (!playerController->winStatus)
 		{
-			if (other.GetName() == "Barrel" || other.GetName() == "Flame" || other.GetName() == "DonkeyKong")
+			if (other.GetName() == "Barrel" || other.GetName() == "Flame" || other.GetName() == "DonkeyKong" || other.GetName() == "BarrelPlus")
 			{
 				// Set status to dying if not already
 				if (!playerController->deathStatus)
@@ -300,18 +333,72 @@ namespace DLPHN
 	//   other  = The object the Player is colliding with.
 	void HammerCollisionHandler(GameObject& object, GameObject& other, const Vector2D& intersection)
 	{
-		UNREFERENCED_PARAMETER(object);
 		UNREFERENCED_PARAMETER(intersection);
 		
-		PlayerController* playerController = object.GetSpace()->GetObjectManager().GetObjectByName("Player")->GetComponent<PlayerController>();
+		// Get playercontroller (normal or plus)
+		PlayerController* playerController;
+		if (isAlphaLevel)
+		{
+			playerController = object.GetSpace()->GetObjectManager().GetObjectByName("Player")->GetComponent<PlayerController>();
+		}
+		else
+		{
+			playerController = object.GetSpace()->GetObjectManager().GetObjectByName("PlayerPlus")->GetComponent<PlayerController>();
+		}
 
 		// Hazard objects
-		if (!playerController->getDeathStatus() && other.GetName() == "Barrel" || other.GetName() == "Flame")
+		if (playerController->getHammerStatus() && !playerController->getDeathStatus() && (other.GetName() == "Barrel" || other.GetName() == "Flame"))
 		{
 			// TODO: Stop time
 			
+			// Add to score
+			playerController->playerScore->addScoreBarrelHammer();
+
 			// Play destruction effect
-			playerController->soundManager->PlaySound("DLPHN_sound_hammerBoop.wav");
+			if (isAlphaLevel)
+			{
+				playerController->soundManager->PlaySound("DLPHN_sound_hammerBoop.wav");
+			}
+			else
+			{
+				playerController->soundManager->PlaySound("DLPHN_sound_hammerBoopPlus.wav");
+			}
+		}
+	}
+
+	// Collision handler to detect jumping over barrels
+	// Params:
+	//   object = The player.
+	//   other  = The object the player is colliding with.
+	//   intersection = The intersection between both objects, but only works with line collisions
+	void JumpDetectionHandler(GameObject& object, GameObject& other, const Vector2D& intersection)
+	{
+		UNREFERENCED_PARAMETER(intersection);
+
+		PlayerController* playerController = object.GetComponent<PlayerController>();
+
+		// Detect only if jumping
+		if (!playerController->getOnGround() && !playerController->getOnLadder() && !playerController->getHammerStatus()
+			&& !playerController->getDeathStatus() && !playerController->getWinStatus() && playerController->jumpTimer > 0.9f)
+		{
+			if (other.GetName() == "Barrel" || other.GetName() == "BarrelPlus")
+			{
+				// Reset timer
+				playerController->jumpTimer = 0.0f;
+
+				// Add barrel jump to score
+				object.GetComponent<PlayerScore>()->addScoreBarrelJump();
+
+				// Play successful jump effect
+				if (isAlphaLevel)
+				{
+					playerController->soundManager->PlaySound("DLPHN_sound_jumpSuccess.wav");
+				}
+				else
+				{
+					playerController->soundManager->PlaySound("DLPHN_sound_jumpSuccessPlus.wav");
+				}
+			}
 		}
 	}
 
@@ -361,6 +448,12 @@ namespace DLPHN
 		return deathStatus;
 	}
 
+	// Returns player's win status
+	unsigned PlayerController::getWinStatus() const
+	{
+		return winStatus;
+	}
+
 	//------------------------------------------------------------------------------
 	// Private Functions:
 	//------------------------------------------------------------------------------
@@ -382,7 +475,28 @@ namespace DLPHN
 				if (walkSoundTimer > 0.15f)
 				{
 					walkSoundTimer = 0.0f;
-					soundManager->PlaySound("DLPHN_sound_movestandin.wav");
+
+					// Play walking sound effect(s)
+					if (isAlphaLevel)
+					{
+						soundManager->PlaySound("DLPHN_sound_movestandin.wav");
+					}
+					else
+					{
+						// Randomly choose one of step-effects
+						switch (RandomRange(1, 3))
+						{
+						case 1:
+							soundManager->PlaySound("DLPHN_sound_move1Plus.wav");
+							break;
+						case 2:
+							soundManager->PlaySound("DLPHN_sound_move2Plus.wav");
+							break;
+						case 3:
+							soundManager->PlaySound("DLPHN_sound_move3Plus.wav");
+							break;
+						}
+					}
 				}
 			}
 
@@ -395,7 +509,28 @@ namespace DLPHN
 				if (walkSoundTimer > 0.15f)
 				{
 					walkSoundTimer = 0.0f;
-					soundManager->PlaySound("DLPHN_sound_movestandin.wav");
+
+					// Play walking sound effect(s)
+					if (isAlphaLevel)
+					{
+						soundManager->PlaySound("DLPHN_sound_movestandin.wav");
+					}
+					else
+					{
+						// Randomly choose one of step-effects
+						switch (RandomRange(1, 3))
+						{
+						case 1:
+							soundManager->PlaySound("DLPHN_sound_move1Plus.wav");
+							break;
+						case 2:
+							soundManager->PlaySound("DLPHN_sound_move2Plus.wav");
+							break;
+						case 3:
+							soundManager->PlaySound("DLPHN_sound_move3Plus.wav");
+							break;
+						}
+					}
 				}
 			}
 
@@ -454,7 +589,14 @@ namespace DLPHN
 			physics->SetVelocity(Vector2D(physics->GetVelocity().x, PlayerJumpSpeed));
 
 			// Play jump sound
-			soundManager->PlaySound("DLPHN_sound_jump.wav");
+			if (isAlphaLevel)
+			{
+				soundManager->PlaySound("DLPHN_sound_jump.wav");
+			}
+			else
+			{
+				soundManager->PlaySound("DLPHN_sound_jumpPlus.wav");
+			}
 		}
 
 		// Set onGround to false if player is moving vertically
@@ -479,7 +621,7 @@ namespace DLPHN
 		static float soundTimer = 0.0f;
 
 		// Get music channel from level
-		FMOD::Channel* music = static_cast<Levels::Level1*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+		static FMOD::Channel* music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
 
 		timer += dt;
 		soundTimer += dt;
@@ -490,7 +632,15 @@ namespace DLPHN
 			soundTimer = 0.0f;
 
 			music->stop();
-			soundManager->PlaySound("DLPHN_music_hammer.wav");
+
+			if (isAlphaLevel)
+			{
+				music = soundManager->PlaySound("DLPHN_music_hammer.wav");
+			}
+			else
+			{
+				music = soundManager->PlaySound("DLPHN_music_hammerPlus.wav");
+			}
 		}
 		
 		// Determine what frame is being displayed
@@ -499,6 +649,7 @@ namespace DLPHN
 		{
 		case 13:
 		case 15:
+			// Side
 			// Determine what direction player is facing
 			if (transform->GetScale().x < 0)
 			{
@@ -512,6 +663,7 @@ namespace DLPHN
 
 		case 14:
 		case 16:
+			// Top
 			playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, circleOffset));
 			break;
 		}
@@ -523,7 +675,16 @@ namespace DLPHN
 			playerHammer->GetComponent<ColliderCircle>()->SetOffset(Vector2D(0.0f, 0.0f));
 
 			// Play normal music
-			music = soundManager->PlaySound("DLPHN_music_theme.wav");
+			music->stop();
+
+			if (isAlphaLevel)
+			{
+				music = soundManager->PlaySound("DLPHN_music_theme.wav");
+			}
+			else
+			{
+				music = soundManager->PlaySound("DLPHN_music_themePlus.wav");
+			}
 
 			// Reset variables
 			timer = 0.0f;
@@ -538,13 +699,31 @@ namespace DLPHN
 		static float timer = 0.0f;
 		timer += dt;
 
-		// Stop music
-		static_cast<Levels::Level1*>(GetOwner()->GetSpace()->GetLevel())->musicChannel->stop();
+		static FMOD::Channel* music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
 
-		// Play death sound once
 		if (timer == dt)
 		{
-			soundManager->PlaySound("DLPHN_sound_death.wav");
+			// Decrement lives
+			--lives;
+
+			// Stop music
+			music->stop();
+
+			// Play death sound
+			if (isAlphaLevel)
+			{
+				music = soundManager->PlaySound("DLPHN_sound_death.wav");
+			}
+			else
+			{
+				music = soundManager->PlaySound("DLPHN_sound_deathPlus.wav");
+			}
+		}
+
+		// Display game over if lives run out
+		if (!lives)
+		{
+			GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameOverBox")->GetComponent<Sprite>()->SetAlpha(1.0f);
 		}
 
 		// Stop player from moving
@@ -554,11 +733,80 @@ namespace DLPHN
 		if (timer >= deathDuration - 2.0f)
 			deathStatus = 2;
 
-		// Restart level
+		// Timer runs out
 		if (timer >= deathDuration)
 		{
 			timer = 0.0f;
-			GetOwner()->GetSpace()->RestartLevel();
+
+			// Restart level if player still has lives
+			if (lives)
+			{
+				GetOwner()->GetSpace()->RestartLevel();
+			}
+			else
+			{
+				// Switch to plus level if in alpha
+				if (isAlphaLevel)
+				{
+					lives = 3;
+					GetOwner()->GetSpace()->SetLevel<Levels::PlusDK>();
+				}
+				// Otherwise quit
+				else
+				{
+					Engine::GetInstance().Stop();
+				}
+			}
+		}
+	}
+
+	// Handles once player wins level
+	void PlayerController::WinSequence(const float dt)
+	{
+		// Countdown to play win effect
+		static float timer = 0.0f;
+		timer += dt;
+
+		// Stop player from moving
+		physics->SetVelocity(Vector2D(0.0f, 0.0f));
+
+		static FMOD::Channel* music = static_cast<Levels::AlphaDK*>(GetOwner()->GetSpace()->GetLevel())->musicChannel;
+
+		if (timer == dt)
+		{
+			// Stop music
+			music->stop();
+
+			// Play win jingle
+			if (isAlphaLevel)
+			{
+				music = soundManager->PlaySound("DLPHN_sound_win.wav");
+			}
+			else
+			{
+				music = soundManager->PlaySound("DLPHN_sound_winPlus.wav");
+			}
+
+			// Add bonus to score
+			playerScore->addCurrentScore(playerScore->getBonusScore());
+		}
+
+		// Quit game after a few seconds
+		if (timer >= 4.0f)
+		{
+			timer = 0.0f;
+
+			// Switch to plus level if in alpha
+			if (isAlphaLevel)
+			{
+				lives = 3;
+				GetOwner()->GetSpace()->SetLevel<Levels::PlusDK>();
+			}
+			// Otherwise quit
+			else
+			{
+				Engine::GetInstance().Stop();
+			}
 		}
 	}
 }

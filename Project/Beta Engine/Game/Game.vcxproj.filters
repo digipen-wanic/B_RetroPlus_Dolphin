@@ -11,9 +11,6 @@
     <ClCompile Include="Source\TimedDeath.cpp">
       <Filter>Game\Behaviors\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Level1.cpp">
-      <Filter>Game\Levels</Filter>
-    </ClCompile>
     <ClCompile Include="Source\stdafx.cpp">
       <Filter>Precompiled</Filter>
     </ClCompile>
@@ -41,6 +38,15 @@
     <ClCompile Include="Source\DLPHN_PlayerScore.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="Source\AlphaDK.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlusDK.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StartScreen.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ColorChange.h">
@@ -51,9 +57,6 @@
     </ClInclude>
     <ClInclude Include="Source\TimedDeath.h">
       <Filter>Game\Behaviors\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Level1.h">
-      <Filter>Game\Levels</Filter>
     </ClInclude>
     <ClInclude Include="Source\stdafx.h">
       <Filter>Precompiled</Filter>
@@ -81,6 +84,15 @@
     </ClInclude>
     <ClInclude Include="Source\DLPHN_PlayerScore.h">
       <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AlphaDK.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlusDK.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StartScreen.h">
+      <Filter>Game\Levels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,10 @@
 #include "DLPHN_PlayerController.h"
 #include <Physics.h>
 #include <Parser.h>
+#include <Random.h>
 #include <Space.h>
+#include <Sprite.h>
+#include <SpriteSource.h>
 #include <Transform.h>
 
 //============================================================
@@ -39,7 +42,7 @@ namespace DLPHN
 		  rollLength(3),
 		  speed(170.0f),
 		  barrelState(Left),
-		  notTouchingTimer(0.1f),
+		  notTouchingDelay(0.1f), notTouchingTimer(0.0f),
 		  grounded(false),
 		  prevGrounded(false)
 
@@ -109,7 +112,17 @@ namespace DLPHN
 	{
 		Barrel* barrel = object.GetComponent<Barrel>();
 
-		if (other.GetName() == "PlayerHammer")
+		unsigned hammerStatus;
+		if (object.GetComponent<Sprite>()->GetSpriteSource()->GetName() == "Barrel")
+		{
+			hammerStatus = object.GetSpace()->GetObjectManager().GetObjectByName("Player")->GetComponent<PlayerController>()->getHammerStatus();
+		}
+		else
+		{
+			hammerStatus = object.GetSpace()->GetObjectManager().GetObjectByName("PlayerPlus")->GetComponent<PlayerController>()->getHammerStatus();
+		}
+
+		if (other.GetName() == "PlayerHammer" && hammerStatus)
 		{
 			barrel->SmashBarrel();
 		}
@@ -141,6 +154,7 @@ namespace DLPHN
 					continue;
 				}
 			}
+			
 			barrel->grounded = true;
 			barrel->notTouchingTimer = 0;
 
@@ -163,7 +177,6 @@ namespace DLPHN
 				physics->SetVelocity(velocity);
 			}
 		}
-
 	}
 
 	//============================================================

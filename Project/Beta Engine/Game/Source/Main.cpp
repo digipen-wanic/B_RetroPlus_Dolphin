@@ -27,15 +27,16 @@
 
 // Custom Components
 #include "DLPHN_DonkeyKong.h"
-#include "DLPHN_PlayerController.h"
 #include "DLPHN_PlayerAnimation.h"
+#include "DLPHN_PlayerController.h"
+#include "DLPHN_PlayerScore.h"
 #include "DLPHN_FlameController.h"
 #include "DLPHN_OilBarrel.h"
 #include "DLPHN_Damsel.h"
 #include "DLPHN_Barrel.h"
 
 // Initial game state
-#include "Level1.h"
+#include "StartScreen.h"
 
 //------------------------------------------------------------------------------
 
@@ -59,7 +60,7 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	// Create a new space called "Level"
 	Space* space = new Space("Level", false);
 	// Set initial level to the second level.
-	space->SetLevel(new Levels::Level1());
+	space->SetLevel(new Levels::StartScreen());
 
 	SpaceManager* spaceManager = new SpaceManager();
 	spaceManager->AddSpace(*space);
@@ -72,6 +73,7 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 		GOF.RegisterComponent<DonkeyKong>();
 		GOF.RegisterComponent<PlayerController>();
 		GOF.RegisterComponent<PlayerAnimation>();
+		GOF.RegisterComponent<PlayerScore>();
 		GOF.RegisterComponent<Damsel>();
 		GOF.RegisterComponent<Barrel>();
 		GOF.RegisterComponent<FlameController>();

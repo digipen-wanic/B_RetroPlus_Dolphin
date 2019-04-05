@@ -59,9 +59,7 @@ namespace DLPHN
 	}
 
 	void DonkeyKong::Initialize()
-	{
-		// Finding the barrel archetype by name
-		barrelArchetype = GameObjectFactory::GetInstance().CreateObject("Barrel");
+	{		
 		current = DK_AIState::GRAB_BARREL;
 		// Get the DK's animations
 		animation = GetOwner()->GetComponent<Animation>();
@@ -72,11 +70,23 @@ namespace DLPHN
 		++idleCount;
 		// Set up the beating chest sound effect
 		soundManager = Engine::GetInstance().GetModule<SoundManager>();
+		
 		// Find the sprite's texture's name to see if it is the new one or old one
 		// and adjust animations as necessary
 		Sprite* sprite = GetOwner()->GetComponent<Sprite>();
 		SpriteSource* source = sprite->GetSpriteSource();
 		const std::string& textureName = source->GetTextureName();
+
+		// Finding the barrel archetype by name
+		if (textureName == "DLPHN_dkPlus.png")
+		{
+			barrelArchetype = GameObjectFactory::GetInstance().CreateObject("BarrelPlus");
+		}
+		else
+		{
+			barrelArchetype = GameObjectFactory::GetInstance().CreateObject("Barrel");
+		}
+
 		// Change the throwing frame
 		if (textureName == "DLPHN_dkPlus.png")
 		{
@@ -104,7 +114,7 @@ namespace DLPHN
 			if (current != prev)
 			{
 				idleTimer = 0;
-				maxIdleCount = RandomRange(2, 4);
+				maxIdleCount = RandomRange(5, 12);
 				++idleCount;
 				// Set the beginning of his animation
 				sprite->SetFrame(idleFrameStart);

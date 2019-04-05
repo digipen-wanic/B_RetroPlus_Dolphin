@@ -1,0 +1,21 @@
+TextObject
+{
+	numComponents : 2
+	
+	Transform
+	{
+		translation : { 150, -1150 }
+		rotation : 0
+		scale : { 190, 190 }
+	}
+	
+	SpriteText
+	{
+		frameIndex : 0
+		color : { 1, 1, 1, 1 }
+		spriteSourceName : SpriteText
+		text : text
+		horizontalAlignment : 0
+		verticalAlignment : 0
+	}
+}

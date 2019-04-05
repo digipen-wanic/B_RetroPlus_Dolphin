@@ -1,0 +1,8 @@
+SpriteText
+{
+	textureName : DLPHN_font.png
+	textureRows : 8
+	textureColumns : 12
+	frameCount : 95
+	frameStart : 0
+}

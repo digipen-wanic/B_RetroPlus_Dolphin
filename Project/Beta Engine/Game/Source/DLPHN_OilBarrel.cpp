@@ -21,6 +21,8 @@
 #include <GameObjectFactory.h>
 #include <parser.h>
 #include <Space.h>
+#include <Sprite.h>
+#include <SpriteSource.h>
 #include <Transform.h>
 
 //------------------------------------------------------------------------------
@@ -57,7 +59,16 @@ namespace DLPHN
 		// Fetch components
 		animation = GetOwner()->GetComponent<Animation>();
 		transform = GetOwner()->GetComponent<Transform>();
-		flameArchetype = GameObjectFactory::GetInstance().CreateObject("Flame");
+		
+		// Get flame archetype based on whether the level is alpha or beta (plus)
+		if (GetOwner()->GetComponent<Sprite>()->GetSpriteSource()->GetName() == "OilBarrel")
+		{
+			flameArchetype = GameObjectFactory::GetInstance().CreateObject("Flame");
+		}
+		else
+		{
+			flameArchetype = GameObjectFactory::GetInstance().CreateObject("FlamePlus");
+		}
 
 		// Set collision handler
 		GetOwner()->GetComponent<ColliderRectangle>()->SetCollisionHandler(&OilBarrelCollisionHandler);
@@ -91,7 +102,7 @@ namespace DLPHN
 		OilBarrel* oilBarrel = object.GetComponent<OilBarrel>();
 
 		// Spawn flame and ignite barrel if not already on fire
-		if (other.GetName() == "Barrel")
+		if (other.GetName() == "Barrel" || other.GetName() == "BarrelPlus")
 		{
 			// Destroy the barrel
 			other.Destroy();
@@ -125,8 +136,10 @@ namespace DLPHN
 	// Spawns a flame
 	void OilBarrel::SpawnFlame()
 	{
+		GameObjectManager& GOM = GetOwner()->GetSpace()->GetObjectManager();
+
 		// Only spawn up to two flames at a time
-		if (GetOwner()->GetSpace()->GetObjectManager().GetObjectCount("Flame") < 2)
+		if (GOM.GetObjectCount("Flame") + GOM.GetObjectCount("FlamePlus") < 2)
 		{
 			GameObject* flame = new GameObject(*flameArchetype);
 

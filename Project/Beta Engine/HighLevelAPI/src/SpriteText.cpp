@@ -161,7 +161,7 @@ void SpriteText::Draw()
 		mesh->Draw();
 
 		// Move the sprite position 1 character over on the X axis.
-		pos += Vector2D(right.x * scale.x, right.y * scale.y) * 0.375f;
+		pos += Vector2D(right.x * scale.x, right.y * scale.y) * 0.6f;
 	}
 
 	Graphics::GetInstance().SetSpriteBlendColor(Colors::White);

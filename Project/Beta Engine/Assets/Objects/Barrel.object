@@ -5,7 +5,7 @@ Barrel
 	{
 		translation : { -99.5, 0 }
 		rotation : 0
-		scale : { 80, 80 }
+		scale : { 75, 75 }
 	}
 	
 	Physics
@@ -32,7 +32,7 @@ Barrel
 	{
 		CollisionGroup : default
 		CollisionFlags : all
-		radius : 30
+		radius : 20
 		offset : { 0, 10 }
 	}
 	

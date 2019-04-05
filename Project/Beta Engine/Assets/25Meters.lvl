@@ -901,7 +901,7 @@ LevelEditor
       {
         CollisionGroup : default
         CollisionFlags : all
-        extents : { 35, 35 }
+        extents : { 8, 10 }
       }
       Physics
       {

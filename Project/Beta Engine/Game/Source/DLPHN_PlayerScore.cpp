@@ -14,9 +14,13 @@
 //------------------------------------------------------------------------------
 
 #include "stdafx.h"
+#include <sstream>
 #include "DLPHN_PlayerScore.h"
+#include "DLPHN_PlayerController.h"
 
 #include <Parser.h>
+#include <Space.h>
+#include <SpriteText.h>
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -25,13 +29,20 @@
 namespace DLPHN
 {
 	//------------------------------------------------------------------------------
+	// Static Variables:
+	//------------------------------------------------------------------------------
+
+	unsigned PlayerScore::highScore = 0;
+
+	//------------------------------------------------------------------------------
 	// Public Functions:
 	//------------------------------------------------------------------------------
 
 	// Constructor
 	PlayerScore::PlayerScore()
 		: Component("PlayerScore"), currentScore(0),
-		currentScoreDisplay(nullptr), scoreBonusDisplay(nullptr), highScoreDisplay(nullptr)
+		playerController(nullptr),
+		currentScoreDisplay(nullptr), bonusScoreDisplay(nullptr), highScoreDisplay(nullptr)
 	{
 	}
 
@@ -43,6 +54,18 @@ namespace DLPHN
 		return new PlayerScore(*this);
 	}
 
+	// Initialize this component (happens at object creation).
+	void PlayerScore::Initialize()
+	{
+		// Fetch gameobjects
+		currentScoreDisplay = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("CurrentScoreText")->GetComponent<SpriteText>();
+		highScoreDisplay = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("HighScoreText")->GetComponent<SpriteText>();
+		bonusScoreDisplay = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("BonusText")->GetComponent<SpriteText>();
+		
+		// Fetch components
+		playerController = GetOwner()->GetComponent<PlayerController>();
+	}
+
 	// Fixed update function for this component.
 	// Params:
 	//   dt = The (fixed) change in time since the last step.
@@ -51,11 +74,11 @@ namespace DLPHN
 		static float bonusTimer = 0.0f;
 		bonusTimer += dt;
 
-		// Subtract scoreBonusSubtractAmount from bonus every second
-		if (bonusTimer >= 1.0f)
+		// Subtract scoreBonusSubtractAmount from bonus every 2 seconds
+		if (bonusTimer >= 2.0f && !playerController->getDeathStatus() && !playerController->getWinStatus())
 		{
 			bonusTimer = 0.0f;
-			scoreBonus -= scoreBonusSubtractAmount;
+			bonusScore -= bonusScoreSubtractAmount;
 		}
 
 		// Update high score if needed
@@ -63,19 +86,42 @@ namespace DLPHN
 		{
 			highScore = currentScore;
 		}
-	}
 
+		// Update current score
+		std::stringstream cs;
+		// Make sure string takes up 6 spaces
+		cs.fill('0');
+		cs.width(6);
+		cs << currentScore;
+		currentScoreDisplay->SetText("I." + cs.str());
+
+		// Update high score
+		std::stringstream hs;
+		// Make sure string takes up 6 spaces
+		hs.fill('0');
+		hs.width(6);
+		hs << highScore;
+		highScoreDisplay->SetText("TOP." + hs.str());
+
+		// Update bonus score
+		std::stringstream bs;
+		// Make sure string takes up 6 spaces
+		bs.fill('0');
+		bs.width(4);
+		bs << bonusScore;
+		bonusScoreDisplay->SetText(bs.str());
+	}
+	
 	// Write object data to file
 	// Params:
 	//   parser = The parser that is writing this object to a file.
 	void PlayerScore::Serialize(Parser& parser) const
 	{
-		parser.WriteVariable("scoreBonus", scoreBonus);
-		parser.WriteVariable("scoreBonusSubtractAmount", scoreBonusSubtractAmount);
+		parser.WriteVariable("bonusScore", bonusScore);
+		parser.WriteVariable("bonusScoreSubtractAmount", bonusScoreSubtractAmount);
 		parser.WriteVariable("barrelJumpScore", barrelJumpScore);
 		parser.WriteVariable("barrelHammerScore", barrelHammerScore);
 		parser.WriteVariable("flameHammerScore", flameHammerScore);
-		parser.WriteVariable("highScore", highScore);
 	}
 
 	// Read object data from a file
@@ -83,12 +129,11 @@ namespace DLPHN
 	//   parser = The parser that is reading this object's data from a file.
 	void PlayerScore::Deserialize(Parser& parser)
 	{
-		parser.ReadVariable("scoreBonus", scoreBonus);
-		parser.ReadVariable("scoreBonusSubtractAmount", scoreBonusSubtractAmount);
+		parser.ReadVariable("bonusScore", bonusScore);
+		parser.ReadVariable("bonusScoreSubtractAmount", bonusScoreSubtractAmount);
 		parser.ReadVariable("barrelJumpScore", barrelJumpScore);
 		parser.ReadVariable("barrelHammerScore", barrelHammerScore);
 		parser.ReadVariable("flameHammerScore", flameHammerScore);
-		parser.ReadVariable("highScore", highScore);
 	}
 
 	// Gets the current score
@@ -98,9 +143,9 @@ namespace DLPHN
 	}
 
 	// Gets the current score bonus
-	unsigned PlayerScore::getScoreBonus() const
+	unsigned PlayerScore::getBonusScore() const
 	{
-		return scoreBonus;
+		return bonusScore;
 	}
 
 	// Adds to the current score
@@ -109,22 +154,22 @@ namespace DLPHN
 		currentScore += points;
 	}
 
-	// Sets display spritetext for current score
-	void PlayerScore::setCurrentScoreDisplay(SpriteText* display)
+	// Adds when jumping over barrel
+	void PlayerScore::addScoreBarrelJump()
 	{
-		currentScoreDisplay = display;
+		currentScore += barrelJumpScore;
 	}
 
-	// Sets display spritetext for score bonus
-	void PlayerScore::setScoreBonusDisplay(SpriteText* display)
+	// Adds when hammering barrel
+	void PlayerScore::addScoreBarrelHammer()
 	{
-		scoreBonusDisplay = display;
+		currentScore += barrelHammerScore;
 	}
 
-	// Sets display spritetext for high score
-	void PlayerScore::setHighScoreDisplay(SpriteText* display)
+	// Adds when hammering flame
+	void PlayerScore::addScoreFlameHammer()
 	{
-		highScoreDisplay = display;
+		currentScore += flameHammerScore;
 	}
 }
 
