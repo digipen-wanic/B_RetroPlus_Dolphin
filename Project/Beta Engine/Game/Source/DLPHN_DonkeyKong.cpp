@@ -25,6 +25,7 @@
 #include <Space.h>
 #include <Animation.h>
 #include <Sprite.h>
+#include <SpriteSource.h>
 #include <Random.h>
 
 //------------------------------------------------------------------------------
@@ -43,7 +44,7 @@ namespace DLPHN
 		idleCount(0), maxIdleCount(2), maxBarrelThrows(2), barrelThrows(0),
 		barrelArchetype(nullptr), animation(nullptr), throwTimer(0.0f), throwDuration(0.8f),
 		idleTimer(0), idleDuration(0.4f), barrelCycleThrown(false), throwTimerOffset(0.4f),
-		aiDisabled(false)
+		aiDisabled(false), downThrowFrame(0), idleFrameCount(0), idleFrameStart(5)
 	{
 	}
 
@@ -71,7 +72,25 @@ namespace DLPHN
 		++idleCount;
 		// Set up the beating chest sound effect
 		soundManager = Engine::GetInstance().GetModule<SoundManager>();
-		soundManager->AddEffect("DLPHN_sound_donkeyBeatingChest.wav");
+		// Find the sprite's texture's name to see if it is the new one or old one
+		// and adjust animations as necessary
+		Sprite* sprite = GetOwner()->GetComponent<Sprite>();
+		SpriteSource* source = sprite->GetSpriteSource();
+		const std::string& textureName = source->GetTextureName();
+		// Change the throwing frame
+		if (textureName == "DLPHN_dkPlus.png")
+		{
+			downThrowFrame = 8;
+			idleFrameCount = 3;
+			monkeySoundFile = "DLPHN_sound_monkeysoundsPlus.wav";
+		}
+		else
+		{
+			downThrowFrame = 3;
+			idleFrameCount = 2;
+			monkeySoundFile = "DLPHN_sound_monkeysounds.wav";
+		}
+		soundManager->AddEffect(monkeySoundFile);
 	}
 
 	void DonkeyKong::Update(float dt)
@@ -88,9 +107,9 @@ namespace DLPHN
 				maxIdleCount = RandomRange(2, 4);
 				++idleCount;
 				// Set the beginning of his animation
-				sprite->SetFrame(5);
+				sprite->SetFrame(idleFrameStart);
 				// Play the chest beating sound effect
-				soundManager->PlaySound("DLPHN_sound_donkeyBeatingChest.wav");
+				soundManager->PlaySound(monkeySoundFile);
 			}
 			prev = current;
 			idleTimer += dt;
@@ -101,15 +120,14 @@ namespace DLPHN
 				{
 					++idleCount;
 					idleTimer = 0;
-					soundManager->PlaySound("DLPHN_sound_donkeyBeatingChest.wav");
-					if (sprite->GetFrame() == 5)
+					soundManager->PlaySound(monkeySoundFile);
+					int currentFrame = sprite->GetFrame();
+					++currentFrame;
+					if (currentFrame >= idleFrameStart + idleFrameCount)
 					{
-						sprite->SetFrame(6);
+						currentFrame = idleFrameStart;
 					}
-					else
-					{
-						sprite->SetFrame(5);
-					}
+					sprite->SetFrame(currentFrame);
 				}
 				else
 				{
@@ -140,7 +158,7 @@ namespace DLPHN
 			{
 				if (RandomRange(0, 4) == 4)
 				{
-					sprite->SetFrame(3);
+					sprite->SetFrame(downThrowFrame);
 				}
 				else
 				{

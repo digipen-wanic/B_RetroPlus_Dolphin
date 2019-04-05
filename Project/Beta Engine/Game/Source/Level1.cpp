@@ -60,7 +60,6 @@ void Levels::Level1::Load()
 	soundManager->AddMusic("Asteroid_Field.mp3");
 	soundManager->AddMusic("DLPHN_music_main.wav");
 	soundManager->AddMusic("DLPHN_music_startJingle.wav");
-	soundManager->AddMusic("DLPHN_music_theme.wav");
 	soundManager->AddEffect("DLPHN_sound_death.wav");
 	soundManager->AddEffect("DLPHN_sound_jumpstandin.wav");
 	soundManager->AddEffect("DLPHN_sound_jumpSuccess.wav");
@@ -71,8 +70,8 @@ void Levels::Level1::Load()
 	soundManager->AddBank("Master Bank.strings.bank");
 	soundManager->AddBank("Master Bank.bank");
 
-	SetFileLocation("Assets/25metersnew.lvl");
-	//SetFileLocation("Assets/25metersplus.lvl");
+	//SetFileLocation("Assets/25metersnew.lvl");
+	SetFileLocation("Assets/25metersplus.lvl");
 	//SetFileLocation("Assets/demo.lvl");
 	GlobalTime& globalTime = GlobalTime::GetInstance();
 	globalTime.SetTimeScale(1.0f);
@@ -81,6 +80,8 @@ void Levels::Level1::Load()
 void Levels::Level1::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
+	soundManager->Initialize();
+	soundManager->AddMusic("DLPHN_music_theme.wav");
 	musicChannel = soundManager->PlaySound("DLPHN_music_theme.wav");
 	LoadLevel();
 }

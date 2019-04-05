@@ -61,6 +61,14 @@ namespace DLPHN
 		bool barrelCycleThrown;
 		// The offset from the timer where DK actually throws the barrel, and not just pose
 		float throwTimerOffset;
+		// The frame DK displays when throwing the barrel downward
+		int downThrowFrame;
+		// The amount of frames DK has during his idle animation
+		int idleFrameCount;
+		// The beginning of the idle animation
+		int idleFrameStart;
+		// The sound file to play when DK beats his chest
+		std::string monkeySoundFile;
 		// The archetype for the barrel
 		GameObject* barrelArchetype;
 		// The animation that we are controlling
